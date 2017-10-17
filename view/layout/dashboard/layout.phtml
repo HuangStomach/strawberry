@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <title><?= H($title) ?></title>
+    <base href="<?= H(URL('/')) ?>">
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/site.css" rel="stylesheet">
+    <link href="assets/css/whiteborad.css" rel="stylesheet">
+    <script data-main="assets/js/main.js" src="assets/js/require.js"></script>
+    <link rel="shortcut icon" href="assets/icon/favicon.png">
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-2 sidebar" style="padding: 0px;">
+          <?= $sidebar ?>
+        </div>
+        <div class="col-md-10 col-md-offset-2" style="padding: 0px;">
+          <div>
+            <?= $header ?>
+          </div>
+          <div style="padding: 15px;">
+            <?= $body ?>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <?= $footer ?>
+    </div>
+  </body>
+</html>

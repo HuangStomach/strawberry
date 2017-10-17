@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <title><?= H($title) ?></title>
+    <base href="<?= H(URL('/')) ?>">
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/site.css" rel="stylesheet">
+    <link href="assets/css/whiteborad.css" rel="stylesheet">
+    <script data-main="assets/js/main.js" src="assets/js/require.js"></script>
+    <link rel="shortcut icon" href="assets/icon/favicon.png">
+  </head>
+  <body>
+    <div id="background" class="background">
+    </div>
+    <div style="height: 100%"
+    class="container-fluid d-flex justify-content-center align-items-center">
+      <?= $body ?>
+    </div>
+  </body>
+  <script>
+  require(['particles'], function() {
+    particlesJS.load('background', 'assets/json/particles.json')
+  })
+  </script>
+</html>

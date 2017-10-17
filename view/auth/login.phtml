@@ -1,0 +1,33 @@
+<div class="login">
+  <h3><?= T('后台信息管理') ?></h3>
+  <hr />
+  <form method='POST'>
+    <fieldset>
+      <legend><?= T('登录') ?></legend>
+      <div class="form-group">
+        <input name="csrf" type="hidden" value="<?= H($csrf) ?>">
+        <input name="username" type="text" 
+          class="form-control login-username <?= $form['_errors']['username'] ? 'is-invalid' : '' ?>"
+          placeholder="<?= T('请输入用户名') ?>" value="<?= $form['username'] ? : '' ?>">
+        <input name="password" type="password" 
+          class="form-control login-password <?= $form['_errors']['password'] ? 'is-invalid' : '' ?>"
+          placeholder="<?= T('请输入密码') ?>">
+        <?php if ($form['_errors']) : ?>
+        <div class="invalid-feedback">
+          <?php foreach ($form['_errors'] as $error) : ?>
+          <p style="margin: 0"><?= $error ?></p>
+          <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block"><?= T('登陆') ?></button>
+      <br />
+      <address class="text-right">
+        <abbr><?= T('如若无法登陆, 请尝试联系技术支持') ?></abbr>
+      </address>
+      <address class="text-right">
+        <abbr title="Phone"><?= T('电话') ?></abbr> <?= $phone ?>
+      </address>
+    </fieldset>
+  </form>
+</div>

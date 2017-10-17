@@ -1,0 +1,9 @@
+---
+default_backend: database
+backends:
+  database:
+    driver: 'database'
+    backend: 'database'
+    readonly: false
+    allow_create: true
+...
