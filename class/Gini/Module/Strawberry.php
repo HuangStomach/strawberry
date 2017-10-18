@@ -11,10 +11,12 @@ namespace Gini\Module {
             \Gini\I18N::setup();
 
             if (PHP_SAPI == 'cli') return;
-
-            /* $username = \Gini\Auth::username();
-            $me = a('user', $username ? ['username' => $username] : null);
-            _G('ME', $me); */
+            
+            if (\Gini\Auth::isLoggedIn()) {
+                $username = \Gini\Auth::username();
+                $me = a('user')->whose('username')->is($username);
+                _G('ME', $me);
+            }
         }
 
     }

@@ -1,0 +1,11 @@
+---
+items:
+  user:
+    name: 用户管理
+    url: user
+    icon: user
+  article:
+    name: 文章管理
+    url: article
+    icon: article
+...

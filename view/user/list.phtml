@@ -1,0 +1,49 @@
+<h4 class="font-weight-normal"><?= T('用户列表') ?></h4>
+<ol class="breadcrumb px-0">
+  <li class="breadcrumb-item active"><?= T($item['name']) ?></li>
+</ol>
+<div class="card text-center">
+  <div class="card-header text-left p-3">
+    <div class="row">
+      <div class="col-md-4">
+        <h5 class="mx-0 my-1"><?= T('用户列表') ?></h5>
+      </div>
+      <div class="col-md-8 ml-auto text-right">
+        <a href="#" class="btn btn-sm btn-primary" role="button"><?= T('添加用户') ?></a>
+      </div>
+    </div>
+  </div>
+  <?php if ($users->totalCount()) : ?>
+  <table class="table table-sm table-hover card-body">
+    <thead>
+      <tr>
+        <th class="pl-3"><?= T('#') ?></th>
+        <th><?= T('姓名') ?></th>
+        <th><?= T('工号') ?></th>
+        <th><?= T('邮箱') ?></th>
+        <th><?= T('电话') ?></th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach ($users as $user) : ?>
+      <tr>
+        <td class="text-left pl-3"><?= H(str_pad($user->id, 6, 0, STR_PAD_LEFT)) ?></td>
+        <td class="text-left"><?= H($user->name) ?></td>
+        <td class="text-left"><?= H($user->ref) ?></td>
+        <td class="text-left"><?= H($user->email) ?></td>
+        <td class="text-left"><?= H($user->phone) ?></td>
+      </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+  <?php else: ?>
+  <div class="card-body">
+    <h4 class="card-title"><?= T('暂无数据') ?></h4>
+    <p class="card-text"><?= T('尝试添加您的第一条数据？') ?></p>
+    <a href="#" class="btn btn-sm btn-primary" role="button"><?= T('添加用户') ?></a>
+  </div>
+  <?php endif; ?>
+  <div class="card-footer text-muted">
+    2 days ago
+  </div>
+</div>

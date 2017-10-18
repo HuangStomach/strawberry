@@ -1,0 +1,12 @@
+<ul class="nav flex-column">
+  <a href="<?= URL('/') ?>" class="nav-link title">
+    <?= T($title) ?>
+  </a>
+  <?php foreach ($items as $item) : ?>
+  <li class="nav-item">
+    <a class="nav-link px-3 <?= $active == $item['url'] ? 'active' : '' ?>" href="<?= URL($item['url']) ?>">
+      <?= T($item['name']) ?>
+    </a>
+  </li>
+  <?php endforeach; ?>
+</ul>

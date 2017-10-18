@@ -5,10 +5,24 @@ namespace Gini\Controller\CGI;
 class Index extends Layout\Whiteboard {
 
     function __index() {
-        $this->redirect('login');
+        $me = _G('ME');
+        if ($me->id) {
+            $this->redirect('article');
+        }
+        else {
+            $this->redirect('login');
+        }
     }
     
     function actionLogin () {
+        $me = _G('ME');
+        if ($me->id) {
+            $this->redirect('article');
+        }
+        else {
+            $this->redirect('login');
+        }
+        
         $form = $this->form('post');
         $route = \Gini\CGI::route();
         $phone = \Gini\Config::get('site.phone') ? : '400-017-5664';
@@ -27,7 +41,7 @@ class Index extends Layout\Whiteboard {
 
                 if ($auth->verify($form['password'])) {
                     \Gini\Auth::login($form['username']);
-                    $this->redirect('dashboard');
+                    $this->redirect('article');
                 }
                 else {
                     $user = a('user')->whose('username')->is($form['username']);
@@ -42,7 +56,7 @@ class Index extends Layout\Whiteboard {
                         if ($user->save()) {
                             $auth->create($form['password']);
                             \Gini\Auth::login($form['username']);
-                            $this->redirect('dashboard');
+                            $this->redirect('article');
                         }
                     }
                     else {

@@ -8,21 +8,21 @@
     <base href="<?= H(URL('/')) ?>">
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link href="assets/css/site.css" rel="stylesheet">
-    <link href="assets/css/whiteborad.css" rel="stylesheet">
+    <link href="assets/css/dashboard.css" rel="stylesheet">
     <script data-main="assets/js/main.js" src="assets/js/require.js"></script>
     <link rel="shortcut icon" href="assets/icon/favicon.png">
   </head>
   <body>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-2 sidebar" style="padding: 0px;">
+        <div class="col-md-2 p-0 sidebar">
           <?= $sidebar ?>
         </div>
-        <div class="col-md-10 col-md-offset-2" style="padding: 0px;">
+        <div class="col-md-10 ml-auto p-0">
           <div>
             <?= $header ?>
           </div>
-          <div style="padding: 15px;">
+          <div class="px-3 py-4">
             <?= $body ?>
           </div>
         </div>
