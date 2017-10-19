@@ -19,9 +19,6 @@ class Index extends Layout\Whiteboard {
         if ($me->id) {
             $this->redirect('article');
         }
-        else {
-            $this->redirect('login');
-        }
         
         $form = $this->form('post');
         $route = \Gini\CGI::route();
@@ -80,6 +77,11 @@ class Index extends Layout\Whiteboard {
             'form' => $form,
             'phone' => $phone
         ]);
+    }
+
+    function actionLogout() {
+        \Gini\Auth::logout();
+        $this->redirect('login');
     }
 
 }

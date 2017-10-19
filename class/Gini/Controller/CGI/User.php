@@ -4,12 +4,68 @@ namespace Gini\Controller\CGI;
 
 class User extends Layout\Dashboard {
 
+    protected $item;
+
+    function __preAction($action, &$params) {
+        $this->item = \Gini\Config::get('sidebar.items')['user'];
+        parent::__preAction($action, $params);
+    }
+
     function __index() {
-        $item = \Gini\Config::get('sidebar.items')['user'];
         $users = those('user');
         $this->view->body = V('user/list', [
-            'item' => $item,
+            'item' => $this->item,
             'users' => $users,
+        ]);
+    }
+
+    function actionAdd() {
+        $form = $this->form('post');
+
+        if ($form) {     
+            $validator = new \Gini\CGI\Validator;
+            try {
+                $validator
+                ->validate('name', !!$form['name'], T('姓名不能为空!'))
+                ->validate('name', strlen($form['name']) <= 20, T('姓名过长, 最多不能超过20位!'))
+                ->validate('username', !!$form['username'], T('用户名不能为空!'))
+                ->validate('username', strlen($form['username']) <= 20, T('用户名过长, 最多不能超过20位!'))
+                ->validate('password', !!$form['password'], T('密码不能为空!'))
+                ->validate('password', strlen($form['password']) <= 18 
+                & strlen($form['password']) >= 6, T('密码应保持在6至18位之间!'))
+                ->validate('confirm', !!$form['confirm'] && $form['password'] === $form['confirm'], T('两次输入密码不一致!'))
+                ->validate('ref', strlen($form['ref']) <= 10, T('学工号过长, 最多不能超过10位!'))
+                ->validate('email', strlen($form['email']) <= 50, T('邮箱过长, 最多不能超过50位!'))
+                ->validate('phone', strlen($form['phone']) <= 50, T('电话号码过长, 最多不能超过50位!'));
+            
+                $auth = new \Gini\Auth($form['username']);
+                $validator->validate('username', $auth->create($form['password']), T('用户名已存在!'));
+                $validator->done();
+
+                $user = a('user');
+                $user->username = $form['username'];
+                $user->name = $form['name'];
+                $user->ref = $form['ref'];
+                $user->email = $form['email'];
+                $user->phone = $form['phone'];
+                if ($user->save()) {
+                    $_SESSION['alert'] = T('用户创建成功');
+                    $this->redirect('user');
+                }
+                else {
+                    $auth->remove();
+                }
+            }
+            catch (\Gini\CGI\Validator\Exception $e) {
+                $form['_errors'] = $validator->errors();
+            }
+        }
+        
+        unset($form['password']);
+        unset($form['confirm']);
+        $this->view->body = V('user/edit', [
+            'item' => $this->item,
+            'form' => $form
         ]);
     }
 

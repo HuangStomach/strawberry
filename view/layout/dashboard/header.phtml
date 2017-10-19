@@ -1,6 +1,15 @@
-<nav class="navbar navbar-light" style="background-color: #fff;">
-  <form class="form-inline ml-auto">
-    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form>
+<nav class="navbar navbar-light px-2">
+  <div class="btn-group ml-auto">
+    <button type="button" class="btn dropdown-toggle btn-sm" data-toggle="dropdown" 
+    aria-haspopup="true" aria-expanded="false">
+      <i class="icon-user"></i>
+    </button>
+    <div class="dropdown-menu dropdown-menu-right">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="<?= URL('logout') ?>"><?= T('登出') ?></a>
+    </div>
+  </div>
 </nav>

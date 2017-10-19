@@ -1,8 +1,10 @@
 body {
-  background-color: #EFF0F4    
+  background-color: #EFF0F4;
+  color: #49586e; 
 }
-.breadcrumb {
-  background-color: inherit;
+.col-form-label {
+  line-height: 38px;
+  text-align: right;
 }
 .card {
   border: #fff;
@@ -21,11 +23,12 @@ body {
   bottom: 0;
   left: 0;
   background-color: #444F61;
+  box-shadow: 3px 0px 3px 1px #ccc;
   overflow-y: auto;
   .title {
-    height: 54px;
+    height: 47px;
     display: block;
-    line-height: 38px;
+    line-height: 31px;
     padding: 8px 8px 8px 16px;
     color: #fff;
     font-weight: bold;
@@ -37,6 +40,34 @@ body {
     }
     &.active {
       color: #82C2A5;
+      background-color: #2C333E;
     }
   }
+}
+.header {
+  box-shadow: 3px 3px 3px 1px #ccc;
+  .navbar {
+    padding: 0;
+    background-color: #fff;
+    .btn {
+      background-color: inherit;
+      color: #49586e;
+      height: 47px;
+      &:focus {
+        box-shadow: inherit
+      }
+    }
+    .dropdown-menu-right {
+      right: 0;
+      left: auto;
+    }
+  }
+}
+.body {
+  overflow: scroll;
+  position: fixed;
+  top: 47px;
+  right: 0;
+  left: 16.666667%;
+  bottom: 0;
 }

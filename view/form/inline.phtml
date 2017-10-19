@@ -1,0 +1,16 @@
+<div class="form-group row">
+  <label class="col-md-2 col-form-label"><?= T($label) ?></label>
+  <div class="col-md-10 input-group is-invalid">
+    <input class="form-control form-control-sm <?= $form['_errors'][$name] ? 'is-invalid' : '' ?>" 
+    placeholder="<?= T($placeholder) ?>" type="<?= $type ? : 'text' ?>" name="<?= H($name) ?>"
+    value="<?= $form[$name] ? : ($object->{$name} ? : '') ?>">
+    <?php if ($require) : ?>
+    <div class="input-group-addon "><?= T('*') ?></div>
+    <?php endif; ?>
+  </div>
+  <?php if ($form['_errors'][$name]) : ?>
+  <div class="invalid-feedback ml-auto px-3" style="display: block;">
+    <?= T($form['_errors'][$name]) ?>
+  </div>
+  <?php endif; ?>
+</div>

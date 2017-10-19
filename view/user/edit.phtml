@@ -1,0 +1,69 @@
+<h4 class="font-weight-normal mb-0"><?= T('添加用户') ?></h4>
+<ol class="breadcrumb px-0">
+  <li class="breadcrumb-item"><a href="<?= URL($item['url']) ?>"><?= T($item['name']) ?></a></li>
+  <li class="breadcrumb-item active"><?= T('添加用户') ?></li>
+</ol>
+<div class="card text-center">
+  <div class="card-header text-left px-3 py-2">
+    <h5 class="mx-0 my-1"><?= T('用户信息') ?></h5>
+  </div>
+  <div class="card-body">
+    <form class="text-left" method="POST">
+      <?= V('form/inline', [
+        'name' => 'name', 
+        'label' => '姓名', 
+        'placeholder' => '请输入姓名', 
+        'require' => true,
+        'form' => $form
+      ]) ?>
+      <?= V('form/inline', [
+        'name' => 'username', 
+        'label' => '用户名', 
+        'placeholder' => '请输入用户名', 
+        'require' => true,
+        'form' => $form
+      ]) ?>
+      <?= V('form/inline', [
+        'name' => 'password', 
+        'label' => '密码', 
+        'placeholder' => '请输入密码', 
+        'type' => 'password', 
+        'require' => true,
+        'form' => $form
+      ]) ?>
+      <?= V('form/inline', [
+        'name' => 'confirm', 
+        'label' => '确认密码', 
+        'placeholder' => '请再次输入密码', 
+        'type' => 'password', 
+        'require' => true,
+        'form' => $form
+      ]) ?>
+      <?= V('form/inline', [
+        'name' => 'ref',
+        'label' => '学工号',
+        'placeholder' => '请输入学工号',
+        'form' => $form
+      ]) ?>
+      <?= V('form/inline', [
+        'name' => 'email',
+        'label' => '邮箱',
+        'placeholder' => '请输入邮箱',
+        'type' => 'email',
+        'form' => $form
+      ]) ?>
+      <?= V('form/inline', [
+        'name' => 'phone',
+        'label' => '电话号码',
+        'placeholder' => '请输入电话号码',
+        'form' => $form
+      ]) ?>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-10">
+          <button type="submit" class="btn btn-sm btn-success"><?= T('保存') ?></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
