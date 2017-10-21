@@ -3,9 +3,9 @@ items:
   user:
     name: 用户管理
     url: user
-    icon: user
+    icon: users
   article:
     name: 文章管理
     url: article
-    icon: article
+    icon: paste
 ...

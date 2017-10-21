@@ -11,11 +11,35 @@ class User extends Layout\Dashboard {
         parent::__preAction($action, $params);
     }
 
-    function __index() {
+    function __index($start = 1, $step = 20) {
         $users = those('user');
+
+        $form = $this->form('get');
+        if ($form) {
+            if ($form['keyword']) {
+                $keyword = $form['keyword'];
+                $users->whose('name')->contains($keyword)
+                ->orWhose('ref')->contains($keyword)
+                ->orWhose('email')->contains($keyword)
+                ->orWhose('phone')->contains($keyword);
+            }
+        }
+
+        $users->limit(($start - 1) * $step, $step);
+        
+        $pagination = \Gini\Module\Widget::factory('pagination', [
+            'uri' => 'user',
+            'total' => $users->totalCount(),
+            'start' => $start,
+            'step' => $step,
+            'form' => $form
+        ]);
+        
         $this->view->body = V('user/list', [
             'item' => $this->item,
+            'form' => $form,
             'users' => $users,
+            'pagination' => $pagination,
         ]);
     }
 
@@ -67,6 +91,24 @@ class User extends Layout\Dashboard {
             'item' => $this->item,
             'form' => $form
         ]);
+    }
+
+    function actionDelete() {
+        $form = $this->form('post');
+
+        if ($form) {
+            $user = a('user', $form['id']);
+            $auth = new \Gini\Auth($user->username);
+            if ($user->id && $user->delete()) {
+                $auth->remove();
+                $_SESSION['alert'] = T('用户删除成功');
+            }
+            else {
+                $_SESSION['alert'] = T('用户删除失败');
+            }
+        }
+
+        $this->redirect('user');
     }
 
 }

@@ -1,47 +1,67 @@
-<h4 class="font-weight-normal"><?= T('文章列表') ?></h4>
+<h4 class="font-weight-normal mb-0"><?= T('文章列表') ?></h4>
 <ol class="breadcrumb px-0">
-  <li class="breadcrumb-item active"><?= T($item['name']) ?></li>
+  <li class="breadcrumb-item"><a href="<?= URL($item['url']) ?>"><?= T($item['name']) ?></a></li>
+  <li class="breadcrumb-item active"><?= T('文章列表') ?></li>
 </ol>
 <div class="card text-center">
-  <div class="card-header text-left p-3">
-    <h5 class="m-0"><?= T('文章列表') ?></h5>
+  <div class="card-header text-left px-3 py-2">
+    <div class="row">
+      <div class="col-md-4">
+        <h5 class="mx-0 my-1"><?= T('文章类别') ?></h5>
+      </div>
+      <div class="col-md-8 ml-auto text-right">
+        <a href="<?= URL('user/add') ?>" class="btn btn-sm btn-primary" role="button"><?= T('添加文章') ?></a>
+      </div>
+    </div>
   </div>
-  <table class="table table-sm table-hover card-body">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Username</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
+  <?php if ($articles && $articles->totalCount()) : ?>
   <div class="card-body">
-    <h4 class="card-title">Special title treatment</h4>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="row">
+      <div class="col-md-6">
+      </div>
+      <form class="col-md-6">
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" style="line-height: 32px;"><?= T('关键字:') ?></label>
+          <div class="col-md-9">
+            <input type="text" name="keyword" class="form-control form-control-sm" 
+            placeholder="<?= T('请输入关键字') ?>" value="<?= $form['keyword'] ?>">
+          </div>
+        </div>
+      </form>
+    </div>
+    <table class="table table-sm table-hover">
+      <thead>
+        <tr>
+          <th class="pl-3"><?= T('#') ?></th>
+          <th><?= T('姓名') ?></th>
+          <th><?= T('工号') ?></th>
+          <th><?= T('邮箱') ?></th>
+          <th><?= T('电话号码') ?></th>
+          <th><?= T('操作') ?></th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($articles as $article) : ?>
+        <tr>
+          <td class="text-left pl-3"><?= H(str_pad($user->id, 6, 0, STR_PAD_LEFT)) ?></td>
+          <td class="text-left"><?= H($user->name) ?></td>
+          <td class="text-left"><?= H($user->ref) ?></td>
+          <td class="text-left"><?= H($user->email) ?></td>
+          <td class="text-left"><?= H($user->phone) ?></td>
+          <td class="text-left" style="line-height: 20px;"><?= $user->links() ?></td>
+        </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
   </div>
-  <div class="card-footer text-muted">
-    2 days ago
+  <?php else: ?>
+  <div class="card-body">
+    <h4 class="card-title"><?= T('暂无数据') ?></h4>
+    <p class="card-text"><?= T('尝试添加您的第一条数据？') ?></p>
+    <a href="#" class="btn btn-sm btn-primary" role="button"><?= T('添加文章') ?></a>
+  </div>
+  <?php endif; ?>
+  <div class="card-footer">
+    <?= $pagination ?>
   </div>
 </div>

@@ -41,6 +41,12 @@ require(['main'], function ($) {
           url: $link.attr('href').substring(10),
           success: function(html) {
               $link.trigger('ajax-success', html)
+              $modal = $('.modal');
+              if ($modal.length > 0) $(".modal:not(':eq(0)')").remove()
+              $modal.modal('show')
+              $modal.on('hidden.bs.modal', function (e) {
+                $modal.remove()
+              })
               $('body').append(html).find('script[data-ajax]').remove()
           },
           complete: function() {

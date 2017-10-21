@@ -1,0 +1,11 @@
+<?php foreach ($items as $k => $item): ?>
+    <?php if ($item['button']): ?>
+    <button data-type="<?= $k ?>" class="<?= $item['class'] ?>" style="<?= $item['style']; ?>" <?= $item['extra']?> >
+        <?= H($item['title']) ?>
+    </button>
+    <?php else: ?>
+    <a name="<?= $k ?>" id="<?= $item['id'] ?>" class="<?= $item['class'] ?>" href="<?= $item['url']; ?>" onfocus="this.blur();" style="<?= $item['style']; ?>" <?= $item['extra']?> >
+        <?= H($item['title']) ?>
+    </a>
+    <?php endif; ?>
+<?php endforeach; ?>
