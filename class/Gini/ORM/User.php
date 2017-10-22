@@ -22,7 +22,7 @@ class User extends \Gini\Module\Object
     }
 
     public function delete() {
-        if (in_array($this->username, ['genee'])) {
+        if (in_array($this->username, \Gini\Config::get('site.administrators'))) {
             return false;
         }
         return parent::delete();
@@ -31,7 +31,7 @@ class User extends \Gini\Module\Object
     public function links () {
         $links = [];
 
-        if (!in_array($this->username, ['genee'])) {
+        if (!in_array($this->username, \Gini\Config::get('site.administrators'))) {
             $links['delete'] = [
                 'title' => T('删除'),
                 'class' => 'btn btn-sm btn-link p-0',
@@ -42,7 +42,7 @@ class User extends \Gini\Module\Object
         $links['edit'] = [
             'title' => T('编辑'),
             'class' => 'btn btn-sm btn-link p-0',
-            'url' => "gini-ajax:ajax/user/edit/{$this->id}",
+            'url' => "user/edit/{$this->id}",
         ];
         
         return \Gini\Module\Widget::factory('links', ['items' => $links]);

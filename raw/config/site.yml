@@ -1,4 +1,6 @@
 ---
 title: ${SITE_TITLE}
 phone: 400-017-5664
+administrators:
+  - genee
 ...

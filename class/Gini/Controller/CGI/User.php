@@ -77,11 +77,15 @@ class User extends Layout\Dashboard {
                         'type' => 'success',
                         'message' => T('用户创建成功'),
                     ];
-                    $this->redirect('user');
                 }
                 else {
+                    $_SESSION['alert'] = [
+                        'type' => 'danger',
+                        'message' => T('用户创建失败'),
+                    ];
                     $auth->remove();
                 }
+                $this->redirect('user');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -96,8 +100,13 @@ class User extends Layout\Dashboard {
         ]);
     }
 
-    function actionEdit() {
+    function actionEdit($id) {
+        $me = _G('ME');
         $form = $this->form('post');
+        $isAdmin = in_array($me->username, \Gini\Config::get('site.administrators'));
+
+        $user = a('user', $id);
+        if (!$user->id) $this->redirect('error/404');
 
         if ($form) {     
             $validator = new \Gini\CGI\Validator;
@@ -105,36 +114,39 @@ class User extends Layout\Dashboard {
                 $validator
                 ->validate('name', !!$form['name'], T('姓名不能为空!'))
                 ->validate('name', strlen($form['name']) <= 20, T('姓名过长, 最多不能超过20位!'))
-                ->validate('username', !!$form['username'], T('用户名不能为空!'))
-                ->validate('username', strlen($form['username']) <= 20, T('用户名过长, 最多不能超过20位!'))
-                ->validate('password', !!$form['password'], T('密码不能为空!'))
-                ->validate('password', strlen($form['password']) <= 18 
-                & strlen($form['password']) >= 6, T('密码应保持在6至18位之间!'))
-                ->validate('confirm', !!$form['confirm'] && $form['password'] === $form['confirm'], T('两次输入密码不一致!'))
                 ->validate('ref', strlen($form['ref']) <= 10, T('学工号过长, 最多不能超过10位!'))
                 ->validate('email', strlen($form['email']) <= 50, T('邮箱过长, 最多不能超过50位!'))
                 ->validate('phone', strlen($form['phone']) <= 50, T('电话号码过长, 最多不能超过50位!'));
-            
-                $auth = new \Gini\Auth($form['username']);
-                $validator->validate('username', $auth->create($form['password']), T('用户名已存在!'));
+
+                if ($isAdmin && $form['password']) {
+                    $validator
+                    ->validate('password', strlen($form['password']) <= 18 
+                    & strlen($form['password']) >= 6, T('密码应保持在6至18位之间!'))
+                    ->validate('confirm', !!$form['confirm'] && $form['password'] === $form['confirm'], T('两次输入密码不一致!'));
+                }
                 $validator->done();
 
-                $user = a('user');
-                $user->username = $form['username'];
                 $user->name = $form['name'];
                 $user->ref = $form['ref'];
                 $user->email = $form['email'];
                 $user->phone = $form['phone'];
                 if ($user->save()) {
+                    if ($isAdmin && $form['password']) {
+                        $auth = new \Gini\Auth($user->username);
+                        $auth->changePassword($form['password']);
+                    }
                     $_SESSION['alert'] = [
                         'type' => 'success',
-                        'message' => T('用户创建成功'),
+                        'message' => T('用户修改成功'),
                     ];
-                    $this->redirect('user');
                 }
                 else {
-                    $auth->remove();
+                    $_SESSION['alert'] = [
+                        'type' => 'danger',
+                        'message' => T('用户修改失败'),
+                    ];
                 }
+                $this->redirect('user');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -144,8 +156,11 @@ class User extends Layout\Dashboard {
         unset($form['password']);
         unset($form['confirm']);
         $this->view->body = V('user/edit', [
+            'edit' => true,
             'item' => $this->item,
-            'form' => $form
+            'form' => $form,
+            'user' => $user,
+            'isAdmin' => $isAdmin,
         ]);
     }
 
@@ -155,7 +170,8 @@ class User extends Layout\Dashboard {
         if ($form) {
             $user = a('user', $form['id']);
             $auth = new \Gini\Auth($user->username);
-            if ($user->id && !in_array($user->username, ['genee']) && $user->delete()) {
+            if ($user->id && !in_array($user->username, \Gini\Config::get('site.administrators')) 
+            && $user->delete()) {
                 $auth->remove();
                 $_SESSION['alert'] = [
                     'type' => 'success',

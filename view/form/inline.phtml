@@ -3,7 +3,7 @@
   <div class="col-md-10 input-group">
     <input class="form-control form-control-sm <?= $form['_errors'][$name] ? 'is-invalid' : '' ?>" 
     placeholder="<?= T($placeholder) ?>" type="<?= $type ? : 'text' ?>" name="<?= H($name) ?>"
-    value="<?= $form[$name] ? : ($object->{$name} ? : '') ?>">
+    value="<?= $form[$name] ? : ($object ? $object->{$name} : '') ?>">
     <?php if ($require) : ?>
     <div class="input-group-addon "><?= T('*') ?></div>
     <?php endif; ?>

@@ -14,16 +14,18 @@
         'label' => '姓名', 
         'placeholder' => '请输入姓名', 
         'require' => true,
-        'form' => $form
+        'object' => $user,
+        'form' => $form,
       ]) ?>
-      <?= V('form/inline', [
+      <?php if (!$edit) echo V('form/inline', [
         'name' => 'username', 
         'label' => '用户名', 
         'placeholder' => '请输入用户名', 
         'require' => true,
+        'object' => $user,
         'form' => $form
       ]) ?>
-      <?= V('form/inline', [
+      <?php if ($isAdmin || !$edit) echo V('form/inline', [
         'name' => 'password', 
         'label' => '密码', 
         'placeholder' => '请输入密码', 
@@ -31,7 +33,7 @@
         'require' => true,
         'form' => $form
       ]) ?>
-      <?= V('form/inline', [
+      <?php if ($isAdmin || !$edit) echo V('form/inline', [
         'name' => 'confirm', 
         'label' => '确认密码', 
         'placeholder' => '请再次输入密码', 
@@ -43,12 +45,14 @@
         'name' => 'ref',
         'label' => '学工号',
         'placeholder' => '请输入学工号',
+        'object' => $user,
         'form' => $form
       ]) ?>
       <?= V('form/inline', [
         'name' => 'email',
         'label' => '邮箱',
         'placeholder' => '请输入邮箱',
+        'object' => $user,
         'type' => 'email',
         'form' => $form
       ]) ?>
@@ -56,6 +60,7 @@
         'name' => 'phone',
         'label' => '电话号码',
         'placeholder' => '请输入电话号码',
+        'object' => $user,
         'form' => $form
       ]) ?>
       <div class="row">
