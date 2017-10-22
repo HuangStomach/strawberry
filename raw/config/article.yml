@@ -1,0 +1,11 @@
+---
+type:
+  - name: 通知公告
+    key: notice
+  - name: 工作动态
+    key: works
+  - name: 规章制度
+    key: rules
+  - name: 使用指南
+    key: guide
+...

@@ -2,13 +2,13 @@
 if (!$step) $step = 20;
 $pages = ceil($total / $step);
 $query = (string)http_build_query($form ? : []);
-$begin = ($start - 1) * $step + 1;
+$begin = $total ? ($start - 1) * $step + 1 : 0;
 $end = $start * $step;
 $end = $total < $end ? $total : $end;
 ?>
 <div class="row">
   <div class="col-md-4 text-muted text-left" style="line-height: 38px;">
-    <?= T("正在显示{$begin}至{$end}条数据, 共{$total}条") ?>
+    <?= T("正在显示{$begin}至{$end}条数据, 共有{$total}条数据") ?>
   </div>
   <nav class="col-md-8">
     <ul class="pagination justify-content-end m-0">

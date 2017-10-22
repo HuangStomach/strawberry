@@ -38,6 +38,12 @@ class User extends \Gini\Module\Object
                 'url' => "gini-ajax:ajax/user/delete/{$this->id}",
             ];
         }
+
+        $links['edit'] = [
+            'title' => T('编辑'),
+            'class' => 'btn btn-sm btn-link p-0',
+            'url' => "gini-ajax:ajax/user/edit/{$this->id}",
+        ];
         
         return \Gini\Module\Widget::factory('links', ['items' => $links]);
     }

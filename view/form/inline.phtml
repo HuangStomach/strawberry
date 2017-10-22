@@ -1,6 +1,6 @@
 <div class="form-group row">
   <label class="col-md-2 col-form-label"><?= T($label) ?></label>
-  <div class="col-md-10 input-group is-invalid">
+  <div class="col-md-10 input-group">
     <input class="form-control form-control-sm <?= $form['_errors'][$name] ? 'is-invalid' : '' ?>" 
     placeholder="<?= T($placeholder) ?>" type="<?= $type ? : 'text' ?>" name="<?= H($name) ?>"
     value="<?= $form[$name] ? : ($object->{$name} ? : '') ?>">

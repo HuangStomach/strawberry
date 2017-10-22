@@ -1,0 +1,92 @@
+<h4 class="font-weight-normal mb-0"><?= T('添加文章') ?></h4>
+<ol class="breadcrumb px-0">
+  <li class="breadcrumb-item"><a href="<?= URL($item['url']) ?>"><?= T($item['name']) ?></a></li>
+  <li class="breadcrumb-item active"><?= T('添加文章') ?></li>
+</ol>
+<div class="card text-center">
+  <div class="card-header text-left px-3 py-2">
+    <h5 class="mx-0 my-1"><?= T('文章信息') ?></h5>
+  </div>
+  <div class="card-body">
+    <form class="text-left" method="POST">
+      <input type="hidden" name='uniqid' value="<?= $uniqid ?>">
+      <div class="form-group">
+        <label><?= T('文章标题') ?></label>
+        <div class="input-group">
+          <input class="form-control form-control-sm <?= $form['_errors']['title'] ? 'is-invalid' : '' ?>" 
+          placeholder="<?= T('请输入标题') ?>" type="text" name="title"
+          value="<?= $form['title'] ? : ($article->title ? : '') ?>">
+          <div class="input-group-addon "><?= T('*') ?></div>
+        </div>
+        <?php if ($form['_errors']['title']) : ?>
+        <div class="invalid-feedback ml-auto" style="display: block;">
+          <?= T($form['_errors']['title']) ?>
+        </div>
+        <?php endif; ?>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label><?= T('文章类别') ?></label>
+            <select class="form-control form-control-sm" name="type" style="height: calc(1.8125rem + 2px);">
+              <?php foreach ($types as $type) : 
+              $selected = $form['type'] 
+              ? ($form['type'] == $type->id ? 'selected' : '') 
+              : ($article->type == $type->id ? 'selected' : '') 
+              ?>selected
+              <option value="<?= $type->id ?>" <?= $selected ?>>
+                <?= H($type->name) ?>
+              </option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label><?= T('发表时间') ?></label>
+            <input class="form-control form-control-sm" placeholder="<?= T('请选择发表时间') ?>" 
+            type="date" name="date" value="<?= $form['title'] ? : ($article->date ?
+            date('Y-m-d', strtotime($article->date)) : date('Y-m-d')) ?>">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="editor"><?= T('文章内容') ?></label>
+        <textarea id="editor" name="content" class="form-control" rows="10">
+          <?= $form['content'] ? H($form['content']) : (H($article->content) ? : '') ?>
+        </textarea>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input name="active" type="checkbox" class="form-check-input" <?= H($checked) ?>> <?= T('前台可见') ?>
+        </label>
+      </div>
+      <br />
+      <button type="submit" class="btn btn-sm btn-success"><?= T('提交') ?></button>
+    </form>
+  </div>
+</div>
+
+<script>
+require(['main'], function ($) {
+  require(['kindeditor', 'css!../css/kindeditor'], function (K) {
+    KindEditor.create('#editor', {
+      width: '100%',
+      height: '400px',
+      items: [
+        'source', '|', 'justifyleft', 'justifycenter', 'justifyright',
+        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', '|', 'fullscreen',
+        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+        'italic', 'underline', 'strikethrough', 'lineheight', 'link', 'unlink', 'image',
+        'insertfile', 'table'
+      ],
+      resizeType: 1,
+      themeType: 'kindeditor',
+      uploadJson: 'ajax/editor/upload/<?= $uniqid ?>',
+      basePath: 'assets/',
+      themesPath: 'assets/css/',
+      pluginsPath: 'assets/image/kindeditor/'
+    })
+  })
+})
+</script>

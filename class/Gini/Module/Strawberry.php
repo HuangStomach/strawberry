@@ -21,16 +21,3 @@ namespace Gini\Module {
 
     }
 }
-
-/* namespace {
-
-    if (function_exists('alert')) {
-        die('alert() was declared by other libraries, which may cause problems!');
-    } else {
-        function alert($text, $type = \Gini\Module\Help\Alert::TYPE_OK)
-        {
-            \Gini\Module\Help\Alert::setMessage($text, $type);
-        }
-    }
-    
-} */
