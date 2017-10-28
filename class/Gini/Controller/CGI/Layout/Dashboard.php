@@ -19,7 +19,7 @@ abstract class Dashboard extends \Gini\Controller\CGI\Layout {
         $sidebar = V('layout/dashboard/sidebar', [
             'title' => $title,
             'items' => $items,
-            'active' => $args[0]
+            'active' => "admin/{$args[1]}",
         ]);
 
         $header = V('layout/dashboard/header', [

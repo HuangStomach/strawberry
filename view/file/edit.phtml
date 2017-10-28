@@ -1,0 +1,29 @@
+<h4 class="font-weight-normal mb-0"><?= T('添加文件') ?></h4>
+<ol class="breadcrumb px-0">
+  <li class="breadcrumb-item"><a href="<?= URL($item['url']) ?>"><?= T($item['name']) ?></a></li>
+  <li class="breadcrumb-item active"><?= T('添加文件') ?></li>
+</ol>
+<div class="card text-center">
+  <div class="card-header text-left px-3 py-2">
+    <h5 class="mx-0 my-1"><?= T('文件上传') ?></h5>
+  </div>
+  <div class="card-body">
+    <form class="text-left" method="POST" enctype="multipart/form-data">
+      <input name="uniqid" type="hidden" value="<?= $uniqid ?>">
+      <input name="file[]" type="file" multiple>
+    </form>
+  </div>
+</div>
+
+<script>
+require(['main'], function ($) {
+  require(['fileinput', 'css!../css/fileinput'], function () {
+    require(['fileinput/theme', 'fileinput/zh'], function () {
+      $("input[name='file[]']").fileinput({
+        language: 'zh',
+        theme: 'icomoon'
+      })
+    })
+  })
+})
+</script>

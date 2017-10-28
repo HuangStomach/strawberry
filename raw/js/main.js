@@ -2,6 +2,7 @@ requirejs.config({
   baseUrl: 'assets/js',
   shim: {
     'bootstrap': ['jquery', 'popper'],
+    'fileinput/zh': ['fileinput'],
   }
 })
 

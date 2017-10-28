@@ -1,0 +1,15 @@
+---
+session:
+  # save_handler: internal/files
+  # save_path: /tmp/session
+  gc_maxlifetime: 86400
+  # name: gini-session
+  cookie:
+    lifetime: 0
+    path: /
+    domain: ~      
+    secure: false
+    httponly: false
+  autostart: true
+  api_autostart: true
+...

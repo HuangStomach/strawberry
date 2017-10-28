@@ -2,10 +2,14 @@
 items:
   user:
     name: 用户管理
-    url: user
+    url: admin/user
     icon: users
   article:
     name: 文章管理
-    url: article
+    url: admin/article
     icon: paste
+  file:
+    name: 文件管理
+    url: admin/file
+    icon: drawer
 ...

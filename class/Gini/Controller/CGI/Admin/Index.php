@@ -1,23 +1,23 @@
 <?php
 
-namespace Gini\Controller\CGI;
+namespace Gini\Controller\CGI\Admin;
 
-class Index extends Layout\Whiteboard {
+class Index extends \Gini\Controller\CGI\Layout\Whiteboard {
 
     function __index() {
         $me = _G('ME');
         if ($me->id) {
-            $this->redirect('article');
+            $this->redirect('admin/article');
         }
         else {
-            $this->redirect('login');
+            $this->redirect('admin/login');
         }
     }
     
     function actionLogin () {
         $me = _G('ME');
         if ($me->id) {
-            $this->redirect('article');
+            $this->redirect('admin/article');
         }
         
         $form = $this->form('post');
@@ -26,7 +26,7 @@ class Index extends Layout\Whiteboard {
         $email = \Gini\Config::get('site.email') ? : 'support@geneegroup.com';
 
         if ($form) {
-            if (!$form['csrf'] || $_SESSION[$route] !== $form['csrf']) $this->redirect('login');
+            if (!$form['csrf'] || $_SESSION[$route] !== $form['csrf']) $this->redirect('admin/login');
 
             $validator = new \Gini\CGI\Validator;
             try {
@@ -38,7 +38,7 @@ class Index extends Layout\Whiteboard {
 
                 if ($auth->verify($form['password'])) {
                     \Gini\Auth::login($form['username']);
-                    $this->redirect('article');
+                    $this->redirect('admin/article');
                 }
                 else {
                     $user = a('user')->whose('username')->is($form['username']);
@@ -53,7 +53,7 @@ class Index extends Layout\Whiteboard {
                         if ($user->save()) {
                             $auth->create($form['password']);
                             \Gini\Auth::login($form['username']);
-                            $this->redirect('article');
+                            $this->redirect('admin/article');
                         }
                     }
                     else {
@@ -81,7 +81,7 @@ class Index extends Layout\Whiteboard {
 
     function actionLogout() {
         \Gini\Auth::logout();
-        $this->redirect('login');
+        $this->redirect('admin/login');
     }
 
 }

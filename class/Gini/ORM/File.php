@@ -2,20 +2,17 @@
 
 namespace Gini\ORM;
 
-class Article extends \Gini\Module\Object
+class File extends \Gini\Module\Object
 {
     public $title           = 'string:100';
-    public $content         = 'string:*';
-    public $uniqid          = 'string:100';
-    public $type            = 'object:article/type';
-    public $active          = 'bool';
+    public $path            = 'string:500'; // 文件全路径
+    public $extension       = 'string:50';
+    public $mime            = 'string:100';
     public $author          = 'object:user';
-    public $date            = 'datetime';
     public $ctime           = 'datetime';
 
     protected static $db_index = [
-        'title', 'type', 
-        'active', 'date'
+        'title', 'name'
     ];
 
     public function save() {
@@ -29,12 +26,7 @@ class Article extends \Gini\Module\Object
         $links['delete'] = [
             'title' => T('删除'),
             'class' => 'btn btn-sm btn-link p-0',
-            'url' => "gini-ajax:ajax/admin/article/delete/{$this->id}",
-        ];
-        $links['edit'] = [
-            'title' => T('编辑'),
-            'class' => 'btn btn-sm btn-link p-0',
-            'url' => "article/admin/edit/{$this->id}",
+            'url' => "gini-ajax:ajax/admin/file/delete/{$this->id}",
         ];
 
         return \Gini\Module\Widget::factory('links', ['items' => $links]);

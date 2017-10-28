@@ -1,8 +1,8 @@
 <?php
 
-namespace Gini\Controller\CGI;
+namespace Gini\Controller\CGI\Admin;
 
-class Article extends Layout\Dashboard {
+class Article extends \Gini\Controller\CGI\Layout\Dashboard {
     
     protected $item;
         
@@ -26,17 +26,16 @@ class Article extends Layout\Dashboard {
         $articles = those('article');
 
         $form = $this->form('get');
-        if ($form) {
-            if ($form['keyword']) {
-                $keyword = $form['keyword'];
-                $articles->whose('title')->contains($keyword);
-            }
+        
+        if ($form['keyword']) {
+            $keyword = $form['keyword'];
+            $articles->whose('title')->contains($keyword);
         }
 
         $articles->limit(($start - 1) * $step, $step);
         
         $pagination = \Gini\Module\Widget::factory('pagination', [
-            'uri' => 'article',
+            'uri' => 'admin/article',
             'total' => $articles->totalCount(),
             'start' => $start,
             'step' => $step,
@@ -83,7 +82,7 @@ class Article extends Layout\Dashboard {
                         'message' => T('文章创建失败'),
                     ];
                 }
-                $this->redirect('article');
+                $this->redirect('admin/article');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -133,7 +132,7 @@ class Article extends Layout\Dashboard {
                         'message' => T('文章创建失败'),
                     ];
                 }
-                $this->redirect('article');
+                $this->redirect('admin/article');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -176,7 +175,7 @@ class Article extends Layout\Dashboard {
             }
         }
 
-        $this->redirect('article');
+        $this->redirect('admin/article');
     }
 
 }

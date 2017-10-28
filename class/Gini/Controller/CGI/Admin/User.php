@@ -1,8 +1,8 @@
 <?php
 
-namespace Gini\Controller\CGI;
+namespace Gini\Controller\CGI\Admin;
 
-class User extends Layout\Dashboard {
+class User extends \Gini\Controller\CGI\Layout\Dashboard {
 
     protected $item;
 
@@ -15,20 +15,19 @@ class User extends Layout\Dashboard {
         $users = those('user');
 
         $form = $this->form('get');
-        if ($form) {
-            if ($form['keyword']) {
-                $keyword = $form['keyword'];
-                $users->whose('name')->contains($keyword)
-                ->orWhose('ref')->contains($keyword)
-                ->orWhose('email')->contains($keyword)
-                ->orWhose('phone')->contains($keyword);
-            }
-        }
 
+        if ($form['keyword']) {
+            $keyword = $form['keyword'];
+            $users->whose('name')->contains($keyword)
+            ->orWhose('ref')->contains($keyword)
+            ->orWhose('email')->contains($keyword)
+            ->orWhose('phone')->contains($keyword);
+        }
+        
         $users->limit(($start - 1) * $step, $step);
         
         $pagination = \Gini\Module\Widget::factory('pagination', [
-            'uri' => 'user',
+            'uri' => 'admin/user',
             'total' => $users->totalCount(),
             'start' => $start,
             'step' => $step,
@@ -85,7 +84,7 @@ class User extends Layout\Dashboard {
                     ];
                     $auth->remove();
                 }
-                $this->redirect('user');
+                $this->redirect('admin/user');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -146,7 +145,7 @@ class User extends Layout\Dashboard {
                         'message' => T('用户修改失败'),
                     ];
                 }
-                $this->redirect('user');
+                $this->redirect('admin/user');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -186,7 +185,7 @@ class User extends Layout\Dashboard {
             }
         }
 
-        $this->redirect('user');
+        $this->redirect('admin/user');
     }
 
 }

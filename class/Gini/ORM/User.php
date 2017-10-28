@@ -35,14 +35,14 @@ class User extends \Gini\Module\Object
             $links['delete'] = [
                 'title' => T('删除'),
                 'class' => 'btn btn-sm btn-link p-0',
-                'url' => "gini-ajax:ajax/user/delete/{$this->id}",
+                'url' => "gini-ajax:ajax/admin/user/delete/{$this->id}",
             ];
         }
 
         $links['edit'] = [
             'title' => T('编辑'),
             'class' => 'btn btn-sm btn-link p-0',
-            'url' => "user/edit/{$this->id}",
+            'url' => "admin/user/edit/{$this->id}",
         ];
         
         return \Gini\Module\Widget::factory('links', ['items' => $links]);
