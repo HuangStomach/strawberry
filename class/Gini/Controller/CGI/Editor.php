@@ -1,6 +1,6 @@
 <?php
 
-namespace Gini\Controller\CGI\Admin;
+namespace Gini\Controller\CGI;
 
 class Editor extends \Gini\Controller\CGI {
 

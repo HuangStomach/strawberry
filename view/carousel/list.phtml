@@ -1,0 +1,54 @@
+<h4 class="font-weight-normal mb-0"><?= T('图片轮播') ?></h4>
+<ol class="breadcrumb px-0">
+  <li class="breadcrumb-item"><a href="<?= URL($item['url']) ?>"><?= T($item['name']) ?></a></li>
+  <li class="breadcrumb-item active"><?= T('图片轮播') ?></li>
+</ol>
+<div class="card text-center">
+  <div class="card-header text-left px-3 py-2">
+    <div class="row">
+      <div class="col-md-4">
+        <h5 class="mx-0 my-1"><?= T('效果预览') ?></h5>
+      </div>
+      <div class="col-md-8 ml-auto text-right">
+        <a href="<?= URL('admin/carousel/add') ?>" class="btn btn-sm btn-primary" role="button"><?= T('添加图片') ?></a>
+      </div>
+    </div>
+  </div>
+  <div class="card-body p-0">
+    <?php if ($carousel->totalCount()) : ?>
+    <div id="carousel" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <?php 
+        $count = $carousel->totalCount();
+        for ($i = 0; $i < $count; $i++) :
+        ?>
+        <li data-target="#carousel" data-slide-to="<?= $i ?>" class="<?= $i == 0 ? 'active' : '' ?>"></li>
+        <?php endfor; ?>
+      </ol>
+      <div class="carousel-inner">
+        <?php 
+        $flag = true;
+        foreach ($carousel as $image) : ?>
+        <div class="carousel-item <?= $flag ? 'active' : '' ?>">
+          <img class="d-block w-100" src="<?= URL("carousel/preview/{$image->id}") ?>">
+          <div class="carousel-caption d-none d-md-block">
+            <h3><?= T($image->title) ?></h3>
+            <div class="m-3">
+            <?= $image->links() ?>
+            </div>
+          </div>
+        </div>
+        <?php 
+        $flag = false;
+        endforeach; ?>
+      </div>
+    </div>
+    <?php else: ?>
+    <div class="p-4">
+      <h4 class="card-title"><?= T('暂无数据') ?></h4>
+      <p class="card-text"><?= T('尝试添加您的第一条数据？') ?></p>
+      <a href="<?= URL('admin/carousel/add') ?>" class="btn btn-sm btn-primary" role="button"><?= T('添加图片') ?></a>
+    </div>
+    <?php endif; ?>
+  </div>
+</div>

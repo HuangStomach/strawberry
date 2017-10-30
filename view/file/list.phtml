@@ -7,14 +7,13 @@
   <div class="card-header text-left px-3 py-2">
     <div class="row">
       <div class="col-md-4">
-        <h5 class="mx-0 my-1"><?= T('文件一览') ?></h5>
+        <h5 class="mx-0 my-1"><?= T('文件概览') ?></h5>
       </div>
       <div class="col-md-8 ml-auto text-right">
         <a href="<?= URL('admin/file/add') ?>" class="btn btn-sm btn-primary" role="button"><?= T('添加文件') ?></a>
       </div>
     </div>
   </div>
-  <?php if ($files && $files->totalCount()) : ?>
   <div class="card-body">
     <div class="row">
       <div class="col-md-6">
@@ -29,12 +28,13 @@
         </div>
       </form>
     </div>
+    <?php if ($files && $files->totalCount()) : ?>
     <table class="table table-sm table-hover">
       <thead>
         <tr>
           <th class="pl-3"><?= T('#') ?></th>
           <th><?= T('标题') ?></th>
-          <th><?= T('发布日期') ?></th>
+          <th><?= T('上传日期') ?></th>
           <th><?= T('发布者') ?></th>
           <th><?= T('操作') ?></th>
         </tr>
@@ -44,21 +44,19 @@
         <tr>
           <td class="text-left pl-3"><?= H(str_pad($file->id, 6, 0, STR_PAD_LEFT)) ?></td>
           <td class="text-left"><?= H($file->title) ?></td>
-          <td class="text-left"><?= H($file->date) ?></td>
+          <td class="text-left"><?= H($file->ctime) ?></td>
           <td class="text-left"><?= H($file->author->name) ?></td>
           <td class="text-left" style="line-height: 20px;"><?= $file->links() ?></td>
         </tr>
         <?php endforeach; ?>
       </tbody>
     </table>
+    <?php else: ?>
+      <h4 class="card-title"><?= T('暂无数据') ?></h4>
+      <p class="card-text"><?= T('尝试添加您的第一条数据？') ?></p>
+      <a href="<?= URL('admin/file/add') ?>" class="btn btn-sm btn-primary" role="button"><?= T('添加文件') ?></a>
+    <?php endif; ?>
   </div>
-  <?php else: ?>
-  <div class="card-body">
-    <h4 class="card-title"><?= T('暂无数据') ?></h4>
-    <p class="card-text"><?= T('尝试添加您的第一条数据？') ?></p>
-    <a href="<?= URL('admin/file/add') ?>" class="btn btn-sm btn-primary" role="button"><?= T('添加文件') ?></a>
-  </div>
-  <?php endif; ?>
   <div class="card-footer">
     <?= $pagination ?>
   </div>

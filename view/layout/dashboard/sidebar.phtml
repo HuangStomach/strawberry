@@ -5,7 +5,7 @@
   <?php foreach ($items as $item) : ?>
   <li class="nav-item">
     <a class="nav-link px-3 <?= $active == $item['url'] ? 'active' : '' ?>" href="<?= URL($item['url']) ?>">
-      <i></i>
+      <i class="mr-2 icon-<?= $item['icon'] ?>"></i>
       <?= T($item['name']) ?>
     </a>
   </li>

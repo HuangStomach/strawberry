@@ -24,12 +24,18 @@ class Article extends \Gini\Controller\CGI\Layout\Dashboard {
 
     function __index($start = 1, $step = 20) {
         $articles = those('article');
+        $types = those('article/type');
 
         $form = $this->form('get');
         
         if ($form['keyword']) {
             $keyword = $form['keyword'];
             $articles->whose('title')->contains($keyword);
+        }
+
+        if ($form['type']) {
+            $type = a('article/type', $form['type']);
+            $articles->whose('type')->is($type);
         }
 
         $articles->limit(($start - 1) * $step, $step);
@@ -45,6 +51,8 @@ class Article extends \Gini\Controller\CGI\Layout\Dashboard {
         $this->view->body = V('article/list', [
             'item' => $this->item,
             'form' => $form,
+            'type' => $type, // 当前选定的type 就为了显示一下
+            'types' => $types,
             'articles' => $articles,
             'pagination' => $pagination
         ]);
@@ -123,13 +131,13 @@ class Article extends \Gini\Controller\CGI\Layout\Dashboard {
                 if ($article->save()) {
                     $_SESSION['alert'] = [
                         'type' => 'success',
-                        'message' => T('文章创建成功'),
+                        'message' => T('文章修改成功'),
                     ];
                 }
                 else {
                     $_SESSION['alert'] = [
                         'type' => 'danger',
-                        'message' => T('文章创建失败'),
+                        'message' => T('文章修改失败'),
                     ];
                 }
                 $this->redirect('admin/article');

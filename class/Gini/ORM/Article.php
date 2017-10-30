@@ -34,7 +34,7 @@ class Article extends \Gini\Module\Object
         $links['edit'] = [
             'title' => T('编辑'),
             'class' => 'btn btn-sm btn-link p-0',
-            'url' => "article/admin/edit/{$this->id}",
+            'url' => "admin/article/edit/{$this->id}",
         ];
 
         return \Gini\Module\Widget::factory('links', ['items' => $links]);

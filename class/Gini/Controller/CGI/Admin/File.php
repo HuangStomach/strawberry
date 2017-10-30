@@ -47,25 +47,26 @@ class File extends \Gini\Controller\CGI\Layout\Dashboard {
         if ($files) {
             $count = count($files['name']);
             for ($i = 0; $i < $count; $i++) {
+                $uniqid = uniqid();
                 $path = DATA_DIR . "/attached/{$uniqid}";
                 \Gini\File::ensureDir($path);
 
-                $ext = \Gini\File::extension($file['name'][$i]);
-                $title = pathinfo($file['name'][$i], PATHINFO_FILENAME);
-                $name = date("YmdHis") . '_' . rand(10000, 99999) . $ext;
+                $ext = \Gini\File::extension($files['name'][$i]);
+                $title = pathinfo($files['name'][$i], PATHINFO_FILENAME);
+                $name = date("YmdHis") . '_' . rand(10000, 99999) . '.' . $ext;
                 
                 if (is_dir($path) && is_uploaded_file($files['tmp_name'][$i])
                 && move_uploaded_file($files['tmp_name'][$i], "{$path}/{$name}")) {
                     $file = a('file');
                     $file->title = $title;
+                    $file->dir = $path;
                     $file->path = "{$path}/{$name}";
                     $file->extension = $ext;
                     $file->mime = $files['type'][$i];
                     $file->author = $me;
                     
                     if (!$file->save()) {
-                        error_log("{$path}/{$name}");
-                        \Gini\File::delete("{$path}/{$name}", true);
+                        \Gini\File::removeDir($path);
                     }
                 }
             }
@@ -78,7 +79,6 @@ class File extends \Gini\Controller\CGI\Layout\Dashboard {
 
         $this->view->body = V('file/edit', [
             'item' => $this->item,
-            'uniqid' => uniqid(),
             'form' => $form,
         ]);
     }
@@ -87,25 +87,24 @@ class File extends \Gini\Controller\CGI\Layout\Dashboard {
         $form = $this->form('post');
 
         if ($form) {
-            $article = a('article', $form['id']);
-            $uniqid = $article->uniqid;
-            $path = APP_PATH . '/' . DATA_DIR . "/attached/{$uniqid}";
-            if ($article->id && $article->delete()) {
+            $file = a('file', $form['id']);
+            $path = APP_PATH . '/' . $file->dir;
+            if ($file->id && $file->delete()) {
                 \Gini\File::removeDir($path);
                 $_SESSION['alert'] = [
                     'type' => 'success',
-                    'message' => T('文章删除成功'),
+                    'message' => T('文件删除成功'),
                 ];
             }
             else {
                 $_SESSION['alert'] = [
                     'type' => 'danger',
-                    'message' => T('文章删除失败'),
+                    'message' => T('文件删除失败'),
                 ];
             }
         }
 
-        $this->redirect('admin/article');
+        $this->redirect('admin/file');
     }
 
 }

@@ -12,4 +12,12 @@ items:
     name: 文件管理
     url: admin/file
     icon: drawer
+  carousel:
+    name: 首页轮播
+    url: admin/carousel
+    icon: images
+  link:
+    name: 友情链接
+    url: admin/link
+    icon: link
 ...

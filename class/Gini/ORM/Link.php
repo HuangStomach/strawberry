@@ -2,18 +2,15 @@
 
 namespace Gini\ORM;
 
-class File extends \Gini\Module\Object
+class Link extends \Gini\Module\Object
 {
-    public $title           = 'string:100';
-    public $dir             = 'string:500'; 
-    public $path            = 'string:500'; // 文件全路径
-    public $extension       = 'string:50';
-    public $mime            = 'string:100';
+    public $name            = 'string:100';
+    public $url             = 'string:500';
     public $author          = 'object:user';
     public $ctime           = 'datetime';
 
     protected static $db_index = [
-        'title'
+        'name'
     ];
 
     public function save() {
@@ -23,19 +20,19 @@ class File extends \Gini\Module\Object
     
     public function links () {
         $links = [];
-        
+
+        $links['edit'] = [
+            'title' => T('编辑'),
+            'class' => 'btn btn-sm btn-link p-0',
+            'url' => "admin/link/edit/{$this->id}",
+        ];
+
         $links['delete'] = [
             'title' => T('删除'),
             'class' => 'btn btn-sm btn-link p-0',
-            'url' => "gini-ajax:ajax/admin/file/delete/{$this->id}",
+            'url' => "gini-ajax:ajax/admin/link/delete/{$this->id}",
         ];
-
-        $links['download'] = [
-            'title' => T('下载'),
-            'class' => 'btn btn-sm btn-link p-0',
-            'url' => "file/download/{$this->id}",
-        ];
-
+        
         return \Gini\Module\Widget::factory('links', ['items' => $links]);
     }
 

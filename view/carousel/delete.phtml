@@ -2,20 +2,20 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"><?= T('删除文章') ?></h5>
+        <h5 class="modal-title"><?= T('删除文件') ?></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <?= T("您确定删除文章《" . H($article->title) . "》吗") ?>
-        <form id="articleDelete" method="post" action="admin/article/delete">
-          <input type="hidden" name="id" value="<?= $article->id ?>">
+        <?= T('您确定删除文件"' . H($carousel->title) . '"吗') ?>
+        <form id="carouselDelete" method="post" action="admin/carousel/delete">
+          <input type="hidden" name="id" value="<?= $carousel->id ?>">
         </form>
         <br/>
         <div class="text-right">
           <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal"><?= T('关闭') ?></button>
-          <button type="submit" class="btn btn-sm btn-danger" form="articleDelete"><?= T('删除') ?></button>
+          <button type="submit" class="btn btn-sm btn-danger" form="carouselDelete"><?= T('删除') ?></button>
         </div>
       </div>
     </div>
