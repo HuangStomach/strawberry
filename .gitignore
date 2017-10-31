@@ -23,5 +23,7 @@ composer.json
 raw/config/@development/
 raw/config/@testing/
 data/log/*
+!data/log/.holder
 data/attached/*
+!data/attached/.holder
 .env
