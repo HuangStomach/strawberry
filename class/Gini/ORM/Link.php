@@ -7,10 +7,19 @@ class Link extends \Gini\Module\Object
     public $name            = 'string:100';
     public $url             = 'string:500';
     public $author          = 'object:user';
+    public $type            = 'int,default:0';
     public $ctime           = 'datetime';
 
     protected static $db_index = [
-        'name'
+        'name', 'type'
+    ];
+    
+    const TYPE_FRIENDLY = 0;
+    const TYPE_CHANNEL = 1;
+
+    public static $TYPE = [
+        self::TYPE_FRIENDLY => '友情链接',
+        self::TYPE_CHANNEL => '快速通道',
     ];
 
     public function save() {
@@ -20,17 +29,24 @@ class Link extends \Gini\Module\Object
     
     public function links () {
         $links = [];
+        $type = 'link';
+
+        switch ($this->type) {
+            case self::TYPE_CHANNEL:
+                $type = 'channel';
+            break;
+        }
 
         $links['edit'] = [
             'title' => T('编辑'),
             'class' => 'btn btn-sm btn-link p-0',
-            'url' => "admin/link/edit/{$this->id}",
+            'url' => "admin/{$type}/edit/{$this->id}",
         ];
 
         $links['delete'] = [
             'title' => T('删除'),
             'class' => 'btn btn-sm btn-link p-0',
-            'url' => "gini-ajax:ajax/admin/link/delete/{$this->id}",
+            'url' => "gini-ajax:ajax/admin/{$type}/delete/{$this->id}",
         ];
         
         return \Gini\Module\Widget::factory('links', ['items' => $links]);

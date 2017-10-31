@@ -20,4 +20,12 @@ items:
     name: 友情链接
     url: admin/link
     icon: link
+  channel:
+    name: 快速通道
+    url: admin/channel
+    icon: share
+  site:
+    name: 信息同步
+    url: admin/site
+    icon: spinner
 ...

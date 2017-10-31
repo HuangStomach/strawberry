@@ -1,0 +1,75 @@
+<h4 class="font-weight-normal mb-0"><?= T('信息来源') ?></h4>
+<ol class="breadcrumb px-0">
+  <li class="breadcrumb-item"><a href="<?= URL($item['url']) ?>"><?= T($item['name']) ?></a></li>
+  <li class="breadcrumb-item active"><?= T('信息来源') ?></li>
+</ol>
+<div class="alert alert-primary" role="alert">
+  <p><?= T('系统会定时从已添加的信息来源处过去信息 目前已支持的信息有:') ?></p>
+  <?= T('仪器信息') ?>
+</div>
+<div class="card text-center">
+  <div class="card-header text-left px-3 py-2">
+    <div class="row">
+      <div class="col-md-4">
+        <h5 class="mx-0 my-1"><?= T('来源列表') ?></h5>
+      </div>
+      <div class="col-md-8 ml-auto text-right">
+        <a href="<?= URL('admin/site/add') ?>" class="btn btn-sm btn-primary" role="button"><?= T('添加来源') ?></a>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+      </div>
+      <form class="col-md-6">
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" style="line-height: 32px;"><?= T('关键字:') ?></label>
+          <div class="col-md-9">
+            <input type="text" name="keyword" class="form-control form-control-sm" 
+            placeholder="<?= T('请输入关键字') ?>" value="<?= $form['keyword'] ?>">
+          </div>
+        </div>
+      </form>
+    </div>
+    <?php if ($sites && $sites->totalCount()) : ?>
+    <table class="table table-sm table-hover">
+      <thead>
+        <tr>
+          <th class="pl-3"><?= T('#') ?></th>
+          <th><?= T('标题') ?></th>
+          <th><?= T('地址') ?></th>
+          <th><?= T('最后同步时间') ?></th>
+          <th><?= T('发布者') ?></th>
+          <th><?= T('操作') ?></th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($sites as $site) : ?>
+        <tr>
+          <td class="text-left pl-3"><?= H(str_pad($site->id, 6, 0, STR_PAD_LEFT)) ?></td>
+          <td class="text-left"><?= H($site->name) ?></td>
+          <td class="text-left"><?= H($site->url) ?></td>
+          <td class="text-left">
+            <?php if ($site->error) : ?>
+              <p class="text-danger m-0"><?= T('同步出现错误， 请联系管理员！') ?></p>
+            <?php else : ?>
+              <p class="text-success m-0"><?= H($site->sync_time) ?></p>
+            <?php endif; ?>
+          </td>
+          <td class="text-left"><?= H($site->author->name) ?></td>
+          <td class="text-left" style="line-height: 20px;"><?= $site->links() ?></td>
+        </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+    <?php else: ?>
+      <h4 class="card-title"><?= T('暂无数据') ?></h4>
+      <p class="card-text"><?= T('尝试添加您的第一条数据？') ?></p>
+      <a href="<?= URL('admin/site/add') ?>" class="btn btn-sm btn-primary" role="button"><?= T('添加来源') ?></a>
+    <?php endif; ?>
+  </div>
+  <div class="card-footer">
+    <?= $pagination ?>
+  </div>
+</div>

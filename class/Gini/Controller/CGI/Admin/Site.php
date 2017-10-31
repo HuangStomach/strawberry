@@ -2,38 +2,38 @@
 
 namespace Gini\Controller\CGI\Admin;
 
-class Link extends \Gini\Controller\CGI\Layout\Dashboard {
+class Site extends \Gini\Controller\CGI\Layout\Dashboard {
     
     protected $item;
         
     function __preAction($action, &$params) {
-        $this->item = \Gini\Config::get('sidebar.items')['link'];
+        $this->item = \Gini\Config::get('sidebar.items')['site'];
         parent::__preAction($action, $params);
     }
 
     function __index($start = 1, $step = 20) {
-        $links = those('link')->whose('type')->is(\Gini\ORM\Link::TYPE_FRIENDLY);
+        $sites = those('site');
         $form = $this->form('get');
         
         if ($form['keyword']) {
             $keyword = $form['keyword'];
-            $links->whose('name')->contains($keyword);
+            $sites->whose('name')->contains($keyword);
         }
 
-        $links->limit(($start - 1) * $step, $step);
+        $sites->limit(($start - 1) * $step, $step);
         
         $pagination = \Gini\Module\Widget::factory('pagination', [
-            'uri' => 'admin/link',
-            'total' => $links->totalCount(),
+            'uri' => 'admin/site',
+            'total' => $sites->totalCount(),
             'start' => $start,
             'step' => $step,
             'form' => $form
         ]);
 
-        $this->view->body = V('link/list', [
+        $this->view->body = V('site/list', [
             'item' => $this->item,
             'form' => $form,
-            'links' => $links,
+            'sites' => $sites,
             'pagination' => $pagination
         ]);
     }
@@ -51,11 +51,12 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
                 ->validate('url', !!$form['url'], T('请输入地址!'));
                 $validator->done();
 
-                $link = a('link');
-                $link->name = $form['name'];
-                $link->url = $form['url'];
-                $link->author = $me;
-                if ($link->save()) {
+                $site = a('site');
+                $site->name = $form['name'];
+                $site->url = $form['url'];
+                $site->error = false;
+                $site->author = $me;
+                if ($site->save()) {
                     $_SESSION['alert'] = [
                         'type' => 'success',
                         'message' => T('链接创建成功'),
@@ -67,14 +68,14 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
                         'message' => T('链接创建失败'),
                     ];
                 }
-                $this->redirect('admin/link');
+                $this->redirect('admin/site');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
             }
         }
 
-        $this->view->body = V('link/edit', [
+        $this->view->body = V('site/edit', [
             'item' => $this->item,
             'form' => $form,
         ]);
@@ -84,8 +85,8 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
         $me = _G('ME');
         $form = $this->form('post');
 
-        $link = a('link', $id);
-        if (!$link->id) $this->redirect('error/404');
+        $site = a('site', $id);
+        if (!$site->id) $this->redirect('error/404');
         
         if ($form) {
             $validator = new \Gini\CGI\Validator;
@@ -96,11 +97,11 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
                 ->validate('url', !!$form['url'], T('请输入地址!'));
                 $validator->done();
 
-                $link = a('link');
-                $link->name = $form['name'];
-                $link->url = $form['url'];
-                $link->author = $me;
-                if ($link->save()) {
+                $site = a('site');
+                $site->name = $form['name'];
+                $site->url = $form['url'];
+                $site->author = $me;
+                if ($site->save()) {
                     $_SESSION['alert'] = [
                         'type' => 'success',
                         'message' => T('链接修改成功'),
@@ -112,17 +113,17 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
                         'message' => T('链接修改失败'),
                     ];
                 }
-                $this->redirect('admin/link');
+                $this->redirect('admin/site');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
             }
         }
         
-        $this->view->body = V('link/edit', [
+        $this->view->body = V('site/edit', [
             'item' => $this->item,
             'form' => $form,
-            'link' => $link
+            'site' => $site
         ]);
     }
     
@@ -130,8 +131,8 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
         $form = $this->form('post');
 
         if ($form) {
-            $link = a('link', $form['id']);
-            if ($link->id && $link->delete()) {
+            $site = a('site', $form['id']);
+            if ($site->id && $site->delete()) {
                 $_SESSION['alert'] = [
                     'type' => 'success',
                     'message' => T('链接删除成功'),
@@ -145,7 +146,29 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
             }
         }
 
-        $this->redirect('admin/link');
+        $this->redirect('admin/site');
+    }
+
+    function actionSync($id) {
+        $site = a('site', $id);
+        if (!$site->id) $this->redirect('error/404');
+
+        $now = time();
+        if ($now - strtotime($site->sync_time) <= 300) {
+            $_SESSION['alert'] = [
+                'type' => 'warning',
+                'message' => T('距上次同步时间间距过小，请5分钟后再试！'),
+            ];
+        }
+        else {
+            $site->sync();
+            $_SESSION['alert'] = [
+                'type' => 'success',
+                'message' => T('正在同步，请稍后检查同步状态！'),
+            ];
+        }
+
+        $this->redirect('admin/site');
     }
 
 }

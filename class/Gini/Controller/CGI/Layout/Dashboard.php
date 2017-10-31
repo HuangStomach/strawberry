@@ -8,7 +8,7 @@ abstract class Dashboard extends \Gini\Controller\CGI\Layout {
 
     function __preAction($action, &$params){
         $me = _G('ME');
-        if (!$me->id) $this->redirect('login');
+        if (!$me->id) $this->redirect('admin/login');
 
         $title = \Gini\Config::get('site.title') ? : '后台管理系统';
 

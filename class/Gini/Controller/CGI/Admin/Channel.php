@@ -2,17 +2,17 @@
 
 namespace Gini\Controller\CGI\Admin;
 
-class Link extends \Gini\Controller\CGI\Layout\Dashboard {
+class Channel extends \Gini\Controller\CGI\Layout\Dashboard {
     
     protected $item;
         
     function __preAction($action, &$params) {
-        $this->item = \Gini\Config::get('sidebar.items')['link'];
+        $this->item = \Gini\Config::get('sidebar.items')['channel'];
         parent::__preAction($action, $params);
     }
 
     function __index($start = 1, $step = 20) {
-        $links = those('link')->whose('type')->is(\Gini\ORM\Link::TYPE_FRIENDLY);
+        $links = those('link')->whose('type')->is(\Gini\ORM\Link::TYPE_CHANNEL);;
         $form = $this->form('get');
         
         if ($form['keyword']) {
@@ -23,14 +23,14 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
         $links->limit(($start - 1) * $step, $step);
         
         $pagination = \Gini\Module\Widget::factory('pagination', [
-            'uri' => 'admin/link',
+            'uri' => 'admin/channel',
             'total' => $links->totalCount(),
             'start' => $start,
             'step' => $step,
             'form' => $form
         ]);
 
-        $this->view->body = V('link/list', [
+        $this->view->body = V('channel/list', [
             'item' => $this->item,
             'form' => $form,
             'links' => $links,
@@ -55,26 +55,27 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
                 $link->name = $form['name'];
                 $link->url = $form['url'];
                 $link->author = $me;
+                $link->type = \Gini\ORM\Link::TYPE_CHANNEL;
                 if ($link->save()) {
                     $_SESSION['alert'] = [
                         'type' => 'success',
-                        'message' => T('链接创建成功'),
+                        'message' => T('通道创建成功'),
                     ];
                 }
                 else {
                     $_SESSION['alert'] = [
                         'type' => 'danger',
-                        'message' => T('链接创建失败'),
+                        'message' => T('通道创建失败'),
                     ];
                 }
-                $this->redirect('admin/link');
+                $this->redirect('admin/channel');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
             }
         }
 
-        $this->view->body = V('link/edit', [
+        $this->view->body = V('channel/edit', [
             'item' => $this->item,
             'form' => $form,
         ]);
@@ -103,23 +104,23 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
                 if ($link->save()) {
                     $_SESSION['alert'] = [
                         'type' => 'success',
-                        'message' => T('链接修改成功'),
+                        'message' => T('通道修改成功'),
                     ];
                 }
                 else {
                     $_SESSION['alert'] = [
                         'type' => 'danger',
-                        'message' => T('链接修改失败'),
+                        'message' => T('通道修改失败'),
                     ];
                 }
-                $this->redirect('admin/link');
+                $this->redirect('admin/channel');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
             }
         }
         
-        $this->view->body = V('link/edit', [
+        $this->view->body = V('channel/edit', [
             'item' => $this->item,
             'form' => $form,
             'link' => $link
@@ -134,18 +135,18 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
             if ($link->id && $link->delete()) {
                 $_SESSION['alert'] = [
                     'type' => 'success',
-                    'message' => T('链接删除成功'),
+                    'message' => T('通道删除成功'),
                 ];
             }
             else {
                 $_SESSION['alert'] = [
                     'type' => 'danger',
-                    'message' => T('链接删除失败'),
+                    'message' => T('通道删除失败'),
                 ];
             }
         }
 
-        $this->redirect('admin/link');
+        $this->redirect('admin/channel');
     }
 
 }

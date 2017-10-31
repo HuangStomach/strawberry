@@ -1,0 +1,39 @@
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><?= T('删除来源') ?></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger" role="alert">
+          <?= T('删除信息来源后, 相关信息也会一并删除！') ?>
+        </div>
+        <?= T('您确定删除信息来源"' . H($site->name) . '"吗') ?>
+        <form id="siteDelete" method="post" action="admin/site/delete">
+          <input type="hidden" name="id" value="<?= $site->id ?>">
+        </form>
+        <br/>
+        <div class="text-right">
+          <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal"><?= T('关闭') ?></button>
+          <button type="submit" class="btn btn-sm btn-danger" form="siteDelete"><?= T('删除') ?></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script data-ajax>
+require(['main'], function ($) {  
+  if ($('.modal').length > 0) {
+    $(".modal:not(':eq(0)')").remove()
+  }
+  $('.modal').modal('show')
+
+  $('.modal').on('hidden.bs.modal', function (e) {
+    $('.modal').remove()
+  })
+})
+</script>
