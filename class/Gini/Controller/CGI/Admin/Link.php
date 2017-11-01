@@ -96,7 +96,6 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
                 ->validate('url', !!$form['url'], T('请输入地址!'));
                 $validator->done();
 
-                $link = a('link');
                 $link->name = $form['name'];
                 $link->url = $form['url'];
                 $link->author = $me;

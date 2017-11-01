@@ -4,20 +4,32 @@ namespace Gini\ORM;
 
 class Site extends \Gini\Module\Object
 {
-    public $name            = 'string:50';
-    public $url             = 'string:250';
-    public $sync_time       = 'datetime';
-    public $error           = 'bool';
-    public $author          = 'object:user';
-    public $ctime           = 'datetime';
+    public $name        = 'string:50';
+    public $url         = 'string:250';
+    public $sync        = 'bool';
+    public $show        = 'bool';
+    public $sync_time   = 'datetime';
+    public $error       = 'bool';
+    public $dir         = 'string:500'; 
+    public $path        = 'string:500'; // 文件全路径
+    public $mime        = 'string:100';
+    public $author      = 'object:user';
+    public $ctime       = 'datetime';
 
     protected static $db_index = [
-        'name'
+        'name', 'sync', 'show'
     ];
 
     public function save() {
         if ($this->ctime == '0000-00-00 00:00:00' || !isset($this->ctime)) $this->ctime = date('Y-m-d H:i:s');
         return parent::save();
+    }
+
+    public function delete() {
+        $path = APP_PATH . '/' . $this->dir;
+        $result = parent::delete();
+        if ($result) \Gini\File::removeDir($path);
+        return $result;
     }
     
     public function links() {
@@ -45,7 +57,9 @@ class Site extends \Gini\Module\Object
     }
 
     public function sync() {
-        return true;
+        if (!$this->id) return false;
+        exec("GINI_MODULE_BASE_PATH=/data/gini-modules /usr/local/share/gini/bin/gini @strawberry equipment get {$this->id} >/dev/null 2>&1 &", $output);
+        error_log(print_r($output, true));
     }
 
 }

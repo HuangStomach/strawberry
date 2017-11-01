@@ -17,6 +17,6 @@ class Object extends \Gini\ORM\Object
     }
 
     public function links () {
-        return \Gini\Model\Widget::factory('links', ['items' => []]);
+        return \Gini\Module\Widget::factory('links', ['items' => []]);
     }
 }

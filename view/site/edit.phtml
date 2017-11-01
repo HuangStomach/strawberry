@@ -1,16 +1,16 @@
-<h4 class="font-weight-normal mb-0"><?= T('添加信息来源') ?></h4>
+<h4 class="font-weight-normal mb-0"><?= T('添加平台') ?></h4>
 <ol class="breadcrumb px-0">
   <li class="breadcrumb-item"><a href="<?= URL($item['url']) ?>"><?= T($item['name']) ?></a></li>
-  <li class="breadcrumb-item active"><?= T('添加信息来源') ?></li>
+  <li class="breadcrumb-item active"><?= T('添加平台') ?></li>
 </ol>
 <div class="card text-center">
   <div class="card-header text-left px-3 py-2">
-    <h5 class="mx-0 my-1"><?= T('信息来源') ?></h5>
+    <h5 class="mx-0 my-1"><?= T('平台信息') ?></h5>
   </div>
   <div class="card-body">
-    <form class="text-left" method="POST">
+    <form class="text-left" method="POST" enctype="multipart/form-data">
       <div class="form-group">
-        <label><?= T('信息来源标题') ?></label>
+        <label><?= T('平台名称') ?></label>
         <div class="input-group">
           <input class="form-control form-control-sm <?= $form['_errors']['name'] ? 'is-invalid' : '' ?>" 
           placeholder="<?= T('请输入标题') ?>" type="text" name="name"
@@ -25,7 +25,7 @@
       </div>
 
       <div class="form-group">
-        <label><?= T('信息来源地址地址') ?></label>
+        <label><?= T('平台地址') ?></label>
         <div class="input-group">
           <input class="form-control form-control-sm <?= $form['_errors']['url'] ? 'is-invalid' : '' ?>" 
           placeholder="<?= T('请输入地址 例: http://less.nankia.edu.cn/lims') ?>" type="url" name="url"
@@ -38,9 +38,57 @@
         </div>
         <?php endif; ?>
       </div>
+
+      <div class="form-group">
+        <label><?= T('平台图片') ?></label>
+        <input name="file" type="file">
+        <?php if ($form['_errors']['file']) : ?>
+        <div class="invalid-feedback ml-auto d-block">
+          <?= T($form['_errors']['file']) ?>
+        </div>
+        <?php endif; ?>
+      </div>
       
+      <div class="form-check">
+        <label class="form-check-label">
+          <input name="show" type="checkbox" class="form-check-input" <?= H($shown) ?>> <?= T('展示') ?>
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input name="sync" type="checkbox" class="form-check-input" <?= H($synced) ?>> <?= T('同步') ?>
+        </label>
+      </div>
+
       <br />
       <button type="submit" class="btn btn-sm btn-success"><?= T('提交') ?></button>
     </form>
   </div>
 </div>
+
+
+<script>
+require(['main'], function ($) {
+  require(['fileinput', 'css!../css/fileinput'], function () {
+    require(['fileinput/theme', 'fileinput/zh'], function () {
+      $("input[name=file]").fileinput({
+        language: 'zh',
+        theme: 'icomoon',
+        showUpload: false,
+        allowedFileTypes: ['image']
+        <?php if ($site->id && $site->path) : ?>
+        , initialPreview: [
+          "<img src='<?= URL("site/preview/{$site->id}") ?>' style='width: 100%;' class='file-preview-image' alt='<?= $site->name ?>' title='<?= $site->name ?>'>"
+        ],
+        initialPreviewConfig: [
+          {
+            caption: "<?= $site->name ?>"
+          }
+        ],
+        initialPreviewShowDelete: false
+        <?php endif; ?>
+      })
+    })
+  })
+})
+</script>

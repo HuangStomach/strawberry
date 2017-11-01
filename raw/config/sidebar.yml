@@ -24,8 +24,12 @@ items:
     name: 快速通道
     url: admin/channel
     icon: share
+  equipment:
+    name: 仪器展示
+    url: admin/equipment
+    icon: books
   site:
-    name: 信息同步
+    name: 院级平台
     url: admin/site
     icon: spinner
 ...

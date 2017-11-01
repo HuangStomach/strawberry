@@ -41,6 +41,7 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
     function actionAdd() {
         $me = _G('ME');
         $form = $this->form('post');
+        $file = $this->form('files')['file'];
 
         if ($form) {
             $validator = new \Gini\CGI\Validator;
@@ -55,7 +56,26 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
                 $site->name = $form['name'];
                 $site->url = $form['url'];
                 $site->error = false;
+                $site->show = $form['show'] == 'on';
+                $site->sync = $form['sync'] == 'on';
                 $site->author = $me;
+
+                if ($file) {
+                    $uniqid = uniqid();
+                    $path = DATA_DIR . "/attached/{$uniqid}";
+                    \Gini\File::ensureDir($path);
+        
+                    $ext = \Gini\File::extension($file['name']);
+                    $name = date("YmdHis") . '_' . rand(10000, 99999) . '.' . $ext;
+                    
+                    if (is_dir($path) && is_uploaded_file($file['tmp_name'])
+                    && move_uploaded_file($file['tmp_name'], "{$path}/{$name}")) {
+                        $site->dir = $path;
+                        $site->path = "{$path}/{$name}";
+                        $site->mime = $file['type'];
+                    }
+                }
+
                 if ($site->save()) {
                     $_SESSION['alert'] = [
                         'type' => 'success',
@@ -75,7 +95,12 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
             }
         }
 
+        // check比较奇怪单独拿出来处理
+        $shown = $form['show'] ? ($form['show'] == 'on' ? 'checked' : '') : 'checked';
+        $synced = $form['sync'] ? ($form['sync'] == 'on' ? 'checked' : '') : 'checked';
         $this->view->body = V('site/edit', [
+            'synced' => $synced,
+            'shown' => $shown,
             'item' => $this->item,
             'form' => $form,
         ]);
@@ -84,6 +109,7 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
     function actionEdit($id) {
         $me = _G('ME');
         $form = $this->form('post');
+        $file = $this->form('files')['file'];
 
         $site = a('site', $id);
         if (!$site->id) $this->redirect('error/404');
@@ -97,10 +123,35 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
                 ->validate('url', !!$form['url'], T('请输入地址!'));
                 $validator->done();
 
-                $site = a('site');
                 $site->name = $form['name'];
                 $site->url = $form['url'];
+                $site->show = $form['show'] == 'on';
+                $site->sync = $form['sync'] == 'on';
                 $site->author = $me;
+                
+                if (!$file['error'] && $file['tmp_name']) {  
+                    $uniqid = uniqid();
+                    $path = DATA_DIR . "/attached/{$uniqid}";
+                    \Gini\File::ensureDir($path);
+        
+                    $ext = \Gini\File::extension($file['name']);
+                    $name = date("YmdHis") . '_' . rand(10000, 99999) . '.' . $ext;
+                    
+                    if (is_dir($path) && is_uploaded_file($file['tmp_name'])
+                    && move_uploaded_file($file['tmp_name'], "{$path}/{$name}")) {
+                        $site->dir = $path;
+                        $site->path = "{$path}/{$name}";
+                        $site->mime = $file['type'];
+                    }
+                    else {
+                        $_SESSION['alert'] = [
+                            'type' => 'danger',
+                            'message' => T('图片编辑失败'),
+                        ];
+                        $this->redirect('admin/site');
+                    }
+                }
+
                 if ($site->save()) {
                     $_SESSION['alert'] = [
                         'type' => 'success',
@@ -120,7 +171,17 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
             }
         }
         
+        // check比较奇怪单独拿出来处理
+        $shown = $form['show'] 
+        ? ($form['show'] == 'on' ? 'checked' : '') 
+        : ($site->show ? 'checked' : '');
+        // check比较奇怪单独拿出来处理
+        $synced = $form['sync'] 
+        ? ($form['sync'] == 'on' ? 'checked' : '') 
+        : ($site->sync ? 'checked' : '');
         $this->view->body = V('site/edit', [
+            'synced' => $synced,
+            'shown' => $shown,
             'item' => $this->item,
             'form' => $form,
             'site' => $site

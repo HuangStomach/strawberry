@@ -1,0 +1,68 @@
+<h4 class="font-weight-normal mb-0"><?= T('选择仪器') ?></h4>
+<ol class="breadcrumb px-0">
+  <li class="breadcrumb-item"><a href="<?= URL($item['url']) ?>"><?= T($item['name']) ?></a></li>
+  <li class="breadcrumb-item active"><?= T('选择仪器') ?></li>
+</ol>
+<div class="card text-center">
+  <div class="card-header text-left px-3 py-2">
+    <div class="row">
+      <div class="col-md-4">
+        <h5 class="mx-0 my-1"><?= T('仪器列表') ?></h5>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+      </div>
+      <form class="col-md-6">
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" style="line-height: 32px;"><?= T('关键字:') ?></label>
+          <div class="col-md-9">
+            <input type="text" name="keyword" class="form-control form-control-sm" 
+            placeholder="<?= T('请输入关键字') ?>" value="<?= $form['keyword'] ?>">
+          </div>
+        </div>
+      </form>
+    </div>
+    <?php if ($equipments && $equipments->totalCount()) : ?>
+    <table class="table table-sm table-hover">
+      <thead>
+        <tr>
+          <th class="pl-3"><?= T('#') ?></th>
+          <th><?= T('名称') ?></th>
+          <th><?= T('价格') ?></th>
+          <th><?= T('地址') ?></th>
+          <th><?= T('展示') ?></th>
+          <th><?= T('操作') ?></th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($equipments as $equipment) : ?>
+        <tr>
+          <td class="text-left pl-3"><?= H(str_pad($equipment->lims_id, 6, 0, STR_PAD_LEFT)) ?></td>
+          <td class="text-left"><?= H($equipment->name) ?></td>
+          <td class="text-left"><?= H($equipment->price) ?></td>
+          <td class="text-left"><?= H($equipment->location) ?></td>
+          <td class="text-left">
+            <?php if (H($equipment->show)) : ?>
+            <span class="badge badge-success"><?= T('是') ?></span>
+            <?php else : ?>
+            <span class="badge badge-secondary"><?= T('否') ?></span>
+            <?php endif; ?>
+          </td>
+          <td class="text-left" style="line-height: 20px;"><?= $equipment->links() ?></td>
+        </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+    <?php else: ?>
+      <h4 class="card-title"><?= T('暂无数据') ?></h4>
+      <p class="card-text"><?= T('没有添加信息来源？或者尝试手动同步信息？') ?></p>
+      <a href="<?= URL('admin/site') ?>" class="btn btn-sm btn-primary" role="button"><?= T('信息来源') ?></a>
+    <?php endif; ?>
+  </div>
+  <div class="card-footer">
+    <?= $pagination ?>
+  </div>
+</div>

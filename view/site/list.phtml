@@ -1,17 +1,17 @@
-<h4 class="font-weight-normal mb-0"><?= T('信息来源') ?></h4>
+<h4 class="font-weight-normal mb-0"><?= T('平台列表') ?></h4>
 <ol class="breadcrumb px-0">
   <li class="breadcrumb-item"><a href="<?= URL($item['url']) ?>"><?= T($item['name']) ?></a></li>
-  <li class="breadcrumb-item active"><?= T('信息来源') ?></li>
+  <li class="breadcrumb-item active"><?= T('平台列表') ?></li>
 </ol>
 <div class="alert alert-primary" role="alert">
-  <p><?= T('系统会定时从已添加的信息来源处过去信息 目前已支持的信息有:') ?></p>
+  <p><?= T('系统会定时从已添加的院级平台处获取信息 目前已支持的信息有:') ?></p>
   <?= T('仪器信息') ?>
 </div>
 <div class="card text-center">
   <div class="card-header text-left px-3 py-2">
     <div class="row">
       <div class="col-md-4">
-        <h5 class="mx-0 my-1"><?= T('来源列表') ?></h5>
+        <h5 class="mx-0 my-1"><?= T('平台概览') ?></h5>
       </div>
       <div class="col-md-8 ml-auto text-right">
         <a href="<?= URL('admin/site/add') ?>" class="btn btn-sm btn-primary" role="button"><?= T('添加来源') ?></a>
@@ -37,10 +37,12 @@
       <thead>
         <tr>
           <th class="pl-3"><?= T('#') ?></th>
-          <th><?= T('标题') ?></th>
+          <th><?= T('名称') ?></th>
           <th><?= T('地址') ?></th>
+          <th><?= T('创建者') ?></th>
+          <th><?= T('展示') ?></th>
+          <th><?= T('同步') ?></th>
           <th><?= T('最后同步时间') ?></th>
-          <th><?= T('发布者') ?></th>
           <th><?= T('操作') ?></th>
         </tr>
       </thead>
@@ -50,6 +52,21 @@
           <td class="text-left pl-3"><?= H(str_pad($site->id, 6, 0, STR_PAD_LEFT)) ?></td>
           <td class="text-left"><?= H($site->name) ?></td>
           <td class="text-left"><?= H($site->url) ?></td>
+          <td class="text-left"><?= H($site->author->name) ?></td>
+          <td class="text-left">
+            <?php if (H($site->show)) : ?>
+            <span class="badge badge-success"><?= T('是') ?></span>
+            <?php else : ?>
+            <span class="badge badge-secondary"><?= T('否') ?></span>
+            <?php endif; ?>
+          </td>
+          <td class="text-left">
+            <?php if (H($site->sync)) : ?>
+            <span class="badge badge-success"><?= T('是') ?></span>
+            <?php else : ?>
+            <span class="badge badge-secondary"><?= T('否') ?></span>
+            <?php endif; ?>
+          </td>
           <td class="text-left">
             <?php if ($site->error) : ?>
               <p class="text-danger m-0"><?= T('同步出现错误， 请联系管理员！') ?></p>
@@ -57,7 +74,6 @@
               <p class="text-success m-0"><?= H($site->sync_time) ?></p>
             <?php endif; ?>
           </td>
-          <td class="text-left"><?= H($site->author->name) ?></td>
           <td class="text-left" style="line-height: 20px;"><?= $site->links() ?></td>
         </tr>
         <?php endforeach; ?>
