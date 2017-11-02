@@ -116,6 +116,7 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
         
         if ($form) {
             $validator = new \Gini\CGI\Validator;
+
             try {
                 $validator
                 ->validate('name', !!$form['name'], T('请输入名称!'))
@@ -150,6 +151,13 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
                         ];
                         $this->redirect('admin/site');
                     }
+                }
+                elseif (!$form['exists']) {
+                    $path = APP_PATH . '/' . $site->dir;
+                    \Gini\File::removeDir($path);
+                    $site->dir = '';
+                    $site->path =  '';
+                    $site->mime = $file['type'];
                 }
 
                 if ($site->save()) {
@@ -193,7 +201,9 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
 
         if ($form) {
             $site = a('site', $form['id']);
+            $path = APP_PATH . '/' . $site->dir;
             if ($site->id && $site->delete()) {
+                \Gini\File::removeDir($path);
                 $_SESSION['alert'] = [
                     'type' => 'success',
                     'message' => T('链接删除成功'),

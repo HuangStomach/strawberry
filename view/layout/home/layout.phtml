@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
+    <title><?= H($title) ?></title>
+    <base href="<?= H(URL('/')) ?>">
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/icomoon.css" rel="stylesheet">
+    <link href="assets/css/site.css" rel="stylesheet">
+    <link href="assets/css/home.css" rel="stylesheet">
+    <script data-main="assets/js/main.js" src="assets/js/require.js"></script>
+    <link rel="shortcut icon" href="assets/icon/favicon.png">
+  </head>
+  <body>
+    <div class="container-fluid header">
+      <div class="header-content mx-auto">
+        <div class="float-right">
+          <form class="form-inline form-search">
+            <div class="input-group input-group-sm">
+              <span class="input-group-addon">@</span>
+              <input type="text" class="form-control form-control-sm ml-auto">
+            </div>
+            <button type="submit" class="btn btn-link">
+              <small><?= T('仪器搜索') ?></small>
+            </button>
+          </form>
+          <nav aria-label="breadcrumb" role="navigation">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#"><?= T('首页') ?></a></li>
+              <li class="breadcrumb-item"><a href="#"><?= T('平台简介') ?></a></li>
+              <li class="breadcrumb-item"><a href="#"><?= T('仪器列表') ?></a></li>
+              <li class="breadcrumb-item"><a href="#"><?= T('规章制度') ?></a></li>
+              <li class="breadcrumb-item"><a href="#"><?= T('使用指南') ?></a></li>
+              <li class="breadcrumb-item"><a href="#"><?= T('文件下载') ?></a></li>
+              <li class="breadcrumb-item"><a href="#"><?= T('联系我们') ?></a></li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <?= $footer ?>
+    </div>
+  </body>
+</html>

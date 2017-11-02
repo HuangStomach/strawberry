@@ -10,7 +10,7 @@ abstract class Dashboard extends \Gini\Controller\CGI\Layout {
         $me = _G('ME');
         if (!$me->id) $this->redirect('admin/login');
 
-        $title = \Gini\Config::get('site.title') ? : '后台管理系统';
+        $title = \Gini\Config::get('site.admin')['title'];
 
         $items = \Gini\Config::get('sidebar.items');
         $route = \Gini\CGI::route();

@@ -78,7 +78,8 @@ require(['main'], function ($) {
         allowedFileTypes: ['image']
         <?php if ($site->id && $site->path) : ?>
         , initialPreview: [
-          "<img src='<?= URL("site/preview/{$site->id}") ?>' style='width: 100%;' class='file-preview-image' alt='<?= $site->name ?>' title='<?= $site->name ?>'>"
+          "<img src='<?= URL("site/preview/{$site->id}") ?>' style='width: 100%;' class='file-preview-image' alt='<?= $site->name ?>' title='<?= $site->name ?>'>" +
+          "<input type='hidden' name='exists' value='1'/>"
         ],
         initialPreviewConfig: [
           {

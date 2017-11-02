@@ -1,0 +1,29 @@
+@import "vars/variables";
+body {
+  background-color: #f2f0f3;
+  color: #333;
+  font-size: 0.9rem;
+}
+.header {
+  border-top: 5px solid @nankai;
+  background-color: #fff;
+  .header-content {
+    height: 100px;
+    width: 1000px;
+    .form-search {
+      .input-group-addon {
+        background-color: inherit;
+      }
+    }
+  }
+}
+
+.breadcrumb .breadcrumb-item a {
+  color: #333;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+  padding-right: .75rem;
+  padding-left: .75rem;
+  content: '|';
+}
