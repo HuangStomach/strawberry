@@ -7,7 +7,7 @@ class Carousel extends \Gini\Controller\CGI {
     public function actionDelete($id) {
         $carousel = a('carousel', $id);
 
-        $view = V('carousel/delete', [
+        $view = V('admin/carousel/delete', [
             'carousel' => $carousel
         ]);
         

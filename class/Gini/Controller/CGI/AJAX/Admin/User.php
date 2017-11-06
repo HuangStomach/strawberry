@@ -7,7 +7,7 @@ class User extends \Gini\Controller\CGI {
     public function actionDelete($id) {
         $user = a('user', $id);
 
-        $view = V('user/delete', [
+        $view = V('admin/user/delete', [
             'user' => $user
         ]);
         

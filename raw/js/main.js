@@ -8,12 +8,11 @@ requirejs.config({
 
 define('main', ['jquery', 'popper'], function($, popper) {
   window.Popper = popper
-  require(['bootstrap'], function(bootstrap) {})
+  require(['bootstrap'])
   return $
 })
 
 require(['main'], function ($) {
-
   if (/msie/.test(navigator.userAgent.toLowerCase()) ||
   navigator.userAgent.match(/Trident.*rv[ :]*11\./)) {
     $(document).on('click', 'button[form]', function () {
@@ -21,6 +20,22 @@ require(['main'], function ($) {
       $('#' + form_id).submit()
     })
   }
+  
+  $('[data-async]').each(function (index, element) {
+    var $this = $(element)
+    var src = $this.attr('data-async')
+    $.ajax({
+      type: "GET",
+      url: src,
+      success: function (html) {
+        $this.trigger('ajax-success', html)
+        $this.html(html).find('script[data-ajax]').remove()
+      },
+      complete: function() {
+        $this.trigger('ajax-complete')
+      }
+    })
+  })
 
   $('body').on('click', 'a[href^="ajax:"]', function (e) {
     var $link = $(this)

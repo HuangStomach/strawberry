@@ -7,7 +7,7 @@ class Link extends \Gini\Controller\CGI {
     public function actionDelete($id) {
         $link = a('link', $id);
 
-        $view = V('link/delete', [
+        $view = V('admin/link/delete', [
             'link' => $link
         ]);
         

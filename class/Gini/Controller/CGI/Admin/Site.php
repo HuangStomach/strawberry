@@ -30,7 +30,7 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
             'form' => $form
         ]);
 
-        $this->view->body = V('site/list', [
+        $this->view->body = V('admin/site/list', [
             'item' => $this->item,
             'form' => $form,
             'sites' => $sites,
@@ -98,7 +98,7 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
         // check比较奇怪单独拿出来处理
         $shown = $form['show'] ? ($form['show'] == 'on' ? 'checked' : '') : 'checked';
         $synced = $form['sync'] ? ($form['sync'] == 'on' ? 'checked' : '') : 'checked';
-        $this->view->body = V('site/edit', [
+        $this->view->body = V('admin/site/edit', [
             'synced' => $synced,
             'shown' => $shown,
             'item' => $this->item,
@@ -187,7 +187,7 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
         $synced = $form['sync'] 
         ? ($form['sync'] == 'on' ? 'checked' : '') 
         : ($site->sync ? 'checked' : '');
-        $this->view->body = V('site/edit', [
+        $this->view->body = V('admin/site/edit', [
             'synced' => $synced,
             'shown' => $shown,
             'item' => $this->item,

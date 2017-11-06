@@ -7,7 +7,7 @@ class Site extends \Gini\Controller\CGI {
     public function actionDelete($id) {
         $site = a('site', $id);
 
-        $view = V('site/delete', [
+        $view = V('admin/site/delete', [
             'site' => $site
         ]);
         

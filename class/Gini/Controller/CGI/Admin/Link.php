@@ -30,7 +30,7 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
             'form' => $form
         ]);
 
-        $this->view->body = V('link/list', [
+        $this->view->body = V('admin/link/list', [
             'item' => $this->item,
             'form' => $form,
             'links' => $links,
@@ -74,7 +74,7 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
             }
         }
 
-        $this->view->body = V('link/edit', [
+        $this->view->body = V('admin/link/edit', [
             'item' => $this->item,
             'form' => $form,
         ]);
@@ -118,7 +118,7 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
             }
         }
         
-        $this->view->body = V('link/edit', [
+        $this->view->body = V('admin/link/edit', [
             'item' => $this->item,
             'form' => $form,
             'link' => $link

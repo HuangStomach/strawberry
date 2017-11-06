@@ -1,7 +1,7 @@
 ---
 title: 
-  admin: ${ADMIN_TITLE}
-  home: ${HOME_TITLE:大型仪器管理系统}
+  admin: ${ADMIN_TITLE:="后台管理系统"}
+  home: ${HOME_TITLE:="大型仪器管理系统"}
 phone: 400-017-5664
 administrators:
   - genee

@@ -7,7 +7,7 @@ abstract class Home extends \Gini\Controller\CGI\Layout {
     protected $selected = null;
 
     function __preAction($action, &$params){
-        $title = \Gini\Config::get('site.home')['title'];
+        $title = \Gini\Config::get('site.title')['home'];
 
         $this->view = V('layout/home/layout', [
             'title' => $title,

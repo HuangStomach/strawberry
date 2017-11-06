@@ -7,7 +7,7 @@ class File extends \Gini\Controller\CGI {
     public function actionDelete($id) {
         $file = a('file', $id);
 
-        $view = V('file/delete', [
+        $view = V('admin/file/delete', [
             'file' => $file
         ]);
         

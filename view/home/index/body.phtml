@@ -1,0 +1,124 @@
+<div class="row mb-4">
+  <div class="col-3">
+    <div class="card">
+      <h6 class="card-header card-header-border"><?= T('校级平台用户登录') ?></h6>
+      <div class="card-body">
+        <h4 class="card-title">Special title treatment</h4>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="card">
+      <h6 class="card-header card-header-border font-weight-normal">
+        <?= T('通知公告 / ') ?>
+        <small class='text-dark font-italic'><?= T('Notice') ?></small>
+        <small class="float-right text-muted ml-auto"><?= T('+更多') ?></small>
+      </h6>
+      <div class="card-body p-2" data-async="ajax/index/article/notice"></div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-3">
+    <div class="card">
+      <h6 class="card-header card-header-border"><?= T('快捷通道') ?></h6>
+      <div class="card-body">
+        <h4 class="card-title">Special title treatment</h4>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="card">
+      <h6 class="card-header card-header-border font-weight-normal">
+        <?= T('工作动态 / ') ?>
+        <small class='text-dark font-italic'><?= T('Works') ?></small>
+        <small class="float-right text-muted ml-auto"><?= T('+更多') ?></small>
+      </h6>
+      <div class="card-body">
+        <h4 class="card-title">Special title treatment</h4>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col">
+    <div class="card">
+      <h6 class="card-header font-weight-normal text-center">
+        <?= T('仪器展示 / ') ?>
+        <small class='text-dark font-italic'><?= T('Instrument Show') ?></small>
+      </h6>
+      <div class="card-body px-5 py-4">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+          <?php if ($equipments->totalCount()) foreach ($equipments as $equipment) : ?>
+            <div class="swiper-slide">
+              <div class="swiper-equipment">
+                <img class="mx-auto" src="<?= $equipment->icon ?>"/>
+                <div class="swiper-description px-4 py-1"><?= $equipment->name ?></div>
+              </div>
+            </div>
+          <?php endforeach; ?>
+          </div>
+        </div>
+        <div class="swiper-button-next text-right">></div>
+        <div class="swiper-button-prev"><</div>
+      </div>
+    </div>
+    <script>
+    require(['swiper', 'css!../css/swiper'], function (Swiper) {
+      var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 4,
+        spaceBetween: 20,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        }
+      })
+    })
+    </script>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col">
+    <div class="card">
+      <h6 class="card-header font-weight-normal text-center">
+        <?= T('院级平台 / ') ?>
+        <small class='text-dark font-italic'><?= T('School Platform') ?></small>
+      </h6>
+      <div class="card-body">
+        <div class="row">
+        <?php if ($sites->totalCount()) foreach ($sites as $site) : ?>
+          <div class="col-3">
+            <div class="site-container">
+              <img class="img-fluid" src="<?= URL("site/preview/{$site->id}") ?>">
+              </img>
+              <div class="site-backdrop"></div>
+              <h6 class="site-description"><?= $site->name ?></h6>
+            </div>
+          </div>
+        <?php endforeach ?>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-0 link-container">
+  <div class="col p-3 link-title">
+    <p class="text-center mb-0" style="word-break: keep-all;"><?= T('友情链接') ?></p>
+  </div>
+  <div class="col py-3 px-4 link-content">
+  <?php if ($links->totalCount()) foreach ($links as $link) : ?>
+  <a href="<?= URL($link->url) ?>"><?= $link->name ?></a>
+  <?php endforeach ?>
+  </div>
+</div>

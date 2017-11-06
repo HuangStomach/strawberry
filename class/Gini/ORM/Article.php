@@ -22,6 +22,10 @@ class Article extends \Gini\Module\Object
         if ($this->ctime == '0000-00-00 00:00:00' || !isset($this->ctime)) $this->ctime = date('Y-m-d H:i:s');
         return parent::save();
     }
+
+    public function date() {
+        return date('Y-m-d', strtotime($this->date));
+    }
     
     public function links () {
         $links = [];

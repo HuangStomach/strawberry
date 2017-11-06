@@ -31,7 +31,7 @@ class File extends \Gini\Controller\CGI\Layout\Dashboard {
             'form' => $form
         ]);
 
-        $this->view->body = V('file/list', [
+        $this->view->body = V('admin/file/list', [
             'item' => $this->item,
             'form' => $form,
             'files' => $files,
@@ -77,7 +77,7 @@ class File extends \Gini\Controller\CGI\Layout\Dashboard {
             $this->redirect('admin/file');
         }
 
-        $this->view->body = V('file/edit', [
+        $this->view->body = V('admin/file/edit', [
             'item' => $this->item,
             'form' => $form,
         ]);

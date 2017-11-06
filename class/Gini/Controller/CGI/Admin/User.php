@@ -34,7 +34,7 @@ class User extends \Gini\Controller\CGI\Layout\Dashboard {
             'form' => $form
         ]);
         
-        $this->view->body = V('user/list', [
+        $this->view->body = V('admin/user/list', [
             'item' => $this->item,
             'form' => $form,
             'users' => $users,
@@ -93,7 +93,7 @@ class User extends \Gini\Controller\CGI\Layout\Dashboard {
         
         unset($form['password']);
         unset($form['confirm']);
-        $this->view->body = V('user/edit', [
+        $this->view->body = V('admin/user/edit', [
             'item' => $this->item,
             'form' => $form
         ]);
@@ -154,7 +154,7 @@ class User extends \Gini\Controller\CGI\Layout\Dashboard {
         
         unset($form['password']);
         unset($form['confirm']);
-        $this->view->body = V('user/edit', [
+        $this->view->body = V('admin/user/edit', [
             'edit' => true,
             'item' => $this->item,
             'form' => $form,

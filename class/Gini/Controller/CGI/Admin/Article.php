@@ -48,7 +48,7 @@ class Article extends \Gini\Controller\CGI\Layout\Dashboard {
             'form' => $form
         ]);
 
-        $this->view->body = V('article/list', [
+        $this->view->body = V('admin/article/list', [
             'item' => $this->item,
             'form' => $form,
             'type' => $type, // 当前选定的type 就为了显示一下
@@ -99,7 +99,7 @@ class Article extends \Gini\Controller\CGI\Layout\Dashboard {
 
         // check比较奇怪单独拿出来处理
         $checked = $form['active'] ? ($form['active'] == 'on' ? 'checked' : '') : 'checked';
-        $this->view->body = V('article/edit', [
+        $this->view->body = V('admin/article/edit', [
             'item' => $this->item,
             'form' => $form,
             'types' => $types,
@@ -151,7 +151,7 @@ class Article extends \Gini\Controller\CGI\Layout\Dashboard {
         $checked = $form['active'] 
         ? ($form['active'] == 'on' ? 'checked' : '') 
         : ($article->active ? 'checked' : '');
-        $this->view->body = V('article/edit', [
+        $this->view->body = V('admin/article/edit', [
             'item' => $this->item,
             'form' => $form,
             'types' => $types,

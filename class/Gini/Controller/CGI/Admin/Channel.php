@@ -30,7 +30,7 @@ class Channel extends \Gini\Controller\CGI\Layout\Dashboard {
             'form' => $form
         ]);
 
-        $this->view->body = V('channel/list', [
+        $this->view->body = V('admin/channel/list', [
             'item' => $this->item,
             'form' => $form,
             'links' => $links,
@@ -75,7 +75,7 @@ class Channel extends \Gini\Controller\CGI\Layout\Dashboard {
             }
         }
 
-        $this->view->body = V('channel/edit', [
+        $this->view->body = V('admin/channel/edit', [
             'item' => $this->item,
             'form' => $form,
         ]);
@@ -119,7 +119,7 @@ class Channel extends \Gini\Controller\CGI\Layout\Dashboard {
             }
         }
         
-        $this->view->body = V('channel/edit', [
+        $this->view->body = V('admin/channel/edit', [
             'item' => $this->item,
             'form' => $form,
             'link' => $link

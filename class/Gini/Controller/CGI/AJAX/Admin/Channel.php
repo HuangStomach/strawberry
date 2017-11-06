@@ -7,7 +7,7 @@ class Channel extends \Gini\Controller\CGI {
     public function actionDelete($id) {
         $link = a('link', $id);
 
-        $view = V('channel/delete', [
+        $view = V('admin/channel/delete', [
             'link' => $link
         ]);
         

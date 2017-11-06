@@ -72,7 +72,7 @@ class Index extends \Gini\Controller\CGI\Layout\Whiteboard {
         $csrf = uniqid();
         $_SESSION[$route] = $csrf;
 
-        $this->view->body = V('auth/login', [
+        $this->view->body = V('admin/auth/login', [
             'csrf' => $csrf,
             'form' => $form,
             'phone' => $phone

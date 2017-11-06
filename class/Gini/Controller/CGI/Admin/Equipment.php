@@ -30,7 +30,7 @@ class Equipment extends \Gini\Controller\CGI\Layout\Dashboard {
             'form' => $form
         ]);
 
-        $this->view->body = V('equipment/list', [
+        $this->view->body = V('admin/equipment/list', [
             'item' => $this->item,
             'form' => $form,
             'equipments' => $equipments,

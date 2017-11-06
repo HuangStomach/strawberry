@@ -1,0 +1,13 @@
+<div class="article-list">
+  <?php if ($articles->totalCount()) foreach ($articles as $article) : ?>
+  <div class="row py-2 mx-0">
+    <div class="article-list-item col-10 px-0">
+      <?= H($article->title) ?>
+      <small class="text-muted"><?= H($article->content) ?></small>
+    </div>
+    <div class="col-2 px-0 text-right">
+      <small class="text-muted"><?= H($article->date()) ?></small>
+    </div>
+  </div>
+  <?php endforeach; ?>
+</div>

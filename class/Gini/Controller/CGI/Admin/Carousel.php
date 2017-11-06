@@ -15,7 +15,7 @@ class Carousel extends \Gini\Controller\CGI\Layout\Dashboard {
         $carousel = those('carousel')->orderBy('index');
         $form = $this->form('get');
 
-        $this->view->body = V('carousel/list', [
+        $this->view->body = V('admin/carousel/list', [
             'item' => $this->item,
             'carousel' => $carousel
         ]);
@@ -76,7 +76,7 @@ class Carousel extends \Gini\Controller\CGI\Layout\Dashboard {
             }
         }
 
-        $this->view->body = V('carousel/edit', [
+        $this->view->body = V('admin/carousel/edit', [
             'item' => $this->item,
             'form' => $form,
         ]);
@@ -151,7 +151,7 @@ class Carousel extends \Gini\Controller\CGI\Layout\Dashboard {
             }
         }
         
-        $this->view->body = V('carousel/edit', [
+        $this->view->body = V('admin/carousel/edit', [
             'item' => $this->item,
             'form' => $form,
             'carousel' => $carousel

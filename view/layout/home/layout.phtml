@@ -16,18 +16,18 @@
   <body>
     <div class="container-fluid header">
       <div class="header-content mx-auto">
-        <div class="float-right">
+        <div class="float-right mt-3">
           <form class="form-inline form-search">
-            <div class="input-group input-group-sm">
+            <div class="input-group input-group-sm ml-auto">
               <span class="input-group-addon">@</span>
-              <input type="text" class="form-control form-control-sm ml-auto">
+              <input type="search" class="form-control form-control-sm ml-auto">
             </div>
-            <button type="submit" class="btn btn-link">
+            <button type="submit" class="btn btn-link mr-2">
               <small><?= T('仪器搜索') ?></small>
             </button>
           </form>
           <nav aria-label="breadcrumb" role="navigation">
-            <ol class="breadcrumb">
+            <ol class="breadcrumb mb-0">
               <li class="breadcrumb-item"><a href="#"><?= T('首页') ?></a></li>
               <li class="breadcrumb-item"><a href="#"><?= T('平台简介') ?></a></li>
               <li class="breadcrumb-item"><a href="#"><?= T('仪器列表') ?></a></li>
@@ -40,8 +40,41 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid">
-      <?= $footer ?>
+    <div class="container-fluid p-0">
+      <?= $header ?>
+    </div>
+    <div class="body mx-auto">
+      <?= $body ?>
+    </div>
+    <div class="container-fluid footer py-3" style="background-color: #2e2f30;">
+      <div class="footer-content mx-auto">
+        <div class="row">
+          <div class="col-7">
+            <nav aria-label="breadcrumb" role="navigation">
+              <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="#"><?= T('首页') ?></a></li>
+                <li class="breadcrumb-item"><a href="#"><?= T('平台简介') ?></a></li>
+                <li class="breadcrumb-item"><a href="#"><?= T('仪器列表') ?></a></li>
+                <li class="breadcrumb-item"><a href="#"><?= T('规章制度') ?></a></li>
+                <li class="breadcrumb-item"><a href="#"><?= T('使用指南') ?></a></li>
+                <li class="breadcrumb-item"><a href="#"><?= T('文件下载') ?></a></li>
+                <li class="breadcrumb-item"><a href="#"><?= T('联系我们') ?></a></li>
+              </ol>
+            </nav>
+          </div>
+          <div class="col-5 breadcrumb mb-0 text-right">
+            <span><?= T('022-23508813') ?></span>
+            <span class="ml-4"><?= T('nkyqpt@nankai.edu.cn') ?></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid footer py-2" style="background-color: #1f2021;">
+      <div class="footer-content mx-auto text-center">
+        <small class="m-0">
+          <?= T('天津市卫津路94号 [300071] 津教备0061号 津ICP备12003308号-1    技术支持：天津市基理科技股份有限公司') ?>
+        </small>
+      </div>
     </div>
   </body>
 </html>
