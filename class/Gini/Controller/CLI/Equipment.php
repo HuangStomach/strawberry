@@ -40,9 +40,10 @@ class Equipment extends \Gini\Controller\CLI {
                     $equipment->site = $site;
                     $equipment->lims_id = $equ['id'];
                     $equipment->name = $equ['name'];
-                    $equipment->icon = $equ['icon128_url'];
+                    $equipment->icon = $equ['iconreal_url'] ? : $equ['icon128_url'];
                     $equipment->url = $equ['url'];
                     $equipment->phone = $equ['phone'];
+                    $equipment->email = $equ['email'];
                     $equipment->contact = $equ['contact'];
                     $equipment->incharge = $equ['incharges'];
                     $equipment->location = $equ['location'] . ' ' .  $equ['location2'];

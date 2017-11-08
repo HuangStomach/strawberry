@@ -52,7 +52,6 @@ class Site extends \Gini\Module\Object
     public function sync() {
         if (!$this->id) return false;
         exec("GINI_MODULE_BASE_PATH=/data/gini-modules /usr/local/share/gini/bin/gini @strawberry equipment get {$this->id} >/dev/null 2>&1 &", $output);
-        error_log(print_r($output, true));
     }
 
 }

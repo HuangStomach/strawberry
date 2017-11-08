@@ -17,5 +17,16 @@ class Type extends \Gini\Module\Object
         if ($this->ctime == '0000-00-00 00:00:00' || !isset($this->ctime)) $this->ctime = date('Y-m-d H:i:s');
         return parent::save();
     }
+    
+    public function translate() {
+        switch ($this->key) {
+            case 'notice':
+                return 'Notice';
+            case 'works':
+                return 'Works';
+            case 'rules':
+                return 'Rules and Regulations';
+        }
+    }
 
 }

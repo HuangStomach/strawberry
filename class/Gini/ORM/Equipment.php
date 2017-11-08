@@ -10,6 +10,7 @@ class Equipment extends \Gini\Module\Object
     public $icon            = 'string:500'; 
     public $url             = 'string:500'; // 仪器url 
     public $phone           = 'string:500';
+    public $email           = 'string:500';
     public $contact         = 'string:100';
     public $incharge        = 'string:100';
     public $location        = 'string:250';

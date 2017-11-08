@@ -7,16 +7,18 @@ $end = $start * $step;
 $end = $total < $end ? $total : $end;
 ?>
 <div class="row">
+  <?php if (!$hiddenDes) : ?>
   <div class="col-md-4 text-muted text-left" style="line-height: 38px;">
     <?= T("正在显示{$begin}至{$end}条数据, 共有{$total}条数据") ?>
   </div>
-  <nav class="col-md-8">
-    <ul class="pagination justify-content-end m-0">
+  <?php endif; ?>
+  <nav class="col-md-<?= $hiddenDes ? '12' : '8' ?>">
+    <ul class="pagination justify-content-<?= $align ? : 'end' ?> m-0">
     <?php
     if ($pages <= 6) :
       if ($start > 1) :
       ?>
-      <li class="page-item"><a class="page-link" href="<?= "{$uri}?{$query}" ?>">&laquo;</a></li>
+      <li class="page-item"><a class="page-link" href="<?= "{$uri}?{$query}" ?>">&lt;</a></li>
       <?php 
       endif;
       for ($i = 1; $i <= $pages; $i ++):
@@ -28,13 +30,13 @@ $end = $total < $end ? $total : $end;
       endfor;
       if ($start < $pages) :
       ?>
-      <li class="page-item"><a class="page-link" href="<?= "{$uri}/{$pages}?{$query}" ?>">&raquo;</a></li>
+      <li class="page-item"><a class="page-link" href="<?= "{$uri}/{$pages}?{$query}" ?>">&gt;</a></li>
       <?php 
       endif;
     else:
       if ($start > 1) :
       ?>
-      <li class="page-item"><a class="page-link" href="<?= "{$uri}?{$query}" ?>">&laquo;</a></li>
+      <li class="page-item"><a class="page-link" href="<?= "{$uri}?{$query}" ?>">&lt;</a></li>
       <?php 
       endif;
       for ($i = $start - 2 >= 0 ? $start - 2 : $start ; $i <= ($start + 2 >= $pages ? $pages : $start + 2); $i ++):
@@ -47,11 +49,12 @@ $end = $total < $end ? $total : $end;
       endfor;
       if ($start < $pages) :
       ?>
-      <li class="page-item"><a class="page-link" href="<?= "{$uri}/{$pages}?{$query}" ?>">&raquo;</a></li>
+      <li class="page-item"><a class="page-link" href="<?= "{$uri}/{$pages}?{$query}" ?>">&gt;</a></li>
       <?php 
       endif;
     endif;
     ?>
+    <li class="text-muted page-item p-2"><?= T("共{$pages}页") ?></li>
     </ul>
   </nav>
 </div>

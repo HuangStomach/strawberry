@@ -26,6 +26,23 @@ class Article extends \Gini\Module\Object
     public function date() {
         return date('Y-m-d', strtotime($this->date));
     }
+
+    public function content() {
+        return mb_substr(strip_tags($this->content), 0, 100);
+    }
+
+    public function image() {
+        $path = APP_PATH . '/' . DATA_DIR . "/attached/{$this->uniqid}/";
+        if (!is_dir($path)) return false;
+        $files = scandir($path, 1);
+        foreach ($files as $file) {
+            list($name, $ext) = explode('.', $file);
+            if (in_array($ext, ['jpg', 'jpeg', 'gif', 'png', 'bmp'])) {
+                return URL("editor/get/{$this->uniqid}/{$name}/{$ext}");
+            }
+        }
+        return false;
+    }
     
     public function links () {
         $links = [];

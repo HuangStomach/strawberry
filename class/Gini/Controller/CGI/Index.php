@@ -21,4 +21,8 @@ class Index extends \Gini\Controller\CGI\Layout\Home {
         ]);
     }
 
+    function actionContact() {
+        $this->view->body = V('home/contact');
+    }
+
 }

@@ -23,7 +23,7 @@ class Article extends \Gini\Controller\CGI\Layout\Dashboard {
     }
 
     function __index($start = 1, $step = 20) {
-        $articles = those('article');
+        $articles = those('article')->orderBy('date', 'desc');
         $types = those('article/type');
 
         $form = $this->form('get');

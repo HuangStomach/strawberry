@@ -1,0 +1,41 @@
+<div class="p-3 equipments">
+  <div class="card mb-4">
+    <h6 class="card-header font-weight-normal text-center">
+      <?= T("仪器列表 / ") ?>
+      <small class='text-dark font-italic'><?= T('Instrument List') ?></small>
+    </h6>
+    <div class="card-body p-5" style="min-height: 600px;">
+      <h6 class="text-dark"><?= T('仪器分类') ?></h6>
+      <hr />
+      <div class="p-3" style="background-color: #f5f6f8;">
+        <span class="my-3 mx-4 d-inline-block">色谱仪器</span>
+        <span class="my-3 mx-4 d-inline-block">色谱仪器</span>
+        <span class="my-3 mx-4 d-inline-block">色谱仪器</span>
+        <span class="my-3 mx-4 d-inline-block">色谱仪器</span>
+        <span class="my-3 mx-4 d-inline-block">色谱仪器</span>
+        <span class="my-3 mx-4 d-inline-block">色谱仪器</span>
+        <span class="my-3 mx-4 d-inline-block">色谱仪器</span>
+        <span class="my-3 mx-4 d-inline-block">色谱仪器</span>
+        <span class="my-3 mx-4 d-inline-block">色谱仪器</span>
+        <span class="my-3 mx-4 d-inline-block">色谱仪器</span>
+      </div>
+      <div class="row">
+      <?php foreach ($equipments as $equipment) : ?>
+        <div class="col-6 py-4 px-0 equipment-container">
+          <div class="row m-0">
+            <div class="col-5">
+              <img class="mx-auto d-block" src="<?= $equipment->icon ?>">
+            </div>
+            <div class="col-7">
+              <h6 class="text-dark text-ellipsis mb-3"><?= H($equipment->name) ?></h6>
+              <p class="text-dark text-ellipsis"><?= H($equipment->contact) ?></p>
+              <p class="text-dark text-ellipsis"><?= H($equipment->phone) ?></p>
+              <p class="text-dark text-ellipsis"><?= H($equipment->email) ?></p>
+            </div>
+          </div>
+        </div>
+      <?php endforeach; ?>
+      </div>
+    </div>
+  </div>
+</div>
