@@ -4,6 +4,10 @@ namespace Gini\Controller\CGI;
 
 class File extends \Gini\Controller\CGI {
 
+    function __index() {
+        $this->view->active = 'file';
+    }
+
     function actionDownload($id) {
         $file = a('file', $id);
         if (!$file->id) $this->redirect('error/404');

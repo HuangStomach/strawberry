@@ -1,4 +1,5 @@
 @import "vars/variables";
+
 body {
   background-color: #f1f2f3;
   color: #333;
@@ -60,6 +61,46 @@ body {
       white-space: nowrap;
     }
   }
+  .form-login {
+    .form-control {
+      border-color: rgba(0,0,0,.4);
+    }
+    .input-group-sm>select.form-control:not([size]):not([multiple]) {
+      -webkit-appearance: none;
+      height: 24px;
+      line-height: 24px;
+      padding: 0 5px;
+      border: none;
+      border-bottom: 1px solid rgba(0,0,0,.4);
+      border-radius: 0;
+      font-size: 14px;
+    }
+    .input-group-addon {
+      padding: 5px;
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
+      border-right: none;
+      border-color: rgba(0,0,0,.4);
+      background-color: inherit;
+    }
+    .backend-addon {
+      border-radius: 0;
+      padding: 0 5px;
+      border: none;
+      border-bottom: 1px solid rgba(0,0,0,.4);
+    }
+    input.form-control {
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+      border-left: none;
+      padding-left: 0;
+    }
+    .btn-block {
+      border-radius: 2px;
+      background-color: @nankai;
+      color: #fff;
+    }
+  }
   [class*="swiper-button-"] {
     color: @nankai;
     position: absolute;
@@ -108,6 +149,8 @@ body {
       flex-grow: 0;
     }
     .link-content {
+      overflow-x: scroll;
+      white-space: nowrap;
       a {
         font-size: 14px;
         color: #333;
@@ -171,6 +214,9 @@ body {
 .nankai-hr {
   border: 1px solid @nankai;
 }
+.form-control:focus {
+  border-color: rgba(0,0,0,.15);
+}
 .card {
   border-radius: 0;
   border: none;
@@ -184,9 +230,15 @@ body {
   }
 }
 .breadcrumb-item+.breadcrumb-item::before {
-  padding-right: .75rem;
-  padding-left: .75rem;
+  padding-right: .70rem;
+  padding-left: .70rem;
   content: '|';
+}
+.breadcrumb .breadcrumb-item a {
+  &.active {
+    color: @nankai;
+    font-weight: bold;
+  }
 }
 .pagination {
   .page-item {

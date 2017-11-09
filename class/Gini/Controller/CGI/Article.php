@@ -20,6 +20,7 @@ class Article extends \Gini\Controller\CGI\Layout\Home {
             'align' => 'center'
         ]);
 
+        $this->view->active = $type;
         $this->view->body = V('home/article/common', [
             'primary' => $articleType->name,
             'secondary' => $articleType->translate(),

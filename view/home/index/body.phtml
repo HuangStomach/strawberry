@@ -1,17 +1,19 @@
 <div class="row mb-4">
   <div class="col-3">
     <div class="card">
-      <h6 class="card-header card-header-border"><?= T('校级平台用户登录') ?></h6>
+      <h6 class="card-header card-header-border" style="padding-left: 40px;">
+        <img style="position: absolute; top: 16px; left: 14px;" src="assets/image/icon/login.png" />
+        <?= T('校级平台用户登录') ?>
+      </h6>
       <div class="card-body" style="height: 265px;">
-        <form>
-          <input type="text"></input>
-        </form>
+        <?= V('home/index/login') ?>
       </div>
     </div>
   </div>
   <div class="col-9">
     <div class="card">
-      <h6 class="card-header card-header-border font-weight-normal">
+      <h6 class="card-header card-header-border font-weight-normal" style="padding-left: 40px;">
+        <img style="position: absolute; top: 11px; left: 10px;" src="assets/image/icon/notice.png" />
         <?= T('通知公告 / ') ?>
         <small class='text-dark font-italic'><?= T('Notice') ?></small>
         <small class="float-right text-muted ml-auto"><?= T('+更多') ?></small>
@@ -33,7 +35,8 @@
   </div>
   <div class="col-9">
     <div class="card">
-      <h6 class="card-header card-header-border font-weight-normal">
+      <h6 class="card-header card-header-border font-weight-normal" style="padding-left: 40px;">
+        <img style="position: absolute; top: 14px; left: 10px;" src="assets/image/icon/works.png" />
         <?= T('工作动态 / ') ?>
         <small class='text-dark font-italic'><?= T('Works') ?></small>
         <small class="float-right text-muted ml-auto"><?= T('+更多') ?></small>
@@ -49,6 +52,7 @@
   <div class="col">
     <div class="card">
       <h6 class="card-header font-weight-normal text-center">
+        <img style="position: absolute; top: 10px; left: 385px;" src="assets/image/icon/equipment.png" />
         <?= T('仪器展示 / ') ?>
         <small class='text-dark font-italic'><?= T('Instrument Show') ?></small>
       </h6>

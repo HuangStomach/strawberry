@@ -16,10 +16,13 @@
   <body>
     <div class="container-fluid header">
       <div class="header-content mx-auto">
+        <img class="mt-4" src="assets/image/logo.png" alt="<?= T('南开大学') ?>" />
         <div class="float-right mt-3">
           <form class="form-inline form-search">
             <div class="input-group input-group-sm ml-auto">
-              <span class="input-group-addon">@</span>
+              <span class="input-group-addon">
+                <img src="assets/image/icon/search.png"></img>
+              </span>
               <input type="search" class="form-control form-control-sm ml-auto">
             </div>
             <button type="submit" class="btn btn-link mr-2">
@@ -28,13 +31,27 @@
           </form>
           <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb mb-0">
-              <li class="breadcrumb-item"><a href="<?= URL('/') ?>"><?= T('首页') ?></a></li>
-              <li class="breadcrumb-item"><a href="#"><?= T('平台简介') ?></a></li>
-              <li class="breadcrumb-item"><a href="<?= URL('equipment') ?>"><?= T('仪器列表') ?></a></li>
-              <li class="breadcrumb-item"><a href="<?= URL('article/rules') ?>"><?= T('规章制度') ?></a></li>
-              <li class="breadcrumb-item"><a href="<?= URL('article/guide') ?>"><?= T('使用指南') ?></a></li>
-              <li class="breadcrumb-item"><a href="<?= URL('file') ?>"><?= T('文件下载') ?></a></li>
-              <li class="breadcrumb-item"><a href="<?= URL('contact') ?>"><?= T('联系我们') ?></a></li>
+              <li class="breadcrumb-item">
+                <a class="<?= $active == 'index' ? 'active' : '' ?>" href="<?= URL('/') ?>"><?= T('首页') ?></a>
+              </li>
+              <li class="breadcrumb-item">
+                <a class="<?= $active == 'intro' ? 'active' : '' ?>" href="#"><?= T('平台简介') ?></a>
+              </li>
+              <li class="breadcrumb-item">
+                <a class="<?= $active == 'equipment' ? 'active' : '' ?>" href="<?= URL('equipment') ?>"><?= T('仪器列表') ?></a>
+              </li>
+              <li class="breadcrumb-item">
+                <a class="<?= $active == 'notice' ? 'active' : '' ?>" href="<?= URL('article/notice') ?>"><?= T('通知公告') ?></a>
+              </li>
+              <li class="breadcrumb-item">
+                <a class="<?= $active == 'rules' ? 'active' : '' ?>" href="<?= URL('article/rules') ?>"><?= T('规章制度') ?></a>
+              </li>
+              <li class="breadcrumb-item">
+                <a class="<?= $active == 'file' ? 'active' : '' ?>" href="<?= URL('file') ?>"><?= T('文件下载') ?></a>
+              </li>
+              <li class="breadcrumb-item">
+                <a class="<?= $active == 'contact' ? 'active' : '' ?>" href="<?= URL('contact') ?>"><?= T('联系我们') ?></a>
+              </li>
             </ol>
           </nav>
         </div>
@@ -55,8 +72,8 @@
                 <li class="breadcrumb-item"><a href="<?= URL('/') ?>"><?= T('首页') ?></a></li>
                 <li class="breadcrumb-item"><a href="#"><?= T('平台简介') ?></a></li>
                 <li class="breadcrumb-item"><a href="<?= URL('equipment') ?>"><?= T('仪器列表') ?></a></li>
+                <li class="breadcrumb-item"><a href="<?= URL('article/notice') ?>"><?= T('通知公告') ?></a></li>
                 <li class="breadcrumb-item"><a href="<?= URL('article/rules') ?>"><?= T('规章制度') ?></a></li>
-                <li class="breadcrumb-item"><a href="<?= URL('article/guide') ?>"><?= T('使用指南') ?></a></li>
                 <li class="breadcrumb-item"><a href="<?= URL('file') ?>"><?= T('文件下载') ?></a></li>
                 <li class="breadcrumb-item"><a href="<?= URL('contact') ?>"><?= T('联系我们') ?></a></li>
               </ol>

@@ -10,6 +10,7 @@ class Index extends \Gini\Controller\CGI\Layout\Home {
         $sites = those('site')->whose('show')->is(true);
         $links = those('link')->whose('type')->is(\Gini\ORM\Link::TYPE_FRIENDLY);
 
+        $this->view->active = 'index';
         $this->view->header = V('home/index/header', [
             'carousel' => $carousel
         ]);
@@ -22,6 +23,7 @@ class Index extends \Gini\Controller\CGI\Layout\Home {
     }
 
     function actionContact() {
+        $this->view->active = 'contact';
         $this->view->body = V('home/contact');
     }
 
