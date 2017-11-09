@@ -67,9 +67,17 @@ class Equipment extends \Gini\Controller\CLI {
                     $equipment->purchased_date = date('Y-m-d H:i:s', $equ['purchased_date']);
                     $equipment->net_date = date('Y-m-d H:i:s', $equ['atime']);
                     $equipment->group = $equ['group'] ? : [];
-                    $equipment->tag = $equ['tag'] ? : '';
+                    $equipment->tag = $equ['tags'] ? : '';
                     $equipment->sync_time = $syncTime;
                     $equipment->save();
+
+                    foreach (explode(',', $equipment->tag) as $name) {
+                        if (!$name) continue;
+                        $name = trim($name);
+                        $tag = a('equipment/tag')->whose('name')->is($name);
+                        $tag->name = $name;
+                        $tag->save();
+                    }
                 }
                 $start += $step;
             }

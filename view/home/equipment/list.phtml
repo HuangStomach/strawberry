@@ -8,16 +8,14 @@
       <h6 class="text-dark"><?= T('仪器分类') ?></h6>
       <hr />
       <div class="p-3" style="background-color: #f5f6f8;">
-        <span class="my-3 mx-4 d-inline-block">色谱仪器</span>
-        <span class="my-3 mx-4 d-inline-block">色谱仪器</span>
-        <span class="my-3 mx-4 d-inline-block">色谱仪器</span>
-        <span class="my-3 mx-4 d-inline-block">色谱仪器</span>
-        <span class="my-3 mx-4 d-inline-block">色谱仪器</span>
-        <span class="my-3 mx-4 d-inline-block">色谱仪器</span>
-        <span class="my-3 mx-4 d-inline-block">色谱仪器</span>
-        <span class="my-3 mx-4 d-inline-block">色谱仪器</span>
-        <span class="my-3 mx-4 d-inline-block">色谱仪器</span>
-        <span class="my-3 mx-4 d-inline-block">色谱仪器</span>
+        <span class="my-2 mx-3 d-inline-block px-2 py-1 <?= isset($select) ? '' : 'active' ?>">
+          <a href="<?= URL() ?>" style="color: inherit"><?= T('全部') ?></a>
+        </span>
+        <?php if ($tags->totalCount()) foreach ($tags as $tag) : ?>
+        <span class="my-2 mx-3 d-inline-block px-2 py-1 <?= $select == $tag->name ? 'active' : '' ?>">
+          <a href="<?= URL('', ['tag' => H($tag->name)]) ?>" style="color: inherit"><?= H($tag->name) ?></a>
+        </span>
+        <?php endforeach; ?>
       </div>
       <div class="row">
       <?php foreach ($equipments as $equipment) : ?>
@@ -30,7 +28,7 @@
               <h6 class="text-dark text-ellipsis mb-3"><?= H($equipment->name) ?></h6>
               <p class="text-dark text-ellipsis"><?= H($equipment->contact) ?></p>
               <p class="text-dark text-ellipsis"><?= H($equipment->phone) ?></p>
-              <p class="text-dark text-ellipsis"><?= H($equipment->email) ?></p>
+              <p class="text-dark text-ellipsis"><?= H($equipment->location) ?></p>
             </div>
           </div>
         </div>
