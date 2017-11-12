@@ -22,4 +22,13 @@ class Equipment extends \Gini\Controller\CGI\Layout\Home {
         ]);
     }
 
+    function actionContent($id = 0) {
+        $equipment = a('equipment', $id);
+        if (!$equipment->id) $this->redirect('error/404');
+        
+        $this->view->body = V('home/equipment/content', [
+            'equipment' => $equipment
+        ]);
+    }
+
 }

@@ -1,7 +1,7 @@
 <div class="row mb-4">
   <div class="col-3">
     <div class="card">
-      <h6 class="card-header card-header-border" style="padding-left: 40px;">
+      <h6 class="card-header card-header-border" style="padding-left: 45px;">
         <img style="position: absolute; top: 16px; left: 14px;" src="assets/image/icon/login.png" />
         <?= T('校级平台用户登录') ?>
       </h6>
@@ -16,7 +16,9 @@
         <img style="position: absolute; top: 11px; left: 10px;" src="assets/image/icon/notice.png" />
         <?= T('通知公告 / ') ?>
         <small class='text-dark font-italic'><?= T('Notice') ?></small>
-        <small class="float-right text-muted ml-auto"><?= T('+更多') ?></small>
+        <small class="float-right ml-auto">
+          <a href="<?= URL('article/notice') ?>" class="text-muted "><?= T('+更多') ?></a>
+        </small>
       </h6>
       <div class="card-body px-2 pt-3 pb-1" style="height: 265px;"
       data-async="ajax/index/article/notice"></div>
@@ -27,7 +29,10 @@
 <div class="row mb-4">
   <div class="col-3">
     <div class="card">
-      <h6 class="card-header card-header-border"><?= T('快捷通道') ?></h6>
+      <h6 class="card-header card-header-border" style="padding-left: 45px;">
+        <img style="position: absolute; top: 13px; left: 14px;" src="assets/image/icon/channel.png" />
+        <?= T('快捷通道') ?>
+      </h6>
       <div class="card-body p-0" style="height: 106px;"
       data-async="ajax/index/link/channel">
       </div>
@@ -39,7 +44,9 @@
         <img style="position: absolute; top: 14px; left: 10px;" src="assets/image/icon/works.png" />
         <?= T('工作动态 / ') ?>
         <small class='text-dark font-italic'><?= T('Works') ?></small>
-        <small class="float-right text-muted ml-auto"><?= T('+更多') ?></small>
+        <small class="float-right text-muted ml-auto">
+          <a href="<?= URL('article/works') ?>" class="text-muted "><?= T('+更多') ?></a>
+        </small>
       </h6>
       <div class="card-body p-2" style="height: 106px;"
       data-async="ajax/index/article/works">
@@ -56,35 +63,9 @@
         <?= T('仪器展示 / ') ?>
         <small class='text-dark font-italic'><?= T('Instrument Show') ?></small>
       </h6>
-      <div class="card-body px-5 py-4">
-        <div class="swiper-container">
-          <div class="swiper-wrapper">
-          <?php if ($equipments->totalCount()) foreach ($equipments as $equipment) : ?>
-            <div class="swiper-slide">
-              <div class="swiper-equipment">
-                <img class="mx-auto" src="<?= $equipment->icon ?>"/>
-                <div class="swiper-description px-4 py-1"><?= $equipment->name ?></div>
-              </div>
-            </div>
-          <?php endforeach; ?>
-          </div>
-        </div>
-        <div class="swiper-button-next text-right">></div>
-        <div class="swiper-button-prev"><</div>
+      <div class="card-body px-5 py-4" data-async="ajax/index/equipment/swiper">
       </div>
     </div>
-    <script>
-    require(['swiper', 'css!../css/swiper'], function (Swiper) {
-      var swiper = new Swiper('.swiper-container', {
-        slidesPerView: 4,
-        spaceBetween: 20,
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        }
-      })
-    })
-    </script>
   </div>
 </div>
 
@@ -92,22 +73,11 @@
   <div class="col">
     <div class="card">
       <h6 class="card-header font-weight-normal text-center">
+        <img style="position: absolute; top: 12px; left: 385px;" src="assets/image/icon/site.png" />
         <?= T('院级平台 / ') ?>
         <small class='text-dark font-italic'><?= T('School Platform') ?></small>
       </h6>
-      <div class="card-body">
-        <div class="row">
-        <?php if ($sites->totalCount()) foreach ($sites as $site) : ?>
-          <div class="col-3">
-            <div class="site-container">
-              <img class="img-fluid" src="<?= URL("site/preview/{$site->id}") ?>">
-              </img>
-              <div class="site-backdrop"></div>
-              <h6 class="site-description"><?= $site->name ?></h6>
-            </div>
-          </div>
-        <?php endforeach ?>
-        </div>
+      <div class="card-body" data-async="ajax/index/site">
       </div>
     </div>
   </div>

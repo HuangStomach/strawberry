@@ -1,17 +1,19 @@
 <div class="media">
   <img class="mr-3" src="<?= $article->image() ?>" 
   style="max-width: 130px; max-height: 90px;">
-  <div class="media-body">
-    <div class="row m-0">
-      <div class="col-9 p-0">
-        <?= $article->title ?>
+  <a href="<?= URL("article/content/{$article->id}") ?>" class="d-block article-link">
+    <div class="media-body">
+      <div class="row m-0">
+        <div class="col-9 p-0">
+          <?= $article->title ?>
+        </div>
+        <div class="col-3 p-0 text-right">
+          <small class="pr-1"><?= $article->date() ?></small>
+        </div>
       </div>
-      <div class="col-3 p-0 text-right">
-        <small class="pr-1"><?= $article->date() ?></small>
+      <div class="text-muted">
+        <?= $article->content() ?>
       </div>
     </div>
-    <div class="text-muted">
-      <?= $article->content() ?>
-    </div>
-  </div>
+  </a>
 </div>

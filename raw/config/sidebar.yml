@@ -4,6 +4,10 @@ items:
     name: 用户管理
     url: admin/user
     icon: users
+  intro:
+    name: 平台简介
+    url: admin/intro
+    icon: file
   article:
     name: 文章管理
     url: admin/article

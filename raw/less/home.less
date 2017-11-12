@@ -59,6 +59,13 @@ body {
       overflow: hidden;
       text-overflow:ellipsis;
       white-space: nowrap;
+      .equipment-link {
+        color: inherit;
+        &:hover {
+          color: inherit;
+          text-decoration: none;
+        }
+      }
     }
   }
   .form-login {
@@ -195,6 +202,22 @@ body {
     }
   }
 }
+.article-link {
+  color: inherit;
+  &:hover {
+    color: inherit;
+    text-decoration: none;
+    .article-list-item {
+      color: @nankai !important;
+      font-weight: bold;
+    }
+  }
+}
+.article-content {
+  img {
+    max-width: 100%;
+  }
+}
 .text-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -213,6 +236,24 @@ body {
     p {
       font-size: .8rem;
     }
+    .equipment-link {
+      color: #1d2124;
+      &:hover {
+        color: @nankai;
+        text-decoration: none;
+      }
+    }
+  }
+}
+.equipment {
+  .col, [class*="col-"] {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .equipment-icon {
+    width: 350px;
+    height: 350px;
+    border: 1px solid @nankai;
   }
 }
 .nankai-hr {

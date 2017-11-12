@@ -1,0 +1,77 @@
+<h4 class="font-weight-normal mb-0"><?= T('平台简介') ?></h4>
+<ol class="breadcrumb px-0">
+  <li class="breadcrumb-item"><a href="<?= URL($item['url']) ?>"><?= T($item['name']) ?></a></li>
+  <li class="breadcrumb-item active"><?= T('编辑信息') ?></li>
+</ol>
+<div class="card text-center">
+  <div class="card-header text-left px-3 py-2">
+    <h5 class="mx-0 my-1"><?= T('平台信息') ?></h5>
+  </div>
+  <div class="card-body">
+    <form class="text-left" method="POST" enctype="multipart/form-data">
+      <input type="hidden" value="<?= $uniqid ?>" name="uniqid">
+      <div class="form-group">
+        <label><?= T('平台图片') ?></label>
+        <input name="file" type="file">
+      </div>
+
+      <div class="form-group">
+        <label for="editor"><?= T('平台内容') ?></label>
+        <textarea id="editor" name="content" class="form-control" rows="10">
+          <?= $form['content'] ? H($form['content']) : (H($intro->content) ? : '') ?>
+        </textarea>
+      </div>
+
+      <br />
+      <button type="submit" class="btn btn-sm btn-success"><?= T('提交') ?></button>
+    </form>
+  </div>
+</div>
+
+
+<script>
+require(['main'], function ($) {
+  require(['fileinput', 'css!../css/fileinput'], function () {
+    require(['fileinput/theme', 'fileinput/zh'], function () {
+      $("input[name=file]").fileinput({
+        language: 'zh',
+        theme: 'icomoon',
+        showUpload: false,
+        allowedFileTypes: ['image']
+        <?php if ($intro->id && $intro->path) : ?>
+        , initialPreview: [
+          "<img src='<?= URL("intro/preview/{$intro->id}") ?>' style='width: 100%;' class='file-preview-image' alt='平台简介' title='平台简介'>" +
+          "<input type='hidden' name='exists' value='1'/>"
+        ],
+        initialPreviewConfig: [
+          {
+            caption: "平台简介"
+          }
+        ],
+        initialPreviewShowDelete: false
+        <?php endif; ?>
+      })
+    })
+  })
+
+  require(['kindeditor', 'css!../css/kindeditor'], function (K) {
+    KindEditor.create('#editor', {
+      width: '100%',
+      height: '400px',
+      items: [
+        'source', '|', 'justifyleft', 'justifycenter', 'justifyright',
+        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', '|', 'fullscreen',
+        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+        'italic', 'underline', 'strikethrough', 'lineheight', 'link', 'unlink', 'image',
+        'insertfile', 'table'
+      ],
+      resizeType: 1,
+      themeType: 'kindeditor',
+      uploadJson: 'ajax/admin/editor/upload/<?= $uniqid ?>',
+      basePath: 'assets/',
+      themesPath: 'assets/css/',
+      pluginsPath: 'assets/image/kindeditor/'
+    })
+  })
+})
+</script>

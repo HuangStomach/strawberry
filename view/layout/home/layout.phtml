@@ -35,7 +35,7 @@
                 <a class="<?= $active == 'index' ? 'active' : '' ?>" href="<?= URL('/') ?>"><?= T('首页') ?></a>
               </li>
               <li class="breadcrumb-item">
-                <a class="<?= $active == 'intro' ? 'active' : '' ?>" href="#"><?= T('平台简介') ?></a>
+                <a class="<?= $active == 'intro' ? 'active' : '' ?>" href="<?= URL('intro') ?>"><?= T('平台简介') ?></a>
               </li>
               <li class="breadcrumb-item">
                 <a class="<?= $active == 'equipment' ? 'active' : '' ?>" href="<?= URL('equipment') ?>"><?= T('仪器列表') ?></a>
@@ -70,7 +70,7 @@
             <nav aria-label="breadcrumb" role="navigation">
               <ol class="breadcrumb mb-0">
                 <li class="breadcrumb-item"><a href="<?= URL('/') ?>"><?= T('首页') ?></a></li>
-                <li class="breadcrumb-item"><a href="#"><?= T('平台简介') ?></a></li>
+                <li class="breadcrumb-item"><a href="<?= URL('intro') ?>"><?= T('平台简介') ?></a></li>
                 <li class="breadcrumb-item"><a href="<?= URL('equipment') ?>"><?= T('仪器列表') ?></a></li>
                 <li class="breadcrumb-item"><a href="<?= URL('article/notice') ?>"><?= T('通知公告') ?></a></li>
                 <li class="breadcrumb-item"><a href="<?= URL('article/rules') ?>"><?= T('规章制度') ?></a></li>
@@ -80,8 +80,14 @@
             </nav>
           </div>
           <div class="col-5 breadcrumb mb-0 text-right">
-            <span><?= T('022-23508813') ?></span>
-            <span class="ml-4"><?= T('nkyqpt@nankai.edu.cn') ?></span>
+            <span>
+              <img class="mr-1" src="assets/image/icon/phone.png"/>
+              <?= T('022-23508813') ?>
+            </span>
+            <span class="ml-4">
+              <img class="mr-1" src="assets/image/icon/email.png"/>
+              <?= T('nkyqpt@nankai.edu.cn') ?>
+            </span>
           </div>
         </div>
       </div>

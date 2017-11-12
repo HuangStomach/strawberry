@@ -1,0 +1,12 @@
+<div class="row">
+<?php if ($sites->totalCount()) foreach ($sites as $site) : ?>
+  <div class="col-3">
+    <div class="site-container">
+      <img class="img-fluid" src="<?= URL("site/preview/{$site->id}") ?>">
+      </img>
+      <div class="site-backdrop"></div>
+      <h6 class="site-description"><?= $site->name ?></h6>
+    </div>
+  </div>
+<?php endforeach ?>
+</div>

@@ -1,0 +1,22 @@
+<div class="p-3">
+  <div class="card mb-4">
+    <h6 class="card-header font-weight-normal text-center">
+      <?= T("文件下载 / ") ?>
+      <small class='text-dark font-italic'><?= T('Download') ?></small>
+    </h6>
+    <div class="card-body" style="min-height: 600px;">
+      <div class="article-list">
+        <?php if ($files->totalCount()) foreach ($files as $file) : ?>
+        <a href="<?= URL("file/download/{$file->id}") ?>" class="d-block article-link">
+          <div class="row pb-2 mx-0 mb-3">
+              <div class="article-list-item text-ellipsis col-12 px-0">
+                <?= H($file->title) ?>
+              </div>
+          </div>
+        </a>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </div>
+  <?= $pagination ?>
+</div>

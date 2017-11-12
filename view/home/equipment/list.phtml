@@ -18,21 +18,25 @@
         <?php endforeach; ?>
       </div>
       <div class="row">
-      <?php foreach ($equipments as $equipment) : ?>
+        <?php foreach ($equipments as $equipment) : ?>
         <div class="col-6 py-4 px-0 equipment-container">
           <div class="row m-0">
             <div class="col-5">
               <img class="mx-auto d-block" src="<?= $equipment->icon ?>">
             </div>
             <div class="col-7">
-              <h6 class="text-dark text-ellipsis mb-3"><?= H($equipment->name) ?></h6>
+              <h6 class="text-dark text-ellipsis mb-3">
+                <a href="<?= URL("equipment/content/{$equipment->id}") ?>" class="equipment-link">
+                  <?= H($equipment->name) ?>
+                </a>
+              </h6>
               <p class="text-dark text-ellipsis"><?= H($equipment->contact) ?></p>
               <p class="text-dark text-ellipsis"><?= H($equipment->phone) ?></p>
               <p class="text-dark text-ellipsis"><?= H($equipment->location) ?></p>
             </div>
           </div>
         </div>
-      <?php endforeach; ?>
+        <?php endforeach; ?>
       </div>
     </div>
   </div>

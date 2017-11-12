@@ -7,14 +7,16 @@
     <div class="card-body" style="min-height: 600px;">
       <div class="article-list">
         <?php if ($articles->totalCount()) foreach ($articles as $article) : ?>
-        <div class="row pb-2 mx-0 mb-3">
-          <div class="article-list-item text-ellipsis col-10 px-0">
-            <?= H($article->title) ?>
+        <a href="<?= URL("article/content/{$article->id}") ?>" class="d-block article-link">
+          <div class="row pb-2 mx-0 mb-3">
+              <div class="article-list-item text-ellipsis col-10 px-0">
+                <?= H($article->title) ?>
+              </div>
+              <div class="col-2 px-0 text-right">
+                <small class="text-muted"><?= H($article->date()) ?></small>
+              </div>
           </div>
-          <div class="col-2 px-0 text-right">
-            <small class="text-muted"><?= H($article->date()) ?></small>
-          </div>
-        </div>
+        </a>
         <?php endforeach; ?>
       </div>
     </div>
