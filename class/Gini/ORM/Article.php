@@ -27,6 +27,12 @@ class Article extends \Gini\Module\Object
         return date('Y-m-d', strtotime($this->date));
     }
 
+    public function title($keyword = '') {
+        if (!$keyword) return H($this->title);
+        $title = H($this->title);
+        return str_replace($keyword, "<span class=\"text-nankai font-weight-bold\">{$keyword}</span>", $title);
+    }
+
     public function content() {
         return mb_substr(strip_tags($this->content), 0, 100);
     }

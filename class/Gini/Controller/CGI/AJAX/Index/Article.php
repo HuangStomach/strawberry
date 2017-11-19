@@ -27,7 +27,7 @@ class Article extends \Gini\Controller\CGI {
         ->orderBy('date', 'desc')
         ->current();
         
-        $view = V('home/index/work', [
+        $view = V('home/article/works/item', [
             'article' => $article
         ]);
 

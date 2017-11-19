@@ -18,14 +18,14 @@
       <div class="header-content mx-auto">
         <img class="mt-4" src="assets/image/logo.png" alt="<?= T('南开大学') ?>" />
         <div class="float-right mt-3">
-          <form class="form-inline form-search">
+          <form action="<?= URL('search') ?>" class="form-inline form-search">
             <div class="input-group input-group-sm ml-auto">
               <span class="input-group-addon">
                 <img src="assets/image/icon/search.png"></img>
               </span>
-              <input type="search" class="form-control form-control-sm ml-auto">
+              <input name="keyword" type="search" class="form-control form-control-sm ml-auto">
             </div>
-            <button type="submit" class="btn btn-link mr-2">
+            <button type="submit" class="btn btn-link text-dark mr-2">
               <small><?= T('仪器搜索') ?></small>
             </button>
           </form>

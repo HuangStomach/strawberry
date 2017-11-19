@@ -1,0 +1,19 @@
+<div class="media mt-2 mb-1">
+  <div style="width: 130px; height: 90px;" class="mr-3">
+    <img src="<?= $article->image() ?>" 
+    style="max-width: 130px; max-height: 90px;">
+  </div>
+  <div class="media-body">
+    <div class="row m-0">
+      <div class="col-9 p-0 text-dark">
+        <?= $article->title($keyword) ?>
+      </div>
+      <div class="col-3 p-0 text-right text-muted">
+        <small class="pr-1"><?= $article->date() ?></small>
+      </div>
+    </div>
+    <div class="text-muted">
+    <?= $article->content() ?>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="p-3">
+  <div class="card mb-4">
+    <h6 class="card-header font-weight-normal text-center">
+      <?php
+      if ($keyword) 
+        echo T('关键字“ %keyword ”搜索结果', ['%keyword' => $keyword]);
+      else 
+        echo T('搜索结果');
+      ?>
+    </h6>
+    <div class="card-body" style="min-height: 600px;">
+      <h6 class="text-right mb-3">
+        <small class="ml-auto">
+          <a href="<?= URL('equipment') ?>" class="text-muted "><?= T('+更多') ?></a>
+        </small>
+      </h6>
+      <div class="swiper-container" style="height: 130px;">
+        <div class="swiper-wrapper">
+        <?php if ($equipments->totalCount()) foreach ($equipments as $equipment) : ?>
+          <div class="swiper-slide">
+            <div class="swiper-equipment">
+              <img class="mx-auto" src="<?= $equipment->icon ?>"/>
+              <div class="swiper-description px-4 py-1">
+                <a href="<?= URL("equipment/content/{$equipment->id}") ?>" class="equipment-link"><?= $equipment->name ?></a>
+              </div>
+            </div>
+          </div>
+        <?php endforeach; ?>
+        </div>
+      </div>
+      <hr class="mb-1 mt-4" style="border-style: dashed; border-color: #ccc" />
+      <div class="article-list">
+        <?php if ($articles->totalCount()) foreach ($articles as $article) : ?>
+        <a href="<?= URL("article/content/{$article->id}") ?>" class="d-block article-link">
+          <?php 
+          if ($article->type->key == 'works') 
+            echo V('home/article/works/search', ['article' => $article, 'keyword' => $keyword]);
+          else 
+            echo V('home/article/common/item', ['article' => $article, 'keyword' => $keyword]);
+          ?>
+        </a>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </div>
+  <?= $pagination ?>
+</div>
+
+<script>
+require(['swiper', 'css!../css/swiper'], function (Swiper) {
+  var swiper = new Swiper('.swiper-container', {
+    slidesPerView: 5,
+    spaceBetween: 20,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    }
+  })
+})
+</script>

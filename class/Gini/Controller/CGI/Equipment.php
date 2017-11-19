@@ -4,7 +4,7 @@ namespace Gini\Controller\CGI;
 
 class Equipment extends \Gini\Controller\CGI\Layout\Home {
 
-    function __index() {
+    function __index($start = 1, $step = 10) {
         $form = $this->form('get');
         $tag = $form['tag'];
 
@@ -12,13 +12,25 @@ class Equipment extends \Gini\Controller\CGI\Layout\Home {
 
         $equipments = those('equipment');
         if ($tag) $equipments->whose('tag')->contains($tag);
-        $equipments->limit(0, 10);
+        
+        $equipments->limit(($start - 1) * $step, $step);
+        
+        $pagination = \Gini\Module\Widget::factory('pagination', [
+            'hiddenDes' => true,
+            'uri' => "equipment",
+            'total' => $equipments->totalCount(),
+            'start' => $start,
+            'step' => $step,
+            'form' => $form,
+            'align' => 'center'
+        ]);
 
         $this->view->active = 'equipment';
         $this->view->body = V('home/equipment/list', [
             'select' => $tag,
             'tags' => $tags,
-            'equipments' => $equipments
+            'equipments' => $equipments,
+            'pagination' => $pagination
         ]);
     }
 

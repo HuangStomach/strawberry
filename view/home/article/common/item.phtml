@@ -1,0 +1,9 @@
+<div class="row pb-2 mx-0 mt-2 mb-1">
+  <div class="article-list-item text-ellipsis col-10 px-0">
+    <?= $article->title($keyword) ?>
+    <small class="text-muted"><?= H($article->content()) ?></small>
+  </div>
+  <div class="col-2 px-0 text-right">
+    <small class="text-muted"><?= H($article->date()) ?></small>
+  </div>
+</div>
