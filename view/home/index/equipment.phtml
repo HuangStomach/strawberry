@@ -1,4 +1,4 @@
-<div class="swiper-container">
+<div id="swiper-equipment" class="swiper-container">
   <div class="swiper-wrapper">
   <?php if ($equipments->totalCount()) foreach ($equipments as $equipment) : ?>
     <div class="swiper-slide">
@@ -16,7 +16,7 @@
 <div class="swiper-button-prev"><</div>
 <script>
 require(['swiper', 'css!../css/swiper'], function (Swiper) {
-  var swiper = new Swiper('.swiper-container', {
+  var swiper = new Swiper('#swiper-equipment', {
     slidesPerView: 4,
     spaceBetween: 20,
     navigation: {

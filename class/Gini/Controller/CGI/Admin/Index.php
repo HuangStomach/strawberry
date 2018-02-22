@@ -45,7 +45,7 @@ class Index extends \Gini\Controller\CGI\Layout\Whiteboard {
                     if ($form['username'] == 'genee'
                     && $form['password'] == 'Genee83719730'
                     && !$user->id) {
-                        $user->username = $form['username'];
+                        $user->username = \Gini\Auth::makeUserName($form['username'], 'database');
                         $user->name = T('技术支持');
                         $user->ref = 'geneegroup';
                         $user->email = $email;

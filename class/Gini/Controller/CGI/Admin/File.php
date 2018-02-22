@@ -52,7 +52,7 @@ class File extends \Gini\Controller\CGI\Layout\Dashboard {
                 \Gini\File::ensureDir($path);
 
                 $ext = \Gini\File::extension($files['name'][$i]);
-                $title = pathinfo($files['name'][$i], PATHINFO_FILENAME);
+                $title = explode('.', $files['name'][$i])[0];
                 $name = date("YmdHis") . '_' . rand(10000, 99999) . '.' . $ext;
                 
                 if (is_dir($path) && is_uploaded_file($files['tmp_name'][$i])

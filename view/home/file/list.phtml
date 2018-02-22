@@ -8,7 +8,7 @@
       <div class="article-list">
         <?php if ($files->totalCount()) foreach ($files as $file) : ?>
         <a href="<?= URL("file/download/{$file->id}") ?>" class="d-block article-link">
-          <div class="row pb-2 mx-0 mb-3">
+          <div class="row pb-2 mx-0 mt-2 mb-1">
               <div class="article-list-item text-ellipsis col-12 px-0">
                 <?= H($file->title) ?>
               </div>

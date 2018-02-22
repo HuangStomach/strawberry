@@ -1,31 +1,40 @@
-<div id="carousel" class="carousel slide mb-4" data-ride="carousel">
-  <ol class="carousel-indicators">
+<div id="swiper-carousel" class="swiper-container swiper-container-horizontal mb-4">
+  <div class="swiper-wrapper">
+    <?php foreach ($carousel as $image) : ?>
+    <div class="swiper-slide" style="width: 85%;">
+      <img class="d-block w-100" src="<?= URL("carousel/preview/{$image->id}") ?>">
+    </div>
+    <?php endforeach; ?>
+  </div>
+  <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
     <?php 
     $count = $carousel->totalCount();
     for ($i = 0; $i < $count; $i++) :
     ?>
-    <li data-target="#carousel" data-slide-to="<?= $i ?>" class="<?= $i == 0 ? 'active' : '' ?>"></li>
+    <span class="swiper-pagination-bullet"></span>
     <?php endfor; ?>
-  </ol>
-  <div class="carousel-inner">
-    <?php 
-    $flag = true;
-    foreach ($carousel as $image) : ?>
-    <div class="carousel-item <?= $flag ? 'active' : '' ?>">
-      <img class="d-block w-100" src="<?= URL("carousel/preview/{$image->id}") ?>">
-    </div>
-    <?php 
-    $flag = false;
-    endforeach; ?>
   </div>
 </div>
 
 <script>
-require(['main'], function ($) {
-  require(['bootstrap'], function () {
-    $('.carousel').carousel({
-      interval: 3000
-    })
+require(['swiper', 'css!../css/swiper'], function (Swiper) {
+  var swiper = new Swiper('#swiper-carousel', {
+    speed: 600,
+    slidesPerView: 'auto',
+    spaceBetween: 0,
+    centeredSlides: true,
+    loop: true,
+    loopAdditionalSlides: 1,
+    loopedSlides: <?= $carousel->totalCount() ?>,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    autoplay: {
+      delay: 6000,
+      stopOnLastSlide: false,
+      disableOnInteraction: true,
+    }
   })
 })
 </script>
