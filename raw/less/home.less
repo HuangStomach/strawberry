@@ -8,7 +8,7 @@ body {
 }
 .header {
   border-top: 5px solid @nankai;
-  background-color: #fff;
+  background-color: @nankai;
   .header-content {
     height: 100px;
     width: 1000px;
@@ -16,12 +16,14 @@ body {
       .input-group {
         height: 26px;
         .input-group-addon {
-          background-color: inherit;
+          border-color: #fff;
+          background-color: #fff;
           line-height: 1;
           border-top-left-radius: 1em;
           border-bottom-left-radius: 1em;
         }
         input[type='search'] {
+          border-color: #fff;
           border-left: none;
           border-top-right-radius: 1em;
           border-bottom-right-radius: 1em;
@@ -29,8 +31,14 @@ body {
       }
     }
   }
+  .breadcrumb-item+.breadcrumb-item::before {
+    color: #fff;
+  }
   .breadcrumb .breadcrumb-item a {
-    color: #333;
+    color: #fff;
+    &.active {
+      color: #fff;
+    }
   }
 }
 .body {
