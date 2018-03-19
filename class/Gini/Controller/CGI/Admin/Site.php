@@ -48,7 +48,7 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
             try {
                 $validator
                 ->validate('name', !!$form['name'], T('请输入名称!'))
-                ->validate('name', strlen($form['name']) <= 50, T('名称过长, 最多不能超过50位!'))
+                ->validate('name', strlen($form['name']) <= 200, T('名称过长, 最多不能超过50位!'))
                 ->validate('url', !!$form['url'], T('请输入地址!'));
                 $validator->done();
 
@@ -120,7 +120,7 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
             try {
                 $validator
                 ->validate('name', !!$form['name'], T('请输入名称!'))
-                ->validate('name', strlen($form['name']) <= 50, T('名称过长, 最多不能超过50位!'))
+                ->validate('name', strlen($form['name']) <= 200, T('名称过长, 最多不能超过50位!'))
                 ->validate('url', !!$form['url'], T('请输入地址!'));
                 $validator->done();
 
@@ -153,8 +153,10 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
                     }
                 }
                 elseif (!$form['exists']) {
-                    $path = APP_PATH . '/' . $site->dir;
-                    \Gini\File::removeDir($path);
+                    if ($site->dir) {
+                        $path = APP_PATH . '/' . $site->dir;
+                        \Gini\File::removeDir($path);
+                    }
                     $site->dir = '';
                     $site->path =  '';
                     $site->mime = $file['type'];

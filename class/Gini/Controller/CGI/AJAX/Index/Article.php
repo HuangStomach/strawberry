@@ -26,6 +26,8 @@ class Article extends \Gini\Controller\CGI {
         ->andWhose('date')->isLessThanOrEqual(date('Y-m-d H:i:s'))
         ->orderBy('date', 'desc')
         ->current();
+
+        if (!$article->id) return \Gini\IoC::construct('\Gini\CGI\Response\Nothing');
         
         $view = V('home/article/works/item', [
             'article' => $article

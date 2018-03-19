@@ -1,6 +1,6 @@
 <div class="row">
 <?php if ($sites->totalCount()) foreach ($sites as $site) : ?>
-  <div class="col-3">
+  <div class="col-3" style="margin-bottom: 10px;">
     <div class="site-container">
       <img class="img-fluid" src="<?= URL("site/preview/{$site->id}") ?>">
       </img>

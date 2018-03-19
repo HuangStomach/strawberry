@@ -4,7 +4,7 @@ namespace Gini\ORM;
 
 class Site extends \Gini\Module\Object
 {
-    public $name        = 'string:50';
+    public $name        = 'string:250';
     public $url         = 'string:250';
     public $sync        = 'bool';
     public $show        = 'bool';
