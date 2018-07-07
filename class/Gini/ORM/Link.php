@@ -8,6 +8,9 @@ class Link extends \Gini\Module\Object
     public $url             = 'string:500';
     public $author          = 'object:user';
     public $type            = 'int,default:0';
+    public $dir             = 'string:500'; 
+    public $path            = 'string:500'; // 文件全路径
+    public $mime            = 'string:100';
     public $ctime           = 'datetime';
 
     protected static $db_index = [

@@ -205,7 +205,7 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
             $site = a('site', $form['id']);
             $path = APP_PATH . '/' . $site->dir;
             if ($site->id && $site->delete()) {
-                \Gini\File::removeDir($path);
+                if ($site->dir) \Gini\File::removeDir($path);
                 $_SESSION['alert'] = [
                     'type' => 'success',
                     'message' => T('链接删除成功'),

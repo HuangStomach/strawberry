@@ -62,15 +62,19 @@
   </div>
 </div>
 
-<div class="clearfix" style="margin-bottom: 50px">
+<div class="clearfix" style="margin-bottom: 98px">
   <div class="card">
     <h6 class="card-header card-header-border">
       <?= T('友情链接 / Interlink') ?>
     </h6>
-    <div class="card-body col py-3 px-4 link-content">
+    <div class="card-body link-content">
+      <nav class="nav nav-fill">
       <?php if ($links->totalCount()) foreach ($links as $link) : ?>
-      <a href="<?= URL($link->url) ?>"><?= $link->name ?></a>
+        <a href="<?= URL($link->url) ?>" class="nav-item">
+          <img class="img-fluid" src="<?= URL("link/preview/{$link->id}") ?>" />
+        </a>
       <?php endforeach ?>
+      </nav>
     </div>
   </div>
 </div>

@@ -90,7 +90,7 @@ class File extends \Gini\Controller\CGI\Layout\Dashboard {
             $file = a('file', $form['id']);
             $path = APP_PATH . '/' . $file->dir;
             if ($file->id && $file->delete()) {
-                \Gini\File::removeDir($path);
+                if ($file->dir) \Gini\File::removeDir($path);
                 $_SESSION['alert'] = [
                     'type' => 'success',
                     'message' => T('文件删除成功'),

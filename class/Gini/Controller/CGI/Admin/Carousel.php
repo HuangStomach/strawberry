@@ -165,7 +165,7 @@ class Carousel extends \Gini\Controller\CGI\Layout\Dashboard {
             $carousel = a('carousel', $form['id']);
             $path = APP_PATH . '/' . $carousel->dir;
             if ($carousel->id && $carousel->delete()) {
-                \Gini\File::removeDir($path);
+                if ($carousel->dir) \Gini\File::removeDir($path);
                 $_SESSION['alert'] = [
                     'type' => 'success',
                     'message' => T('图片删除成功'),

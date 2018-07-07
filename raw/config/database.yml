@@ -1,5 +1,5 @@
 ---
 default:
-  dsn: mysql:dbname=${DB_NAME};host=${DB_HOST}
-  username: ${DB_USER}
+  dsn: mysql:dbname=${DB_NAME:=strawberry};host=${DB_HOST:=172.17.42.1}
+  username: ${DB_USER:=genee}
 ...

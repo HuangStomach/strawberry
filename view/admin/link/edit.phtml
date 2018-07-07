@@ -8,7 +8,7 @@
     <h5 class="mx-0 my-1"><?= T('链接信息') ?></h5>
   </div>
   <div class="card-body">
-    <form class="text-left" method="POST">
+    <form class="text-left" method="POST" enctype="multipart/form-data">
       <div class="form-group">
         <label><?= T('链接标题') ?></label>
         <div class="input-group">
@@ -38,9 +38,46 @@
         </div>
         <?php endif; ?>
       </div>
+
+      <div class="form-group">
+        <label><?= T('平台图片') ?></label>
+        <input name="file" type="file">
+        <?php if ($form['_errors']['file']) : ?>
+        <div class="invalid-feedback ml-auto d-block">
+          <?= T($form['_errors']['file']) ?>
+        </div>
+        <?php endif; ?>
+      </div>
       
       <br />
       <button type="submit" class="btn btn-sm btn-success"><?= T('提交') ?></button>
     </form>
   </div>
 </div>
+
+<script>
+require(['main'], function ($) {
+  require(['fileinput', 'css!../css/fileinput'], function () {
+    require(['fileinput/theme', 'fileinput/zh'], function () {
+      $("input[name=file]").fileinput({
+        language: 'zh',
+        theme: 'icomoon',
+        showUpload: false,
+        allowedFileTypes: ['image']
+        <?php if ($link->id && $link->path) : ?>
+        , initialPreview: [
+          "<img src='<?= URL("link/preview/{$link->id}") ?>' style='width: 100%;' class='file-preview-image' alt='<?= $link->name ?>' title='<?= $link->name ?>'>" +
+          "<input type='hidden' name='exists' value='1'/>"
+        ],
+        initialPreviewConfig: [
+          {
+            caption: "<?= $link->name ?>"
+          }
+        ],
+        initialPreviewShowDelete: false
+        <?php endif; ?>
+      })
+    })
+  })
+})
+</script>
