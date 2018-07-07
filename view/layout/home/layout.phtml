@@ -14,90 +14,13 @@
     <link rel="shortcut icon" href="assets/icon/favicon.png">
   </head>
   <body>
-    <div class="container-fluid header">
-      <div class="header-content mx-auto">
-        <img class="mt-4" src="assets/image/logo.png" alt="<?= T('南开大学') ?>" />
-        <div class="float-right mt-3">
-          <form action="<?= URL('search') ?>" class="form-inline form-search">
-            <div class="input-group input-group-sm ml-auto">
-              <span class="input-group-addon">
-                <img src="assets/image/icon/search.png"></img>
-              </span>
-              <input name="keyword" type="search" class="form-control form-control-sm ml-auto">
-            </div>
-            <button type="submit" class="btn btn-link text-white mr-2">
-              <small><?= T('仪器搜索') ?></small>
-            </button>
-          </form>
-          <nav aria-label="breadcrumb" role="navigation">
-            <ol class="breadcrumb mb-0">
-              <li class="breadcrumb-item">
-                <a class="<?= $active == 'index' ? 'active' : '' ?>" href="<?= URL('/') ?>"><?= T('首页') ?></a>
-              </li>
-              <li class="breadcrumb-item">
-                <a class="<?= $active == 'intro' ? 'active' : '' ?>" href="<?= URL('intro') ?>"><?= T('平台简介') ?></a>
-              </li>
-              <li class="breadcrumb-item">
-                <a class="<?= $active == 'equipment' ? 'active' : '' ?>" href="<?= URL('equipment') ?>"><?= T('仪器列表') ?></a>
-              </li>
-              <li class="breadcrumb-item">
-                <a class="<?= $active == 'notice' ? 'active' : '' ?>" href="<?= URL('article/notice') ?>"><?= T('通知公告') ?></a>
-              </li>
-              <li class="breadcrumb-item">
-                <a class="<?= $active == 'rules' ? 'active' : '' ?>" href="<?= URL('article/rules') ?>"><?= T('规章制度') ?></a>
-              </li>
-              <li class="breadcrumb-item">
-                <a class="<?= $active == 'file' ? 'active' : '' ?>" href="<?= URL('file') ?>"><?= T('文件下载') ?></a>
-              </li>
-              <li class="breadcrumb-item">
-                <a class="<?= $active == 'contact' ? 'active' : '' ?>" href="<?= URL('contact') ?>"><?= T('联系我们') ?></a>
-              </li>
-            </ol>
-          </nav>
-        </div>
-      </div>
-    </div>
+    <?= V('layout/home/header', ['active' => $active]) ?>
     <div class="container-fluid p-0">
       <?= $header ?>
     </div>
     <div class="body mx-auto">
       <?= $body ?>
     </div>
-    <div class="container-fluid footer py-3" style="background-color: #2e2f30;">
-      <div class="footer-content mx-auto">
-        <div class="row">
-          <div class="col-7">
-            <nav aria-label="breadcrumb" role="navigation">
-              <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><a href="<?= URL('/') ?>"><?= T('首页') ?></a></li>
-                <li class="breadcrumb-item"><a href="<?= URL('intro') ?>"><?= T('平台简介') ?></a></li>
-                <li class="breadcrumb-item"><a href="<?= URL('equipment') ?>"><?= T('仪器列表') ?></a></li>
-                <li class="breadcrumb-item"><a href="<?= URL('article/notice') ?>"><?= T('通知公告') ?></a></li>
-                <li class="breadcrumb-item"><a href="<?= URL('article/rules') ?>"><?= T('规章制度') ?></a></li>
-                <li class="breadcrumb-item"><a href="<?= URL('file') ?>"><?= T('文件下载') ?></a></li>
-                <li class="breadcrumb-item"><a href="<?= URL('contact') ?>"><?= T('联系我们') ?></a></li>
-              </ol>
-            </nav>
-          </div>
-          <div class="col-5 breadcrumb mb-0 text-right">
-            <span>
-              <img class="mr-1" src="assets/image/icon/phone.png"/>
-              <?= T('022-23508813') ?>
-            </span>
-            <span class="ml-4">
-              <img class="mr-1" src="assets/image/icon/email.png"/>
-              <?= T('nkyqpt@nankai.edu.cn') ?>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container-fluid footer py-2" style="background-color: #1f2021;">
-      <div class="footer-content mx-auto text-center">
-        <small class="m-0">
-          <?= T('天津市卫津路94号 [300071] 津教备0061号 津ICP备12003308号-1    技术支持：天津市基理科技股份有限公司') ?>
-        </small>
-      </div>
-    </div>
+    <?= V('layout/home/footer') ?>
   </body>
 </html>

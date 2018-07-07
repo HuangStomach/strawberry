@@ -1,95 +1,76 @@
-<div class="row mb-4">
-  <div class="col-3">
-    <div class="card">
-      <h6 class="card-header card-header-border" style="padding-left: 45px;">
-        <img style="position: absolute; top: 16px; left: 14px;" src="assets/image/icon/login.png" />
-        <?= T('校级平台用户登录') ?>
-      </h6>
-      <div class="card-body" style="height: 265px;">
-        <?= V('home/index/login') ?>
-      </div>
+<div class="clearfix" style="margin-bottom: 50px">
+  <div class="card float-left" style="width: 280px; margin-right: 60px;">
+    <h6 class="card-header card-header-border">
+      <?= T('校级平台用户登录') ?>
+    </h6>
+    <div class="card-body">
+      <?= V('home/index/login') ?>
     </div>
   </div>
-  <div class="col-9">
-    <div class="card">
-      <h6 class="card-header card-header-border font-weight-normal" style="padding-left: 40px;">
-        <img style="position: absolute; top: 11px; left: 10px;" src="assets/image/icon/notice.png" />
-        <?= T('通知公告 / ') ?>
-        <small class='text-dark font-italic'><?= T('Notice') ?></small>
-        <small class="float-right ml-auto">
-          <a href="<?= URL('article/notice') ?>" class="text-muted "><?= T('+更多') ?></a>
-        </small>
-      </h6>
-      <div class="card-body px-2 pt-1 pb-1" style="height: 265px;"
-      data-async="ajax/index/article/notice"></div>
+  <div class="card float-left"  style="width: 660px;">
+    <h6 class="card-header card-header-border">
+      <?= T('通知公告 / Notifications') ?>
+      <small class="float-right ml-auto">
+        <a href="<?= URL('article/notice') ?>" class="text-muted "><?= T('更多') ?></a>
+      </small>
+    </h6>
+    <div class="card-body" data-async="ajax/index/article/notice"></div>
+  </div>
+</div>
+
+<div class="clearfix" style="margin-bottom: 50px">
+  <div class="card float-left" style="width: 280px; margin-right: 60px;">
+    <h6 class="card-header card-header-border">
+      <?= T('快捷通道') ?>
+    </h6>
+    <div class="card-body p-0"
+    data-async="ajax/index/link/channel">
+    </div>
+  </div>
+  <div class="card float-left"  style="width: 660px;">
+    <h6 class="card-header card-header-border">
+      <?= T('工作动态 / Works') ?>
+      <small class="float-right text-muted ml-auto">
+        <a href="<?= URL('article/works') ?>" class="text-muted "><?= T('更多') ?></a>
+      </small>
+    </h6>
+    <div class="card-body" data-async="ajax/index/article/works">
     </div>
   </div>
 </div>
 
-<div class="row mb-4">
-  <div class="col-3">
-    <div class="card">
-      <h6 class="card-header card-header-border" style="padding-left: 45px;">
-        <img style="position: absolute; top: 13px; left: 14px;" src="assets/image/icon/channel.png" />
-        <?= T('快捷通道') ?>
-      </h6>
-      <div class="card-body p-0" style="height: 106px;"
-      data-async="ajax/index/link/channel">
-      </div>
-    </div>
-  </div>
-  <div class="col-9">
-    <div class="card">
-      <h6 class="card-header card-header-border font-weight-normal" style="padding-left: 40px;">
-        <img style="position: absolute; top: 14px; left: 10px;" src="assets/image/icon/works.png" />
-        <?= T('工作动态 / ') ?>
-        <small class='text-dark font-italic'><?= T('Works') ?></small>
-        <small class="float-right text-muted ml-auto">
-          <a href="<?= URL('article/works') ?>" class="text-muted "><?= T('+更多') ?></a>
-        </small>
-      </h6>
-      <div class="card-body px-2 pb-2 pt-0" style="height: 106px;"
-      data-async="ajax/index/article/works">
-      </div>
+<div class="clearfix" style="margin-bottom: 50px">
+  <div class="card">
+    <h6 class="card-header card-header-border">
+      <?= T('仪器展示 / Instrument Show') ?>
+      <small class="float-right ml-auto">
+        <a href="<?= URL('equipment') ?>" class="text-muted "><?= T('更多') ?></a>
+      </small>
+    </h6>
+    <div class="card-body" data-async="ajax/index/equipment/swiper">
     </div>
   </div>
 </div>
 
-<div class="row mb-4">
-  <div class="col">
-    <div class="card">
-      <h6 class="card-header font-weight-normal text-center">
-        <img style="position: absolute; top: 10px; left: 385px;" src="assets/image/icon/equipment.png" />
-        <?= T('仪器展示 / ') ?>
-        <small class='text-dark font-italic'><?= T('Instrument Show') ?></small>
-      </h6>
-      <div class="card-body px-5 py-4" data-async="ajax/index/equipment/swiper">
-      </div>
+<div class="clearfix" style="margin-bottom: 50px">
+  <div class="card">
+    <h6 class="card-header card-header-border">
+      <?= T('院级平台 / School Platform') ?>
+    </h6>
+    <div class="card-body" data-async="ajax/index/site">
     </div>
   </div>
 </div>
 
-<div class="row mb-4">
-  <div class="col">
-    <div class="card">
-      <h6 class="card-header font-weight-normal text-center">
-        <img style="position: absolute; top: 12px; left: 385px;" src="assets/image/icon/site.png" />
-        <?= T('院级平台 / ') ?>
-        <small class='text-dark font-italic'><?= T('School Platform') ?></small>
-      </h6>
-      <div class="card-body" data-async="ajax/index/site">
-      </div>
+<div class="clearfix" style="margin-bottom: 50px">
+  <div class="card">
+    <h6 class="card-header card-header-border">
+      <?= T('友情链接 / Interlink') ?>
+    </h6>
+    <div class="card-body col py-3 px-4 link-content">
+      <?php if ($links->totalCount()) foreach ($links as $link) : ?>
+      <a href="<?= URL($link->url) ?>"><?= $link->name ?></a>
+      <?php endforeach ?>
     </div>
-  </div>
-</div>
-
-<div class="row mb-0 link-container">
-  <div class="col p-3 link-title">
-    <p class="text-center mb-0" style="word-break: keep-all;"><?= T('友情链接') ?></p>
-  </div>
-  <div class="col py-3 px-4 link-content">
-  <?php if ($links->totalCount()) foreach ($links as $link) : ?>
-  <a href="<?= URL($link->url) ?>"><?= $link->name ?></a>
-  <?php endforeach ?>
   </div>
 </div>

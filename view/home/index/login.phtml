@@ -1,28 +1,20 @@
 <form class="form-login" method="POST" action="http://less.nankai.edu.cn/lims/login">
-  <div class="input-group input-group-sm mb-3">
-    <select class="form-control text-muted" name="token_backend">
+  <div class="input-group input-group-sm" style="margin-bottom: 20px;">
+    <select class="form-control custom-select" name="token_backend">
       <option value="database"><?= T('本地用户') ?></option>
       <option value="ids.nankai"><?= T('一卡通用户') ?></option>
       <option value="database%yiqi.tju"><?= T('天津大学本地用户') ?></option>
     </select>
-    <span class="input-group-addon backend-addon text-muted">
-      &gt;
-    </span>
   </div>
-  <div class="input-group mb-3">
-    <span class="input-group-addon text-muted">
-      <img src="assets/image/icon/token.png" />
-    </span>
+  <div class="input-group" style="margin-bottom: 20px;">
     <input name="token" class="form-control" placeholder="<?= T('用户名') ?>">
   </div>
-  <div class="input-group" style="margin-bottom: 30px;">
-    <span class="input-group-addon text-muted">
-      <img src="assets/image/icon/password.png" />
-    </span>
+  <div class="input-group" style="margin-bottom: 34px;">
     <input name="password" class="form-control" placeholder="<?= T('密 码') ?>">
   </div>
-  <input type="submit" class="btn btn-block" name="submit" value="登录">
-  <a href="http://less.nankai.edu.cn/lims/signup" class="text-muted text-center d-block p-2">
+  <input type="submit" class="btn btn-block"  style="margin-bottom: 24px;"
+  name="submit" value="登录">
+  <a href="http://less.nankai.edu.cn/lims/signup" class="text-muted text-center d-block">
     <small><?= T('没有账户，点击注册>') ?></small>
   </a>
 </form>

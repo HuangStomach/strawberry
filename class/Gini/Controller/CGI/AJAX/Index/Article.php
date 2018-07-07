@@ -10,7 +10,7 @@ class Article extends \Gini\Controller\CGI {
         )->whose('active')->is(true)
         ->andWhose('date')->isLessThanOrEqual(date('Y-m-d H:i:s'))
         ->orderBy('date', 'desc')
-        ->limit(0, 5);
+        ->limit(0, 3);
 
         $view = V('home/index/notice', [
             'articles' => $articles
@@ -20,17 +20,15 @@ class Article extends \Gini\Controller\CGI {
     }
 
     public function actionWorks() {
-        $article = those('article')->whose('type')->is(
+        $articles = those('article')->whose('type')->is(
             a('article/type')->whose('key')->is('works')
         )->whose('active')->is(true)
         ->andWhose('date')->isLessThanOrEqual(date('Y-m-d H:i:s'))
         ->orderBy('date', 'desc')
-        ->current();
+        ->limit(0, 2);
 
-        if (!$article->id) return \Gini\IoC::construct('\Gini\CGI\Response\Nothing');
-        
-        $view = V('home/article/works/item', [
-            'article' => $article
+        $view = V('home/index/notice', [
+            'articles' => $articles
         ]);
 
         return \Gini\IoC::construct('\Gini\CGI\Response\HTML', $view);

@@ -1,8 +1,9 @@
-<div id="swiper-carousel" class="swiper-container swiper-container-horizontal mb-4">
+<div id="swiper-carousel" class="swiper-container swiper-container-horizontal" style="margin-bottom: 50px;">
   <div class="swiper-wrapper">
     <?php foreach ($carousel as $image) : ?>
-    <div class="swiper-slide" style="width: 85%;">
-      <img class="d-block w-100" src="<?= URL("carousel/preview/{$image->id}") ?>">
+    <div class="swiper-slide" style="width: 1000px;">
+      <div class="mask"></div>
+      <img class="d-block w-100" style="height: 400px;" src="<?= URL("carousel/preview/{$image->id}") ?>">
     </div>
     <?php endforeach; ?>
   </div>

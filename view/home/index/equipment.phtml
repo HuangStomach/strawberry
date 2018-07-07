@@ -4,24 +4,25 @@
     <div class="swiper-slide">
       <div class="swiper-equipment">
         <img class="mx-auto" src="<?= $equipment->icon ?>"/>
-        <div class="swiper-description px-4 py-1">
-          <a href="<?= URL("equipment/content/{$equipment->id}") ?>" class="equipment-link"><?= $equipment->name ?></a>
-        </div>
+      </div>
+      <div class="swiper-description">
+        <a href="<?= URL("equipment/content/{$equipment->id}") ?>" class="equipment-link"><?= $equipment->name ?></a>
       </div>
     </div>
   <?php endforeach; ?>
   </div>
 </div>
-<div class="swiper-button-next text-right">></div>
-<div class="swiper-button-prev"><</div>
 <script>
 require(['swiper', 'css!../css/swiper'], function (Swiper) {
   var swiper = new Swiper('#swiper-equipment', {
+    loop: true,
+    speed: 600,
     slidesPerView: 4,
     spaceBetween: 20,
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+    autoplay: {
+      delay: 3000,
+      stopOnLastSlide: false,
+      disableOnInteraction: true,
     }
   })
 })

@@ -11,6 +11,7 @@ abstract class Home extends \Gini\Controller\CGI\Layout {
 
         $this->view = V('layout/home/layout', [
             'title' => $title,
+            'active' => \Gini\CGI::route(),
             'header' => $header,
             'footer' => $footer,
         ]);
