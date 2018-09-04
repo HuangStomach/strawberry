@@ -25,7 +25,7 @@ class Article extends \Gini\Controller\CGI {
         )->whose('active')->is(true)
         ->andWhose('date')->isLessThanOrEqual(date('Y-m-d H:i:s'))
         ->orderBy('date', 'desc')
-        ->limit(0, 2);
+        ->limit(0, 3);
 
         $view = V('home/index/notice', [
             'articles' => $articles

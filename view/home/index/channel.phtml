@@ -1,11 +1,10 @@
 <ul class="list-group">
   <?php if ($channels->totalCount()) foreach ($channels as $channel) : ?>
-  <li class="list-group-item" style="padding: 40px 20px 30px; font-weight: bold; font-size: 16px;">
-    <div class="pl-3 d-flex justify-content-between">
-      <a href="<?= H($channel->url) ?>" class="text-dark"><?= H($channel->name) ?></a>
-      <span>
-        <img src="assets/image/icon/channel.png" />
-      </span>
+  <li class="list-group-item" style="height: 175px; padding-top: 90px;
+    background: url(<?= url("link/preview/{$channel->id}") ?>) no-repeat;">
+    <div class="d-flex justify-content-between">
+      <a href="<?= H($channel->url) ?>" class="text-white" 
+        style="font-size: 18px; font-weight: 400;"><?= H($channel->name) ?></a>
     </div>
   </li>
   <?php endforeach; ?>

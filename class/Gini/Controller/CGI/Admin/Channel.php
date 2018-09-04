@@ -41,6 +41,7 @@ class Channel extends \Gini\Controller\CGI\Layout\Dashboard {
     function actionAdd() {
         $me = _G('ME');
         $form = $this->form('post');
+        $file = $this->form('files')['file'];
 
         if ($form) {
             $validator = new \Gini\CGI\Validator;
@@ -56,6 +57,23 @@ class Channel extends \Gini\Controller\CGI\Layout\Dashboard {
                 $link->url = $form['url'];
                 $link->author = $me;
                 $link->type = \Gini\ORM\Link::TYPE_CHANNEL;
+
+                if ($file) {
+                    $uniqid = uniqid();
+                    $path = DATA_DIR . "/attached/{$uniqid}";
+                    \Gini\File::ensureDir($path);
+        
+                    $ext = \Gini\File::extension($file['name']);
+                    $name = date("YmdHis") . '_' . rand(10000, 99999) . '.' . $ext;
+                    
+                    if (is_dir($path) && is_uploaded_file($file['tmp_name'])
+                    && move_uploaded_file($file['tmp_name'], "{$path}/{$name}")) {
+                        $link->dir = $path;
+                        $link->path = "{$path}/{$name}";
+                        $link->mime = $file['type'];
+                    }
+                }
+
                 if ($link->save()) {
                     $_SESSION['alert'] = [
                         'type' => 'success',
@@ -84,6 +102,7 @@ class Channel extends \Gini\Controller\CGI\Layout\Dashboard {
     function actionEdit($id) {
         $me = _G('ME');
         $form = $this->form('post');
+        $file = $this->form('files')['file'];
 
         $link = a('link', $id);
         if (!$link->id) $this->redirect('error/404');
@@ -100,6 +119,39 @@ class Channel extends \Gini\Controller\CGI\Layout\Dashboard {
                 $link->name = $form['name'];
                 $link->url = $form['url'];
                 $link->author = $me;
+                
+                if (!$file['error'] && $file['tmp_name']) {  
+                    $uniqid = uniqid();
+                    $path = DATA_DIR . "/attached/{$uniqid}";
+                    \Gini\File::ensureDir($path);
+        
+                    $ext = \Gini\File::extension($file['name']);
+                    $name = date("YmdHis") . '_' . rand(10000, 99999) . '.' . $ext;
+                    
+                    if (is_dir($path) && is_uploaded_file($file['tmp_name'])
+                    && move_uploaded_file($file['tmp_name'], "{$path}/{$name}")) {
+                        $link->dir = $path;
+                        $link->path = "{$path}/{$name}";
+                        $link->mime = $file['type'];
+                    }
+                    else {
+                        $_SESSION['alert'] = [
+                            'type' => 'danger',
+                            'message' => T('图片编辑失败'),
+                        ];
+                        $this->redirect('admin/link');
+                    }
+                }
+                elseif (!$form['exists']) {
+                    if ($link->dir) {
+                        $path = APP_PATH . '/' . $link->dir;
+                        \Gini\File::removeDir($path);
+                    }
+                    $link->dir = '';
+                    $link->path =  '';
+                    $link->mime = $file['type'];
+                }
+
                 if ($link->save()) {
                     $_SESSION['alert'] = [
                         'type' => 'success',
@@ -131,7 +183,9 @@ class Channel extends \Gini\Controller\CGI\Layout\Dashboard {
 
         if ($form) {
             $link = a('link', $form['id']);
+            $path = APP_PATH . '/' . $link->dir;
             if ($link->id && $link->delete()) {
+                if ($link->dir) \Gini\File::removeDir($path);
                 $_SESSION['alert'] = [
                     'type' => 'success',
                     'message' => T('通道删除成功'),
