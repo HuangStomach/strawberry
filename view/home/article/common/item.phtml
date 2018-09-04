@@ -1,9 +1,13 @@
 <div class="row mx-0">
+  <div class="article-list-item col-2 px-0 text-right">
+    <?php $date = explode('-', H($article->date())) ?>
+    <div class="date mx-auto text-center">
+      <div class="date-header p-1"><?= $date[0] ?></div>
+      <div class="date-body p-2"><?= "$date[1].$date[2]" ?></div>
+    </div>
+  </div>
   <div class="article-list-item text-ellipsis col-10 px-0">
     <?= $article->title($keyword) ?>
+    <p class="text-muted article-list-content"><?= H($article->content()) ?></p>
   </div>
-  <div class="article-list-item col-2 px-0 text-right">
-    <?= H($article->date()) ?>
-  </div>
-  <p class="text-muted article-list-content"><?= H($article->content()) ?></p>
 </div>

@@ -66,7 +66,7 @@ class User extends \Gini\Controller\CGI\Layout\Dashboard {
                 $validator->done();
 
                 $user = a('user');
-                $user->username = $form['username'];
+                $user->username = \Gini\Auth::makeUserName($form['username'], 'database');
                 $user->name = $form['name'];
                 $user->ref = $form['ref'];
                 $user->email = $form['email'];
