@@ -1,19 +1,15 @@
 <div id="swiper-carousel" class="swiper-container swiper-container-horizontal" style="margin-bottom: 50px;">
   <div class="swiper-wrapper">
     <?php foreach ($carousel as $image) : ?>
-    <div class="swiper-slide" style="width: 1000px;">
+    <div class="swiper-slide" style="width: 1200px;">
       <div class="mask"></div>
       <img class="d-block w-100" style="height: 400px;" src="<?= URL("carousel/preview/{$image->id}") ?>">
     </div>
     <?php endforeach; ?>
   </div>
-  <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
-    <?php 
-    $count = $carousel->totalCount();
-    for ($i = 0; $i < $count; $i++) :
-    ?>
-    <span class="swiper-pagination-bullet"></span>
-    <?php endfor; ?>
+  <div class="swiper-button-container">
+    <div class="swiper-button-next icon-next" style="right: 0;"></div>
+    <div class="swiper-button-prev icon-before" style="left: 0;"></div>
   </div>
 </div>
 
@@ -27,9 +23,9 @@ require(['swiper', 'css!../css/swiper'], function (Swiper) {
     loop: true,
     loopAdditionalSlides: 1,
     loopedSlides: <?= $carousel->totalCount() ?>,
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
     },
     autoplay: {
       delay: 6000,

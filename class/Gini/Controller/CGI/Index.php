@@ -9,7 +9,7 @@ class Index extends \Gini\Controller\CGI\Layout\Home {
         $links = those('link')->whose('type')->is(\Gini\ORM\Link::TYPE_FRIENDLY);
 
         $this->view->active = 'index';
-        $this->view->header = V('home/index/header', [
+        $this->view->header = V('home/index/carousel', [
             'carousel' => $carousel
         ]);
 
