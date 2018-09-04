@@ -1,11 +1,9 @@
 <div id="swiper-equipment" class="swiper-container">
   <div class="swiper-wrapper">
   <?php if ($equipments->totalCount()) foreach ($equipments as $equipment) : ?>
-    <div class="swiper-slide">
-      <div class="swiper-equipment">
-        <img class="mx-auto" src="<?= $equipment->icon ?>"/>
-      </div>
-      <div class="swiper-description">
+    <div class="swiper-card swiper-slide">
+      <img class="swiper-img" src="<?= $equipment->icon ?>"/>
+      <div class="swiper-description text-center">
         <a href="<?= URL("equipment/content/{$equipment->id}") ?>" class="equipment-link"><?= $equipment->name ?></a>
       </div>
     </div>
@@ -18,9 +16,10 @@ require(['swiper', 'css!../css/swiper'], function (Swiper) {
     loop: true,
     speed: 600,
     slidesPerView: 4,
+    slidesOffsetAfter: 1,
     spaceBetween: 20,
     autoplay: {
-      delay: 3000,
+      delay: 6000,
       stopOnLastSlide: false,
       disableOnInteraction: true,
     }
