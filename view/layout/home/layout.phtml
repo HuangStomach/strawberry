@@ -18,8 +18,13 @@
     <div class="container-fluid p-0">
       <?= $header ?>
     </div>
-    <div class="body mx-auto">
-      <?= $body ?>
+    <div class="body">
+      <div class="clearfix mx-auto" style="width: 1000px;">
+        <?= $body ?>
+      </div>
+    </div>
+    <div class="link mx-auto">
+      <?= $link ?>
     </div>
     <?= V('layout/home/footer') ?>
   </body>
