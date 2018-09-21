@@ -4,5 +4,5 @@ title:
   home: ${HOME_TITLE:="大型仪器管理系统"}
 phone: 400-017-5664
 administrators:
-  - genee
+  - genee|database
 ...

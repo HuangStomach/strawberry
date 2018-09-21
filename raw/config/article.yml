@@ -4,6 +4,6 @@ type:
     key: notice
   - name: 工作动态
     key: works
-  - name: 规章制度
+  - name: 办事流程
     key: rules
 ...
