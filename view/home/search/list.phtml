@@ -14,14 +14,14 @@
           <a href="<?= URL('equipment') ?>" class="text-muted "><?= T('+更多') ?></a>
         </small>
       </h6>
-      <div class="swiper-container" style="height: 130px;">
+      <div class="swiper-container" style="height: 160px;">
         <div class="swiper-wrapper">
         <?php if ($equipments->totalCount()) foreach ($equipments as $equipment) : ?>
           <div class="swiper-slide">
             <div class="swiper-equipment">
-              <img class="mx-auto" src="<?= $equipment->icon ?>"/>
-              <div class="swiper-description px-4 py-1">
-                <a href="<?= URL("equipment/content/{$equipment->id}") ?>" class="equipment-link"><?= $equipment->name ?></a>
+              <img class="mx-auto" src="<?= $equipment->icon ?>" style="display: block;"/>
+              <div class="swiper-description text-center px-4 py-1">
+                <a href="<?= URL("equipment/content/{$equipment->id}") ?>" class="equipment-link text-dark"><?= $equipment->name ?></a>
               </div>
             </div>
           </div>
