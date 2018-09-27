@@ -21,7 +21,8 @@
             <div class="swiper-equipment">
               <img class="mx-auto" src="<?= $equipment->icon ?>" style="display: block;"/>
               <div class="swiper-description text-center px-4 py-1">
-                <a href="<?= URL("equipment/content/{$equipment->id}") ?>" class="equipment-link text-dark"><?= $equipment->name ?></a>
+                <a href="<?= URL("equipment/content/{$equipment->id}") ?>" class="equipment-link text-dark"
+                style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block;"><?= $equipment->name ?></a>
               </div>
             </div>
           </div>
