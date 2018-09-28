@@ -6,14 +6,14 @@ class Equipment extends \Gini\Controller\CGI\Layout\Home {
 
     function __index($start = 1, $step = 10) {
         $form = $this->form('get');
-        $tag = $form['tag'];
+        $tag = H($form['tag']);
 
         $tags = those('equipment/tag');
 
         $equipments = those('equipment');
         if ($tag) $equipments->whose('tag')->contains($tag);
         
-        $equipments->limit(($start - 1) * $step, $step);
+        $equipments->limit(((int)$start - 1) * (int)$step, (int)$step);
         
         $pagination = \Gini\Module\Widget::factory('pagination', [
             'hiddenDes' => true,

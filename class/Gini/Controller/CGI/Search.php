@@ -6,17 +6,17 @@ class Search extends \Gini\Controller\CGI\Layout\Home {
 
     function __index($start = 1, $step = 15) {
         $form = $this->form();
-        $keyword = $form['keyword'];
+        $keyword = H($form['keyword']);
         
-        $articles = those('article')->whose('title')->contains($form['keyword'])
+        $articles = those('article')->whose('title')->contains($keyword)
         ->andWhose('active')->is(true)
         ->andWhose('date')->isLessThanOrEqual(date('Y-m-d H:i:s'))
         ->orderBy('date', 'desc');
 
-        $equipments = those('equipment')->whose('name')->contains($form['keyword'])
+        $equipments = those('equipment')->whose('name')->contains($keyword)
         ->limit(0, 5);
         
-        $articles->limit(($start - 1) * $step, $step);
+        $articles->limit(((int)$start - 1) * (int)$step, (int)$step);
         
         $pagination = \Gini\Module\Widget::factory('pagination', [
             'hiddenDes' => true,
