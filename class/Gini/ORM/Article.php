@@ -34,7 +34,7 @@ class Article extends \Gini\Module\Object
     }
 
     public function content() {
-        return mb_substr(strip_tags($this->content), 0, 100);
+        return mb_substr(str_replace('&nbsp;', '', strip_tags($this->content)), 0, 100);
     }
 
     public function image() {
