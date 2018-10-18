@@ -92,7 +92,7 @@ class Editor extends \Gini\Controller\CGI {
         if (move_uploaded_file($tmp_name, $file_path) === false) $this->alert("上传文件失败。");
 
         @chmod($file_path, 0644);
-        $file_url = URL("{$_SERVER['HTTP_HOST']}/editor/get/{$uniqid}/{$seed}/{$file_ext}");
+        $file_url = URL("editor/get/{$uniqid}/{$seed}/{$file_ext}");
         $json = new \Gini\Module\Json();
         echo $json->encode(['error' => 0, 'url' => $file_url]);
         exit;
