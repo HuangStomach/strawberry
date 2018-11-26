@@ -55,14 +55,14 @@ class Equipment extends \Gini\Module\Object
             $links['hidden'] = [
                 'title' => T('隐藏'),
                 'class' => 'btn btn-sm btn-link p-0',
-                'url' => "gini-ajax:ajax/admin/equipment/switch/{$this->id}",
+                'url' => "gini-ajax:ajax/strawberry/equipment/switch/{$this->id}",
             ];
         }
         else {
             $links['show'] = [
                 'title' => T('显示'),
                 'class' => 'btn btn-sm btn-link p-0',
-                'url' => "gini-ajax:ajax/admin/equipment/switch/{$this->id}",
+                'url' => "gini-ajax:ajax/strawberry/equipment/switch/{$this->id}",
             ];
         }
         

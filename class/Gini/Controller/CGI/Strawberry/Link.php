@@ -1,6 +1,6 @@
 <?php
 
-namespace Gini\Controller\CGI\Admin;
+namespace Gini\Controller\CGI\Strawberry;
 
 class Link extends \Gini\Controller\CGI\Layout\Dashboard {
     
@@ -23,7 +23,7 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
         $links->limit(($start - 1) * $step, $step);
         
         $pagination = \Gini\Module\Widget::factory('pagination', [
-            'uri' => 'admin/link',
+            'uri' => 'strawberry/link',
             'total' => $links->totalCount(),
             'start' => $start,
             'step' => $step,
@@ -85,7 +85,7 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
                         'message' => T('链接创建失败'),
                     ];
                 }
-                $this->redirect('admin/link');
+                $this->reditect('strawberry/link');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -138,7 +138,7 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
                             'type' => 'danger',
                             'message' => T('图片编辑失败'),
                         ];
-                        $this->redirect('admin/link');
+                        $this->reditect('strawberry/link');
                     }
                 }
                 elseif (!$form['exists']) {
@@ -163,7 +163,7 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
                         'message' => T('链接修改失败'),
                     ];
                 }
-                $this->redirect('admin/link');
+                $this->reditect('strawberry/link');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -198,7 +198,7 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
             }
         }
 
-        $this->redirect('admin/link');
+        $this->reditect('strawberry/link');
     }
 
 }

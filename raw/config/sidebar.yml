@@ -2,38 +2,38 @@
 items:
   user:
     name: 用户管理
-    url: admin/user
+    url: strawberry/user
     icon: users
   intro:
     name: 平台简介
-    url: admin/intro
+    url: strawberry/intro
     icon: file
   article:
     name: 文章管理
-    url: admin/article
+    url: strawberry/article
     icon: paste
   file:
     name: 文件管理
-    url: admin/file
+    url: strawberry/file
     icon: drawer
   carousel:
     name: 首页轮播
-    url: admin/carousel
+    url: strawberry/carousel
     icon: images
   link:
     name: 友情链接
-    url: admin/link
+    url: strawberry/link
     icon: link
   channel:
     name: 快速通道
-    url: admin/channel
+    url: strawberry/channel
     icon: share
   equipment:
     name: 仪器展示
-    url: admin/equipment
+    url: strawberry/equipment
     icon: books
   site:
     name: 院级平台
-    url: admin/site
+    url: strawberry/site
     icon: spinner
 ...

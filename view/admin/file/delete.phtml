@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
         <?= T('您确定删除文件"' . H($file->title) . '"吗') ?>
-        <form id="fileDelete" method="post" action="admin/file/delete">
+        <form id="fileDelete" method="post" action="strawberry/file/delete">
           <input type="hidden" name="id" value="<?= $file->id ?>">
         </form>
         <br/>

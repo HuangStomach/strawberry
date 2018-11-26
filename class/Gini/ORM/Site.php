@@ -31,19 +31,19 @@ class Site extends \Gini\Module\Object
         $links['delete'] = [
             'title' => T('删除'),
             'class' => 'btn btn-sm btn-link p-0',
-            'url' => "gini-ajax:ajax/admin/site/delete/{$this->id}",
+            'url' => "gini-ajax:ajax/strawberry/site/delete/{$this->id}",
         ];
 
         $links['edit'] = [
             'title' => T('编辑'),
             'class' => 'btn btn-sm btn-link p-0',
-            'url' => "admin/site/edit/{$this->id}",
+            'url' => "strawberry/site/edit/{$this->id}",
         ];
 
         $links['sync'] = [
             'title' => T('同步'),
             'class' => 'btn btn-sm btn-link p-0',
-            'url' => "admin/site/sync/{$this->id}",
+            'url' => "strawberry/site/sync/{$this->id}",
         ];
         
         return \Gini\Module\Widget::factory('links', ['items' => $links]);

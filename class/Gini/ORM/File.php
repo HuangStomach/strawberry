@@ -27,7 +27,7 @@ class File extends \Gini\Module\Object
         $links['delete'] = [
             'title' => T('删除'),
             'class' => 'btn btn-sm btn-link p-0',
-            'url' => "gini-ajax:ajax/admin/file/delete/{$this->id}",
+            'url' => "gini-ajax:ajax/strawberry/file/delete/{$this->id}",
         ];
 
         $links['download'] = [

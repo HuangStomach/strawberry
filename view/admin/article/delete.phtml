@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
         <?= T("您确定删除文章《" . H($article->title) . "》吗") ?>
-        <form id="articleDelete" method="post" action="admin/article/delete">
+        <form id="articleDelete" method="post" action="strawberry/article/delete">
           <input type="hidden" name="id" value="<?= $article->id ?>">
         </form>
         <br/>

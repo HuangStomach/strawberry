@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
         <?= T('您确定删除链接"' . H($link->name) . '"吗') ?>
-        <form id="linkDelete" method="post" action="admin/link/delete">
+        <form id="linkDelete" method="post" action="strawberry/link/delete">
           <input type="hidden" name="id" value="<?= $link->id ?>">
         </form>
         <br/>

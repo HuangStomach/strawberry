@@ -1,6 +1,6 @@
 <?php
 
-namespace Gini\Controller\CGI\Admin;
+namespace Gini\Controller\CGI\Strawberry;
 
 class User extends \Gini\Controller\CGI\Layout\Dashboard {
 
@@ -27,7 +27,7 @@ class User extends \Gini\Controller\CGI\Layout\Dashboard {
         $users->limit(($start - 1) * $step, $step);
         
         $pagination = \Gini\Module\Widget::factory('pagination', [
-            'uri' => 'admin/user',
+            'uri' => 'strawberry/user',
             'total' => $users->totalCount(),
             'start' => $start,
             'step' => $step,
@@ -84,7 +84,7 @@ class User extends \Gini\Controller\CGI\Layout\Dashboard {
                     ];
                     $auth->remove();
                 }
-                $this->redirect('admin/user');
+                $this->reditect('strawberry/user');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -145,7 +145,7 @@ class User extends \Gini\Controller\CGI\Layout\Dashboard {
                         'message' => T('用户修改失败'),
                     ];
                 }
-                $this->redirect('admin/user');
+                $this->reditect('strawberry/user');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -185,7 +185,7 @@ class User extends \Gini\Controller\CGI\Layout\Dashboard {
             }
         }
 
-        $this->redirect('admin/user');
+        $this->reditect('strawberry/user');
     }
 
 }

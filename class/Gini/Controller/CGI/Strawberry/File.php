@@ -1,6 +1,6 @@
 <?php
 
-namespace Gini\Controller\CGI\Admin;
+namespace Gini\Controller\CGI\Strawberry;
 
 class File extends \Gini\Controller\CGI\Layout\Dashboard {
     
@@ -24,7 +24,7 @@ class File extends \Gini\Controller\CGI\Layout\Dashboard {
         $files->limit(($start - 1) * $step, $step);
         
         $pagination = \Gini\Module\Widget::factory('pagination', [
-            'uri' => 'admin/file',
+            'uri' => 'strawberry/file',
             'total' => $files->totalCount(),
             'start' => $start,
             'step' => $step,
@@ -74,7 +74,7 @@ class File extends \Gini\Controller\CGI\Layout\Dashboard {
                 'type' => 'success',
                 'message' => T('文件上传成功'),
             ];
-            $this->redirect('admin/file');
+            $this->reditect('strawberry/file');
         }
 
         $this->view->body = V('admin/file/edit', [
@@ -104,7 +104,7 @@ class File extends \Gini\Controller\CGI\Layout\Dashboard {
             }
         }
 
-        $this->redirect('admin/file');
+        $this->reditect('strawberry/file');
     }
 
 }

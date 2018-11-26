@@ -1,6 +1,6 @@
 <?php
 
-namespace Gini\Controller\CGI\Admin;
+namespace Gini\Controller\CGI\Strawberry;
 
 class Article extends \Gini\Controller\CGI\Layout\Dashboard {
     
@@ -41,7 +41,7 @@ class Article extends \Gini\Controller\CGI\Layout\Dashboard {
         $articles->limit(($start - 1) * $step, $step);
         
         $pagination = \Gini\Module\Widget::factory('pagination', [
-            'uri' => 'admin/article',
+            'uri' => 'strawberry/article',
             'total' => $articles->totalCount(),
             'start' => $start,
             'step' => $step,
@@ -90,7 +90,7 @@ class Article extends \Gini\Controller\CGI\Layout\Dashboard {
                         'message' => T('文章创建失败'),
                     ];
                 }
-                $this->redirect('admin/article');
+                $this->reditect('strawberry/article');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -140,7 +140,7 @@ class Article extends \Gini\Controller\CGI\Layout\Dashboard {
                         'message' => T('文章修改失败'),
                     ];
                 }
-                $this->redirect('admin/article');
+                $this->reditect('strawberry/article');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -183,7 +183,7 @@ class Article extends \Gini\Controller\CGI\Layout\Dashboard {
             }
         }
 
-        $this->redirect('admin/article');
+        $this->reditect('strawberry/article');
     }
 
 }

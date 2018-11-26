@@ -1,6 +1,6 @@
 <?php
 
-namespace Gini\Controller\CGI\Admin;
+namespace Gini\Controller\CGI\Strawberry;
 
 class Intro extends \Gini\Controller\CGI\Layout\Dashboard {
     
@@ -40,7 +40,7 @@ class Intro extends \Gini\Controller\CGI\Layout\Dashboard {
                         'type' => 'danger',
                         'message' => T('简介更新失败'),
                     ];
-                    $this->redirect('admin/intro');
+                    $this->reditect('strawberry/intro');
                 }
             }
             elseif (!$form['exists']) {
@@ -63,7 +63,7 @@ class Intro extends \Gini\Controller\CGI\Layout\Dashboard {
                     'message' => T('简介更新失败'),
                 ];
             }
-            $this->redirect('admin/intro');
+            $this->reditect('strawberry/intro');
         }
         
         $this->view->body = V('admin/intro/edit', [

@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
         <?= T('您确定删除文件"' . H($carousel->title) . '"吗') ?>
-        <form id="carouselDelete" method="post" action="admin/carousel/delete">
+        <form id="carouselDelete" method="post" action="strawberry/carousel/delete">
           <input type="hidden" name="id" value="<?= $carousel->id ?>">
         </form>
         <br/>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Gini\Controller\CGI\AJAX\Admin;
+namespace Gini\Controller\CGI\AJAX\Strawberry;
 
 class Article extends \Gini\Controller\CGI {
 

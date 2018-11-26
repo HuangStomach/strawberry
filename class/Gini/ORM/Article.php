@@ -56,12 +56,12 @@ class Article extends \Gini\Module\Object
         $links['delete'] = [
             'title' => T('删除'),
             'class' => 'btn btn-sm btn-link p-0',
-            'url' => "gini-ajax:ajax/admin/article/delete/{$this->id}",
+            'url' => "gini-ajax:ajax/strawberry/article/delete/{$this->id}",
         ];
         $links['edit'] = [
             'title' => T('编辑'),
             'class' => 'btn btn-sm btn-link p-0',
-            'url' => "admin/article/edit/{$this->id}",
+            'url' => "strawberry/article/edit/{$this->id}",
         ];
 
         return \Gini\Module\Widget::factory('links', ['items' => $links]);

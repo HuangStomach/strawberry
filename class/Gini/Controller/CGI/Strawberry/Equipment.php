@@ -1,6 +1,6 @@
 <?php
 
-namespace Gini\Controller\CGI\Admin;
+namespace Gini\Controller\CGI\Strawberry;
 
 class Equipment extends \Gini\Controller\CGI\Layout\Dashboard {
     
@@ -23,7 +23,7 @@ class Equipment extends \Gini\Controller\CGI\Layout\Dashboard {
         $equipments->limit(($start - 1) * $step, $step);
         
         $pagination = \Gini\Module\Widget::factory('pagination', [
-            'uri' => 'admin/equipment',
+            'uri' => 'strawberry/equipment',
             'total' => $equipments->totalCount(),
             'start' => $start,
             'step' => $step,

@@ -28,13 +28,13 @@ class Carousel extends \Gini\Module\Object
         $links['edit'] = [
             'title' => T('编辑'),
             'class' => 'btn btn-sm btn-warning',
-            'url' => "admin/carousel/edit/{$this->id}",
+            'url' => "strawberry/carousel/edit/{$this->id}",
         ];
         
         $links['delete'] = [
             'title' => T('删除'),
             'class' => 'btn btn-sm btn-danger',
-            'url' => "gini-ajax:ajax/admin/carousel/delete/{$this->id}",
+            'url' => "gini-ajax:ajax/strawberry/carousel/delete/{$this->id}",
         ];
 
         return \Gini\Module\Widget::factory('links', ['items' => $links]);

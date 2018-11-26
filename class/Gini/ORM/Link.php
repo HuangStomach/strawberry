@@ -43,13 +43,13 @@ class Link extends \Gini\Module\Object
         $links['edit'] = [
             'title' => T('编辑'),
             'class' => 'btn btn-sm btn-link p-0',
-            'url' => "admin/{$type}/edit/{$this->id}",
+            'url' => "strawberry/{$type}/edit/{$this->id}",
         ];
 
         $links['delete'] = [
             'title' => T('删除'),
             'class' => 'btn btn-sm btn-link p-0',
-            'url' => "gini-ajax:ajax/admin/{$type}/delete/{$this->id}",
+            'url' => "gini-ajax:ajax/strawberry/{$type}/delete/{$this->id}",
         ];
         
         return \Gini\Module\Widget::factory('links', ['items' => $links]);

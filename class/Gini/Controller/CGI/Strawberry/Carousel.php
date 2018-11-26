@@ -1,6 +1,6 @@
 <?php
 
-namespace Gini\Controller\CGI\Admin;
+namespace Gini\Controller\CGI\Strawberry;
 
 class Carousel extends \Gini\Controller\CGI\Layout\Dashboard {
     
@@ -69,7 +69,7 @@ class Carousel extends \Gini\Controller\CGI\Layout\Dashboard {
                     }
                 }
 
-                $this->redirect('admin/carousel');
+                $this->reditect('strawberry/carousel');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -126,7 +126,7 @@ class Carousel extends \Gini\Controller\CGI\Layout\Dashboard {
                             'type' => 'danger',
                             'message' => T('图片编辑失败'),
                         ];
-                        $this->redirect('admin/carousel');
+                        $this->reditect('strawberry/carousel');
                     }
                 }
                     
@@ -144,7 +144,7 @@ class Carousel extends \Gini\Controller\CGI\Layout\Dashboard {
                     ];
                 }
 
-                $this->redirect('admin/carousel');
+                $this->reditect('strawberry/carousel');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -179,7 +179,7 @@ class Carousel extends \Gini\Controller\CGI\Layout\Dashboard {
             }
         }
 
-        $this->redirect('admin/carousel');
+        $this->reditect('strawberry/carousel');
     }
 
 }

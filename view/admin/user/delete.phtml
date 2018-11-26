@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
         <?= T("您确定删除用户[" . H($user->name) . "]吗") ?>
-        <form id="userDelete" method="post" action="admin/user/delete">
+        <form id="userDelete" method="post" action="strawberry/user/delete">
           <input type="hidden" name="id" value="<?= $user->id ?>">
         </form>
         <br/>

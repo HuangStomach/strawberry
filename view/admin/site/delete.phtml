@@ -12,7 +12,7 @@
           <?= T('删除信息来源后, 相关信息也会一并删除！') ?>
         </div>
         <?= T('您确定删除信息来源"' . H($site->name) . '"吗') ?>
-        <form id="siteDelete" method="post" action="admin/site/delete">
+        <form id="siteDelete" method="post" action="strawberry/site/delete">
           <input type="hidden" name="id" value="<?= $site->id ?>">
         </form>
         <br/>

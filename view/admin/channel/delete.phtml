@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
         <?= T('您确定删除通道"' . H($link->name) . '"吗') ?>
-        <form id="channelDelete" method="post" action="admin/channel/delete">
+        <form id="channelDelete" method="post" action="strawberry/channel/delete">
           <input type="hidden" name="id" value="<?= $link->id ?>">
         </form>
         <br/>

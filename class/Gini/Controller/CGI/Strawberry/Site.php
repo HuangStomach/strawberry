@@ -1,39 +1,39 @@
 <?php
 
-namespace Gini\Controller\CGI\Admin;
+namespace Gini\Controller\CGI\Strawberry;
 
-class Channel extends \Gini\Controller\CGI\Layout\Dashboard {
+class Site extends \Gini\Controller\CGI\Layout\Dashboard {
     
     protected $item;
         
     function __preAction($action, &$params) {
-        $this->item = \Gini\Config::get('sidebar.items')['channel'];
+        $this->item = \Gini\Config::get('sidebar.items')['site'];
         parent::__preAction($action, $params);
     }
 
     function __index($start = 1, $step = 20) {
-        $links = those('link')->whose('type')->is(\Gini\ORM\Link::TYPE_CHANNEL);;
+        $sites = those('site');
         $form = $this->form('get');
         
         if ($form['keyword']) {
             $keyword = $form['keyword'];
-            $links->whose('name')->contains($keyword);
+            $sites->whose('name')->contains($keyword);
         }
 
-        $links->limit(($start - 1) * $step, $step);
+        $sites->limit(($start - 1) * $step, $step);
         
         $pagination = \Gini\Module\Widget::factory('pagination', [
-            'uri' => 'admin/channel',
-            'total' => $links->totalCount(),
+            'uri' => 'strawberry/site',
+            'total' => $sites->totalCount(),
             'start' => $start,
             'step' => $step,
             'form' => $form
         ]);
 
-        $this->view->body = V('admin/channel/list', [
+        $this->view->body = V('admin/site/list', [
             'item' => $this->item,
             'form' => $form,
-            'links' => $links,
+            'sites' => $sites,
             'pagination' => $pagination
         ]);
     }
@@ -48,15 +48,17 @@ class Channel extends \Gini\Controller\CGI\Layout\Dashboard {
             try {
                 $validator
                 ->validate('name', !!$form['name'], T('请输入名称!'))
-                ->validate('name', strlen($form['name']) <= 50, T('名称过长, 最多不能超过50位!'))
+                ->validate('name', strlen($form['name']) <= 200, T('名称过长, 最多不能超过50位!'))
                 ->validate('url', !!$form['url'], T('请输入地址!'));
                 $validator->done();
 
-                $link = a('link');
-                $link->name = $form['name'];
-                $link->url = $form['url'];
-                $link->author = $me;
-                $link->type = \Gini\ORM\Link::TYPE_CHANNEL;
+                $site = a('site');
+                $site->name = $form['name'];
+                $site->url = $form['url'];
+                $site->error = false;
+                $site->show = $form['show'] == 'on';
+                $site->sync = $form['sync'] == 'on';
+                $site->author = $me;
 
                 if ($file) {
                     $uniqid = uniqid();
@@ -68,32 +70,37 @@ class Channel extends \Gini\Controller\CGI\Layout\Dashboard {
                     
                     if (is_dir($path) && is_uploaded_file($file['tmp_name'])
                     && move_uploaded_file($file['tmp_name'], "{$path}/{$name}")) {
-                        $link->dir = $path;
-                        $link->path = "{$path}/{$name}";
-                        $link->mime = $file['type'];
+                        $site->dir = $path;
+                        $site->path = "{$path}/{$name}";
+                        $site->mime = $file['type'];
                     }
                 }
 
-                if ($link->save()) {
+                if ($site->save()) {
                     $_SESSION['alert'] = [
                         'type' => 'success',
-                        'message' => T('通道创建成功'),
+                        'message' => T('链接创建成功'),
                     ];
                 }
                 else {
                     $_SESSION['alert'] = [
                         'type' => 'danger',
-                        'message' => T('通道创建失败'),
+                        'message' => T('链接创建失败'),
                     ];
                 }
-                $this->redirect('admin/channel');
+                $this->reditect('strawberry/site');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
             }
         }
 
-        $this->view->body = V('admin/channel/edit', [
+        // check比较奇怪单独拿出来处理
+        $shown = $form['show'] ? ($form['show'] == 'on' ? 'checked' : '') : 'checked';
+        $synced = $form['sync'] ? ($form['sync'] == 'on' ? 'checked' : '') : 'checked';
+        $this->view->body = V('admin/site/edit', [
+            'synced' => $synced,
+            'shown' => $shown,
             'item' => $this->item,
             'form' => $form,
         ]);
@@ -104,21 +111,24 @@ class Channel extends \Gini\Controller\CGI\Layout\Dashboard {
         $form = $this->form('post');
         $file = $this->form('files')['file'];
 
-        $link = a('link', $id);
-        if (!$link->id) $this->redirect('error/404');
+        $site = a('site', $id);
+        if (!$site->id) $this->redirect('error/404');
         
         if ($form) {
             $validator = new \Gini\CGI\Validator;
+
             try {
                 $validator
                 ->validate('name', !!$form['name'], T('请输入名称!'))
-                ->validate('name', strlen($form['name']) <= 50, T('名称过长, 最多不能超过50位!'))
+                ->validate('name', strlen($form['name']) <= 200, T('名称过长, 最多不能超过50位!'))
                 ->validate('url', !!$form['url'], T('请输入地址!'));
                 $validator->done();
 
-                $link->name = $form['name'];
-                $link->url = $form['url'];
-                $link->author = $me;
+                $site->name = $form['name'];
+                $site->url = $form['url'];
+                $site->show = $form['show'] == 'on';
+                $site->sync = $form['sync'] == 'on';
+                $site->author = $me;
                 
                 if (!$file['error'] && $file['tmp_name']) {  
                     $uniqid = uniqid();
@@ -130,51 +140,61 @@ class Channel extends \Gini\Controller\CGI\Layout\Dashboard {
                     
                     if (is_dir($path) && is_uploaded_file($file['tmp_name'])
                     && move_uploaded_file($file['tmp_name'], "{$path}/{$name}")) {
-                        $link->dir = $path;
-                        $link->path = "{$path}/{$name}";
-                        $link->mime = $file['type'];
+                        $site->dir = $path;
+                        $site->path = "{$path}/{$name}";
+                        $site->mime = $file['type'];
                     }
                     else {
                         $_SESSION['alert'] = [
                             'type' => 'danger',
                             'message' => T('图片编辑失败'),
                         ];
-                        $this->redirect('admin/link');
+                        $this->reditect('strawberry/site');
                     }
                 }
                 elseif (!$form['exists']) {
-                    if ($link->dir) {
-                        $path = APP_PATH . '/' . $link->dir;
+                    if ($site->dir) {
+                        $path = APP_PATH . '/' . $site->dir;
                         \Gini\File::removeDir($path);
                     }
-                    $link->dir = '';
-                    $link->path =  '';
-                    $link->mime = $file['type'];
+                    $site->dir = '';
+                    $site->path =  '';
+                    $site->mime = $file['type'];
                 }
 
-                if ($link->save()) {
+                if ($site->save()) {
                     $_SESSION['alert'] = [
                         'type' => 'success',
-                        'message' => T('通道修改成功'),
+                        'message' => T('链接修改成功'),
                     ];
                 }
                 else {
                     $_SESSION['alert'] = [
                         'type' => 'danger',
-                        'message' => T('通道修改失败'),
+                        'message' => T('链接修改失败'),
                     ];
                 }
-                $this->redirect('admin/channel');
+                $this->reditect('strawberry/site');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
             }
         }
         
-        $this->view->body = V('admin/channel/edit', [
+        // check比较奇怪单独拿出来处理
+        $shown = $form['show'] 
+        ? ($form['show'] == 'on' ? 'checked' : '') 
+        : ($site->show ? 'checked' : '');
+        // check比较奇怪单独拿出来处理
+        $synced = $form['sync'] 
+        ? ($form['sync'] == 'on' ? 'checked' : '') 
+        : ($site->sync ? 'checked' : '');
+        $this->view->body = V('admin/site/edit', [
+            'synced' => $synced,
+            'shown' => $shown,
             'item' => $this->item,
             'form' => $form,
-            'link' => $link
+            'site' => $site
         ]);
     }
     
@@ -182,24 +202,46 @@ class Channel extends \Gini\Controller\CGI\Layout\Dashboard {
         $form = $this->form('post');
 
         if ($form) {
-            $link = a('link', $form['id']);
-            $path = APP_PATH . '/' . $link->dir;
-            if ($link->id && $link->delete()) {
-                if ($link->dir) \Gini\File::removeDir($path);
+            $site = a('site', $form['id']);
+            $path = APP_PATH . '/' . $site->dir;
+            if ($site->id && $site->delete()) {
+                if ($site->dir) \Gini\File::removeDir($path);
                 $_SESSION['alert'] = [
                     'type' => 'success',
-                    'message' => T('通道删除成功'),
+                    'message' => T('链接删除成功'),
                 ];
             }
             else {
                 $_SESSION['alert'] = [
                     'type' => 'danger',
-                    'message' => T('通道删除失败'),
+                    'message' => T('链接删除失败'),
                 ];
             }
         }
 
-        $this->redirect('admin/channel');
+        $this->reditect('strawberry/site');
+    }
+
+    function actionSync($id) {
+        $site = a('site', $id);
+        if (!$site->id) $this->redirect('error/404');
+
+        $now = time();
+        if ($now - strtotime($site->sync_time) <= 300) {
+            $_SESSION['alert'] = [
+                'type' => 'warning',
+                'message' => T('距上次同步时间间距过小，请5分钟后再试！'),
+            ];
+        }
+        else {
+            $site->sync();
+            $_SESSION['alert'] = [
+                'type' => 'success',
+                'message' => T('正在同步，请稍后检查同步状态！'),
+            ];
+        }
+
+        $this->reditect('strawberry/site');
     }
 
 }
