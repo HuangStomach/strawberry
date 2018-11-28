@@ -88,7 +88,7 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
                         'message' => T('链接创建失败'),
                     ];
                 }
-                $this->reditect('strawberry/site');
+                $this->redirect('strawberry/site');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -149,7 +149,7 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
                             'type' => 'danger',
                             'message' => T('图片编辑失败'),
                         ];
-                        $this->reditect('strawberry/site');
+                        $this->redirect('strawberry/site');
                     }
                 }
                 elseif (!$form['exists']) {
@@ -174,7 +174,7 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
                         'message' => T('链接修改失败'),
                     ];
                 }
-                $this->reditect('strawberry/site');
+                $this->redirect('strawberry/site');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -219,7 +219,7 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
             }
         }
 
-        $this->reditect('strawberry/site');
+        $this->redirect('strawberry/site');
     }
 
     function actionSync($id) {
@@ -241,7 +241,7 @@ class Site extends \Gini\Controller\CGI\Layout\Dashboard {
             ];
         }
 
-        $this->reditect('strawberry/site');
+        $this->redirect('strawberry/site');
     }
 
 }

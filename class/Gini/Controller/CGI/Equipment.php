@@ -13,6 +13,11 @@ class Equipment extends \Gini\Controller\CGI\Layout\Home {
         $equipments = those('equipment');
         if ($tag) $equipments->whose('tag')->contains($tag);
         
+        if ($form['keyword']) {
+            $keyword = H($form['keyword']);
+            $equipments->whose('name')->contains($keyword);
+        }
+        
         $equipments->limit(((int)$start - 1) * (int)$step, (int)$step);
         
         $pagination = \Gini\Module\Widget::factory('pagination', [

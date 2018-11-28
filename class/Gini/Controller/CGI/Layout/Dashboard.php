@@ -8,7 +8,7 @@ abstract class Dashboard extends \Gini\Controller\CGI\Layout {
 
     function __preAction($action, &$params){
         $me = _G('ME');
-        if (!$me->id) $this->reditect('strawberry/login');
+        if (!$me->id) $this->redirect('strawberry/login');
 
         $title = \Gini\Config::get('site.title')['admin'];
 

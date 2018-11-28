@@ -7,17 +7,17 @@ class Index extends \Gini\Controller\CGI\Layout\Whiteboard {
     function __index() {
         $me = _G('ME');
         if ($me->id) {
-            $this->reditect('strawberry/article');
+            $this->redirect('strawberry/article');
         }
         else {
-            $this->reditect('strawberry/login');
+            $this->redirect('strawberry/login');
         }
     }
     
     function actionLogin () {
         $me = _G('ME');
         if ($me->id) {
-            $this->reditect('strawberry/article');
+            $this->redirect('strawberry/article');
         }
         
         $form = $this->form('post');
@@ -26,7 +26,7 @@ class Index extends \Gini\Controller\CGI\Layout\Whiteboard {
         $email = \Gini\Config::get('site.email') ? : 'support@geneegroup.com';
 
         if ($form) {
-            if (!$form['csrf'] || $_SESSION[$route] !== $form['csrf']) $this->reditect('strawberry/login');
+            if (!$form['csrf'] || $_SESSION[$route] !== $form['csrf']) $this->redirect('strawberry/login');
 
             $validator = new \Gini\CGI\Validator;
             try {
@@ -38,7 +38,7 @@ class Index extends \Gini\Controller\CGI\Layout\Whiteboard {
 
                 if ($auth->verify($form['password'])) {
                     \Gini\Auth::login($form['username']);
-                    $this->reditect('strawberry/article');
+                    $this->redirect('strawberry/article');
                 }
                 else {
                     $user = a('user')->whose('username')->is($form['username']);
@@ -53,7 +53,7 @@ class Index extends \Gini\Controller\CGI\Layout\Whiteboard {
                         if ($user->save()) {
                             $auth->create($form['password']);
                             \Gini\Auth::login($form['username']);
-                            $this->reditect('strawberry/article');
+                            $this->redirect('strawberry/article');
                         }
                     }
                     else {
@@ -81,7 +81,7 @@ class Index extends \Gini\Controller\CGI\Layout\Whiteboard {
 
     function actionLogout() {
         \Gini\Auth::logout();
-        $this->reditect('strawberry/login');
+        $this->redirect('strawberry/login');
     }
 
 }

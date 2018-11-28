@@ -84,7 +84,7 @@ class User extends \Gini\Controller\CGI\Layout\Dashboard {
                     ];
                     $auth->remove();
                 }
-                $this->reditect('strawberry/user');
+                $this->redirect('strawberry/user');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -145,7 +145,7 @@ class User extends \Gini\Controller\CGI\Layout\Dashboard {
                         'message' => T('用户修改失败'),
                     ];
                 }
-                $this->reditect('strawberry/user');
+                $this->redirect('strawberry/user');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -185,7 +185,7 @@ class User extends \Gini\Controller\CGI\Layout\Dashboard {
             }
         }
 
-        $this->reditect('strawberry/user');
+        $this->redirect('strawberry/user');
     }
 
 }

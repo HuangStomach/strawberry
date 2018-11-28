@@ -74,7 +74,7 @@ class File extends \Gini\Controller\CGI\Layout\Dashboard {
                 'type' => 'success',
                 'message' => T('文件上传成功'),
             ];
-            $this->reditect('strawberry/file');
+            $this->redirect('strawberry/file');
         }
 
         $this->view->body = V('admin/file/edit', [
@@ -104,7 +104,7 @@ class File extends \Gini\Controller\CGI\Layout\Dashboard {
             }
         }
 
-        $this->reditect('strawberry/file');
+        $this->redirect('strawberry/file');
     }
 
 }

@@ -90,7 +90,7 @@ class Article extends \Gini\Controller\CGI\Layout\Dashboard {
                         'message' => T('文章创建失败'),
                     ];
                 }
-                $this->reditect('strawberry/article');
+                $this->redirect('strawberry/article');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -140,7 +140,7 @@ class Article extends \Gini\Controller\CGI\Layout\Dashboard {
                         'message' => T('文章修改失败'),
                     ];
                 }
-                $this->reditect('strawberry/article');
+                $this->redirect('strawberry/article');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -183,7 +183,7 @@ class Article extends \Gini\Controller\CGI\Layout\Dashboard {
             }
         }
 
-        $this->reditect('strawberry/article');
+        $this->redirect('strawberry/article');
     }
 
 }

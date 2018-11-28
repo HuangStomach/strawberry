@@ -85,7 +85,7 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
                         'message' => T('链接创建失败'),
                     ];
                 }
-                $this->reditect('strawberry/link');
+                $this->redirect('strawberry/link');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -138,7 +138,7 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
                             'type' => 'danger',
                             'message' => T('图片编辑失败'),
                         ];
-                        $this->reditect('strawberry/link');
+                        $this->redirect('strawberry/link');
                     }
                 }
                 elseif (!$form['exists']) {
@@ -163,7 +163,7 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
                         'message' => T('链接修改失败'),
                     ];
                 }
-                $this->reditect('strawberry/link');
+                $this->redirect('strawberry/link');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -198,7 +198,7 @@ class Link extends \Gini\Controller\CGI\Layout\Dashboard {
             }
         }
 
-        $this->reditect('strawberry/link');
+        $this->redirect('strawberry/link');
     }
 
 }

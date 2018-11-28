@@ -86,7 +86,7 @@ class Channel extends \Gini\Controller\CGI\Layout\Dashboard {
                         'message' => T('通道创建失败'),
                     ];
                 }
-                $this->reditect('strawberry/channel');
+                $this->redirect('strawberry/channel');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -139,7 +139,7 @@ class Channel extends \Gini\Controller\CGI\Layout\Dashboard {
                             'type' => 'danger',
                             'message' => T('图片编辑失败'),
                         ];
-                        $this->reditect('strawberry/link');
+                        $this->redirect('strawberry/link');
                     }
                 }
                 elseif (!$form['exists']) {
@@ -164,7 +164,7 @@ class Channel extends \Gini\Controller\CGI\Layout\Dashboard {
                         'message' => T('通道修改失败'),
                     ];
                 }
-                $this->reditect('strawberry/channel');
+                $this->redirect('strawberry/channel');
             }
             catch (\Gini\CGI\Validator\Exception $e) {
                 $form['_errors'] = $validator->errors();
@@ -199,7 +199,7 @@ class Channel extends \Gini\Controller\CGI\Layout\Dashboard {
             }
         }
 
-        $this->reditect('strawberry/channel');
+        $this->redirect('strawberry/channel');
     }
 
 }
