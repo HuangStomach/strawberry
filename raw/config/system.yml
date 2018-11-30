@@ -9,7 +9,7 @@ session:
     path: /
     domain: ~      
     secure: false
-    httponly: false
+    httponly: true
   autostart: true
   api_autostart: true
 ...
